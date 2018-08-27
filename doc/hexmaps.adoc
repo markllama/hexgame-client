@@ -1,0 +1,3 @@
+= Information on Hex Maps
+
+https://www.redblobgames.com/grids/hexagons/
