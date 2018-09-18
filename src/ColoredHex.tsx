@@ -4,6 +4,7 @@ import * as React from 'react';
 import { RegularPolygon } from 'react-konva';
 
 interface IColoredHexProps {
+  radius: number,
   x: number,
   y: number
 }
@@ -11,13 +12,13 @@ interface IColoredHexProps {
 class ColoredHex extends React.Component<IColoredHexProps, any> {
 
   public static propTypes = {
-    x: PropTypes.number,
-    y: PropTypes.number
+    radius: PropTypes.number,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired
   }
 
   public static defaultProps = {
-    x: 40,
-    y: 40
+    radius: 15
   }
   
   public state = {
@@ -35,10 +36,11 @@ class ColoredHex extends React.Component<IColoredHexProps, any> {
       x={this.props.x}
       y={this.props.y}
       sides={6}
-      radius={30}
+      radius={this.props.radius}
       rotation={30}
+      stroke={'1px'}
       fill={this.state.color}
-      shadowBlur={5}
+      // shadowBlur={5}
       onClick={this.handleClick}
         />
     );
