@@ -3,18 +3,18 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { RegularPolygon } from 'react-konva';
 
+import HexVector from '../lib/hexmap/hexvector';
+
 interface IColoredHexProps {
   radius: number,
-  x: number,
-  y: number
+  origin: HexVector
 }
 
 class ColoredHex extends React.Component<IColoredHexProps, any> {
 
   public static propTypes = {
-    radius: PropTypes.number,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired
+    origin: HexVector,
+    radius: PropTypes.number
   }
 
   public static defaultProps = {
@@ -33,8 +33,8 @@ class ColoredHex extends React.Component<IColoredHexProps, any> {
   public render() {
     return (
         <RegularPolygon
-      x={this.props.x}
-      y={this.props.y}
+      x={this.props.origin.hx}
+      y={this.props.origin.hy}
       sides={6}
       radius={this.props.radius}
       rotation={30}

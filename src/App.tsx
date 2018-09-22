@@ -3,7 +3,7 @@ import './App.css';
 
 import logo from './images/one_hex.png';
 
-import HexmapCanvas from "./HexmapCanvas";
+import HexmapCanvas from "./components/HexmapCanvas";
 
 class App extends React.Component {
   public render() {
