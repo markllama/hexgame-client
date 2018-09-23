@@ -18,6 +18,10 @@ class HexVector {
     return new HexVector(this.hx + other.hx, this.hy + other.hy);
   }
 
+  public sub(other: HexVector) {
+    return new HexVector(this.hx - other.hx, this.hy - other.hy);
+  }
+
   public mul(factor: number) {
     return new HexVector(this.hx * factor, this.hy * factor)
   }
