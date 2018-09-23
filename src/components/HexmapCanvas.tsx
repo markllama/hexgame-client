@@ -41,15 +41,24 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
   private fill_map() {
 
     const hexradius = this.props.hexrun * 2;
-    const hexheight = Math.floor(this.props.hexrun * 1.6);
+    const hexrise = Math.floor(hexradius * Math.sqrt(2/3));
+    const hexheight = Math.floor(hexrise * 2);
     const origin = new HexVector(hexradius, hexheight * 3);
-    const shift = new HexVector(hexradius, 0)
+    const colShift = new HexVector(0, hexheight)
+    const rowShift = new HexVector(this.props.hexrun * 3, 0)
     
     const rows = []
     let i = 0
-    for (i = 0 ; i < 6 ; i++) {
-      const location = origin.add(shift.mul(i*3))
-      rows.push(<ColoredHex radius={hexradius} origin={location}/>);
+    let j = 0
+    let location: HexVector;
+    for (i = 0 ; i < 15 ; i++) {
+      for (j = 0 ; j < 21 ; j++) {
+        location = origin.add(rowShift.mul(i)).add(colShift.mul(j))
+        if ((i % 2) === 1) {
+          location = location.add(new HexVector(0,hexrise))
+        }
+        rows.push(<ColoredHex radius={hexradius} origin={location}/>);
+      }
     }
     return rows
  }
