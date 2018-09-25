@@ -1,7 +1,4 @@
-//
-//
-//
-class HexVector {
+export class HexVector {
   private hX: number;
   private hY: number;
 
