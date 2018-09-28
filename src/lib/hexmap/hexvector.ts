@@ -7,6 +7,10 @@ export class HexVector {
     this.hY = hy
   }
 
+  public toString = () : string => {
+    return '(' + this.hX + ',' + this.hY + ')';
+  }
+
   get hx():number { return this.hX }
   get hy():number { return this.hY }
   get hz():number { return this.hY - this.hY }
