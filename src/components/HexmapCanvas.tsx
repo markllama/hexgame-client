@@ -36,7 +36,7 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
     
     return (
         <div className="HexmapCanvas">
-        <Stage width={window.innerWidth} height={window.innerHeight} >
+        <Stage width={this.props.hexrun * (this.props.size.hx*3+1)} height={this.hexrise * (this.props.size.hy*2+1)} >
         <Layer>
         <Text text="Try click on rect" />
         {this.fill_map()}
@@ -51,7 +51,7 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
 
   private fill_map() {
 
-    const origin = new HexVector(this.hexradius + 10, this.hexheight);
+    const origin = new HexVector(this.hexradius, this.hexheight);
     // const rowShift = new HexVector(0, -hexheight)
     const colShift = new HexVector(this.props.hexrun * 3, 0)
     
