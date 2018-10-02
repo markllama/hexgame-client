@@ -23,9 +23,9 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
   }
 
   public static defaultProps = {
-    hexrun: 15,
+    hexrun: 30,
     origin: new HexVector(),
-    size: new HexVector(15, 21),
+    size: new HexVector(8, 10),
   }
 
   public get size() { return this.props.size; }
@@ -49,26 +49,20 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
 
   }
 
-  // private yBias(x:number) { return Math.floor(x / 2) }
+  private yBias(x:number) { return Math.floor(x / 2) }
 
   private fill_map() {
 
-    // const origin = new HexVector(this.hexradius, this.hexheight);
-    // const rowShift = new HexVector(0, -hexheight)
-    // const colShift = new HexVector(this.props.hexrun * 3, 0)
-    
     const rows = []
     let col = 0
     let row = 0
     let location: HexVector;
 
     for (col = 0 ; col < this.size.hx ; col++) {
-      // const bias = this.yBias(col);
+      const bias = this.yBias(col);
       for (row = 0 ; row < this.size.hy ; row++) {
-        // location = origin.add(colShift.mul(col)).add(new HexVector(0, ((row + bias) * this.hexheight) - (col * this.hexrise)))
-        // .add(yBias)
-        // location = new HexVector(col, row + bias)
-        location = new HexVector(col, row)
+        location = new HexVector(col, row + bias)
+        // location = new HexVector(col, row)
         rows.push(<ColoredHex hexrun={this.hexrun} location={location}/>);
       }
     }

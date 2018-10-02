@@ -1,7 +1,7 @@
 import * as Konva from  'konva';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import { RegularPolygon } from 'react-konva';
+import { Group, RegularPolygon, Text } from 'react-konva';
 
 import HexVector from '../lib/hexmap/hexvector';
 
@@ -41,13 +41,14 @@ class ColoredHex extends React.Component<IColoredHexProps, any> {
     const hexrise = this.props.hexrun * 2 * Math.sqrt(2/3)
     const rowShift = new HexVector(0, hexrise * 2)
     const colShift = new HexVector(this.props.hexrun * 3, 0)
+    // const sawtooth = new HexVector()
     const sawtooth = (this.location.hx % 2) === 0 ?
       new HexVector() :
       new HexVector(0, - hexrise)
     
     return this.origin
       .add(colShift.mul(this.location.hx))
-      .add(rowShift.mul(this.location.hy))
+      .add(rowShift.mul(this.location.hy - Math.floor(this.location.hx / 2)))
       .add(sawtooth)
   }
 
@@ -61,6 +62,7 @@ class ColoredHex extends React.Component<IColoredHexProps, any> {
     // calculate the pixel location for the hex
     const p = this.center
     return (
+      <Group>
         <RegularPolygon
       x={p.hx}
       y={p.hy}
@@ -72,6 +74,8 @@ class ColoredHex extends React.Component<IColoredHexProps, any> {
       // shadowBlur={5}
       onClick={this.handleClick}
         />
+        <Text x={p.hx} y={p.hy} align='left' text={this.props.location.toString()} />
+        </Group>
     );
   }
 
