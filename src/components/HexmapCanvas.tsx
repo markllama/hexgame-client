@@ -2,8 +2,9 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { Layer, Stage, Text } from 'react-konva';
 
-import ColoredHex from './ColoredHex';
+import CanvasHex from './CanvasHex';
 
+import Hex from '../lib/hexmap/hex';
 import HexVector from '../lib/hexmap/hexvector';
 
 import "./HexmapCanvas.css";
@@ -19,7 +20,7 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
   public static propTypes = {
     hexrun: PropTypes.number,
     origin: HexVector,
-    size: HexVector
+    size: HexVector,
   }
 
   public static defaultProps = {
@@ -63,7 +64,7 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
       for (row = 0 ; row < this.size.hy ; row++) {
         location = new HexVector(col, row + bias)
         // location = new HexVector(col, row)
-        rows.push(<ColoredHex hexrun={this.hexrun} location={location}/>);
+        rows.push(<CanvasHex hexrun={this.hexrun} hex={new Hex(location=location)}/>);
       }
     }
     return rows

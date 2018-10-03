@@ -1,5 +1,7 @@
 .HexmapCanvas {
     overflow: scroll;
-    width: 600px;
-    height: 500px;
+    padding: 0;
+    margin: auto;
+    display: block;
+    width: 800px;
 }

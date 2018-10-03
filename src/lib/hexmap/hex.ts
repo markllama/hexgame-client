@@ -12,6 +12,18 @@ export class Hex {
     return this.Location
   }
 
+  public get hx() {
+    return this.Location.hx
+  }
+
+  public get hy() {
+    return this.Location.hy
+  }
+
+  public get hz() {
+    return this.Location.hz
+  }
+  
   // add terrain
   // del terrain
 }

@@ -3,18 +3,19 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { Group, RegularPolygon, Text } from 'react-konva';
 
+import Hex from '../lib/hexmap/hex';
 import HexVector from '../lib/hexmap/hexvector';
 
-interface IColoredHexProps {
+interface ICanvasHexProps {
   hexrun: number,
-  location: HexVector
+  hex: Hex
 }
 
-class ColoredHex extends React.Component<IColoredHexProps, any> {
+class CanvasHex extends React.Component<ICanvasHexProps, any> {
 
   public static propTypes = {
-    hexrun: PropTypes.number,
-    location: HexVector
+    hex: PropTypes.object,
+    hexrun: PropTypes.number
   }
 
   public static defaultProps = {
@@ -25,7 +26,7 @@ class ColoredHex extends React.Component<IColoredHexProps, any> {
     color: 'green',
   };
 
-  constructor(props: IColoredHexProps) {
+  constructor(props: ICanvasHexProps) {
     super(props)
   }
 
@@ -46,18 +47,18 @@ class ColoredHex extends React.Component<IColoredHexProps, any> {
     const rowShift = new HexVector(0, hexrise * 2)
     const colShift = new HexVector(this.props.hexrun * 3, 0)
     // const sawtooth = new HexVector()
-    const sawtooth = (this.location.hx % 2) === 0 ?
+    const sawtooth = (this.props.hex.hx % 2) === 0 ?
       new HexVector() :
       new HexVector(0, - hexrise)
     
     return this.origin
-      .add(colShift.mul(this.location.hx))
-      .add(rowShift.mul(this.location.hy - Math.floor(this.location.hx / 2)))
+      .add(colShift.mul(this.props.hex.hx))
+      .add(rowShift.mul(this.props.hex.hy - Math.floor(this.props.hex.hx / 2)))
       .add(sawtooth)
   }
 
   public get location() {
-    return this.props.location
+    return this.props.hex.location
   }
 
   // 
@@ -79,7 +80,7 @@ class ColoredHex extends React.Component<IColoredHexProps, any> {
       // shadowBlur={5}
       onClick={this.handleClick}
         />
-        <Text x={p.hx} y={p.hy + hexrise / 2} align="center" text={this.props.location.toString()} listening={false}/>
+        <Text x={p.hx} y={p.hy + hexrise / 2} align="center" text={this.props.hex.location.toString()} listening={false}/>
         </Group>
     );
   }
@@ -91,4 +92,4 @@ class ColoredHex extends React.Component<IColoredHexProps, any> {
   }; 
 }
 
-export default ColoredHex; 
+export default CanvasHex; 
