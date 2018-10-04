@@ -3,10 +3,14 @@
 
 export class Terrain {
   private Name: string
-  // locations: HexVector[]
+  private Locations: HexVector[]
 
   public name() {
     return this.Name
+  }
+
+  public get locations() {
+    return this.locations
   }
 }
 
