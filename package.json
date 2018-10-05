@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "konva": "^2.3.0",
-    "react": "^16.5.1",
-    "react-bootstrap": "^0.32.4",
-    "react-dom": "^16.5.1",
-    "react-konva": "^1.7.15",
-    "react-router-dom": "^4.3.1",
-    "react-scripts-ts": "2.17.0"
+    "konva": "*",
+    "react": "*",
+    "react-bootstrap": "*",
+    "react-dom": "*",
+    "react-konva": "*",
+    "react-router-dom": "*"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -18,17 +17,14 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.5",
-    "@types/jest": "^23.3.3",
-    "@types/node": "^10.9.4",
-    "@types/react": "^16.4.14",
-    "@types/react-bootstrap": "^0.32.13",
-    "@types/react-dom": "^16.0.7",
-    "@types/react-router-dom": "^4.3.1",
-    "chai": "^4.1.2",
-    "jest": "^23.6.0",
-    "ts-jest": "^23.10.3",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.1.1"
+    "@types/jest": "*",
+    "@types/node": "*",
+    "@types/react": "*",
+    "@types/react-bootstrap": "*",
+    "@types/react-dom": "*",
+    "@types/react-router-dom": "*",
+    "react-scripts-ts": "^3.1.0",
+    "ts-node": "*",
+    "typescript": "*"
   }
 }
