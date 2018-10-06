@@ -15,6 +15,10 @@ export class HexVector {
   get hy():number { return this.hY }
   get hz():number { return this.hY - this.hY }
 
+  public eq(other: HexVector) {
+    return this.hx === other.hx && this.hy === other.hy
+  }
+
   public add(other: HexVector) {
     return new HexVector(this.hx + other.hx, this.hy + other.hy);
   }
@@ -26,7 +30,19 @@ export class HexVector {
   public mul(factor: number) {
     return new HexVector(this.hx * factor, this.hy * factor)
   }
+
+
 }
 
+export const ORIGIN = new HexVector()
+export const UNIT: HexVector[] = [
+  new HexVector( 0, -1),
+  new HexVector( 1,  0),
+  new HexVector( 1,  1),
+  new HexVector( 0,  1),
+  new HexVector(-1,  0),
+  new HexVector(-1, -1),
+  new HexVector(0, -1)
+]
 
 export default HexVector;
