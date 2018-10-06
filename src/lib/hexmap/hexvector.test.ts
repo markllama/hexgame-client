@@ -24,6 +24,29 @@ describe('<HexVector>', () => {
     expect(hexvector.UNIT[0].hy).toEqual(-1)
   });
 
+  it ("length", () => {
+    expect(hexvector.ORIGIN.length).toBe(0)
+
+    for (var u in hexvector.UNIT) {
+      expect(u.length).toBe(1)
+    }
+
+    const t = {"hv": new HexVector(0, 3), "len": 3}
+
+    expect(t.hv.length).toBe(t.len)
+    
+    // const samples: {hv: HexVector, len: number}[] = [
+    //   {hv: new HexVector(0, 3), len: 3},
+    //   {hv: new HexVector(4, 3), len: 4},
+    //   {hv: new HexVector(-3, 3), len: 6},
+    //   {hv: new HexVector(2, -4), len: 3}
+    // ]
+
+    // for (var t in samples) {
+    //   expect(t.hv.length).toEqual(3)
+    // }
+  });
+  
   it ("eq()", () => {
     expect(hexvector.ORIGIN.eq(new HexVector(0, 0))).toBeTruthy()
     expect(hexvector.ORIGIN.eq(new HexVector(0, 1))).toBeFalsy()

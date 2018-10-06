@@ -15,22 +15,29 @@ export class HexVector {
   get hy():number { return this.hY }
   get hz():number { return this.hY - this.hY }
 
-  public eq(other: HexVector) {
+  get length():number {
+    return Math.max(Math.abs(this.hx), Math.abs(this.hy), Math.abs(this.hz))
+  }
+
+  public eq(other: HexVector):boolean {
     return this.hx === other.hx && this.hy === other.hy
   }
 
-  public add(other: HexVector) {
+  public add(other: HexVector):HexVector {
     return new HexVector(this.hx + other.hx, this.hy + other.hy);
   }
 
-  public sub(other: HexVector) {
+  public sub(other: HexVector):HexVector {
     return new HexVector(this.hx - other.hx, this.hy - other.hy);
   }
 
-  public mul(factor: number) {
+  public mul(factor: number):HexVector {
     return new HexVector(this.hx * factor, this.hy * factor)
   }
 
+  public distance(other: HexVector):number {
+    return this.sub(other).length
+  }
 
 }
 
