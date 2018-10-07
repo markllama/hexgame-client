@@ -27,8 +27,8 @@ describe('<HexVector>', () => {
   it ("length", () => {
     expect(hexvector.ORIGIN.length).toBe(0)
 
-    for (var u in hexvector.UNIT) {
-      expect(u.length).toBe(1)
+    for (let i = 0 ; i++ ; i < hexvector.UNIT.length) {
+      expect(hexvector[i].length).toBe(1)
     }
 
     const t = {"hv": new HexVector(0, 3), "len": 3}
