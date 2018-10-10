@@ -6,11 +6,12 @@ import logo from './images/one_hex.png';
 import HexmapCanvas from "./components/HexmapCanvas";
 import HexVector from "./lib/hexmap/hexvector";
 import HexMap from "./lib/hexmap/map";
+import Terrain from "./lib/hexmap/terrain";
 
 class App extends React.Component {
+
   public render() {
-    const size = new HexVector(15,21);
-    const hm = new HexMap("testmap", size);
+    const hm = this.createMap()
     return (
       <div className="App">
         <header className="App-header">
@@ -24,6 +25,20 @@ class App extends React.Component {
       </div>
     );
   }
+
+  private createMap():HexMap {
+    const size = new HexVector(15,21);
+    const hm = new HexMap("testmap", size);
+
+    const hills = new Terrain("hills", "hill")
+    const craters = new Terrain("craters", "crater")
+
+    hm.terrains[-1] = hills
+    hm.terrains[-1] = craters
+    
+    return hm
+  }
+
 }
 
 export default App;

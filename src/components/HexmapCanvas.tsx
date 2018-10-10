@@ -40,7 +40,7 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
         <div className="HexmapCanvas">
         <Stage width={this.hexrun * (this.size.hx*3+1)} height={this.hexrise * ((this.size.hy + 1)*2)} >
         <Layer>
-        <Text text="Try click on rect" />
+        <Text text={this.props.hexmap.name} />
         {this.fill_map()}
         </Layer>
         </Stage>

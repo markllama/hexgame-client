@@ -19,6 +19,7 @@ export class Terrain {
   public type() {
     return this.Type
   }
+
   public get locations() {
     return this.Locations;
   }
