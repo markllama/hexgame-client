@@ -14,9 +14,65 @@ describe('<HexMap>', () => {
     expect(hm0.terrains.size).toEqual(0)
   });
 
+  it ('ybias', () => {
+    expect(HexMap.ybias(0)).toEqual(0)
+    expect(HexMap.ybias(1)).toEqual(0)
+    expect(HexMap.ybias(2)).toEqual(1)
+    expect(HexMap.ybias(3)).toEqual(1)
+    expect(HexMap.ybias(4)).toEqual(2)
+    expect(HexMap.ybias(5)).toEqual(2)
+  });
+
+  const hm1 = new HexMap("Test Map", new HexVector(15, 22))
+
+  const inside = [
+    new HexVector(0, 0),
+    new HexVector(0, hm1.size.hy-1),
+    new HexVector(hm1.size.hx-1, HexMap.ybias(hm1.size.hx)),
+    new HexVector(hm1.size.hx-1, hm1.size.hy + HexMap.ybias(hm1.size.hx)-1)
+  ]
+
+  const outside = [
+    // off the x edges
+    new HexVector(-1, 0),
+    new HexVector(-1, hm1.size.hy - 1),
+
+    new HexVector(hm1.size.hx, 9)
+    new HexVector(hm1.size.hx, 22)
+
+    // inside x, off the y edges
+    new HexVector(0, -1),
+    new HexVector(0, hm1.size.hy),
+    new HexVector(1, -1),
+    new HexVector(1, hm1.size.hy),
+
+    new HexVector(2, 0),
+    new HexVector(2, hm1.size.hy + HexMap.ybias(2)),
+    new HexVector(3, 0),
+    new HexVector(3, hm1.size.hy + HexMap.ybias(3)),
+
+    new HexVector(hm1.size.hx - 1, HexMap.ybias(hm1.size.hx-1)-1),
+    new HexVector(hm1.size.hx - 1, hm1.size.hy + HexMap.ybias(hm1.size.hx-1))
+
+    new HexVector(hm1.size.hx, HexMap.ybias(hm1.size.hx)-1),
+    new HexVector(hm1.size.hx, hm1.size.hy + HexMap.ybias(hm1.size.hx))
+  ]
+
+  it("contains:inside", () => {
+    for (const i of inside) {
+      expect(hm1.contains(i)).toBeTruthy()
+    }
+  });
+
+  it("contains:outside", () => {
+    for (const o of outside) {
+      expect(hm1.contains(o)).toBeFalsy()
+    }
+  });
+  
   it ('addTerrain', () => {
     const hm0 = new HexMap("Test Map", new HexVector(15, 22))
-    const t0 = new Terrain("hill")
+    const t0 = new Terrain("hill", "hill")
     
     expect(hm0.terrains.size).toEqual(0)
     hm0.terrains.set("hill", t0)
