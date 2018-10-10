@@ -13,11 +13,11 @@ export class Terrain {
     this.Locations = new Map<string, HexVector>()
   }
 
-  public name() {
+  public get name() {
     return this.Name;
   }
 
-  public type() {
+  public get type() {
     return this.Type
   }
 

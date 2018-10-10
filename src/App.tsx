@@ -33,8 +33,8 @@ class App extends React.Component {
     const hills = new Terrain("hills", "hill")
     const craters = new Terrain("craters", "crater")
 
-    hm.terrains.set('hills', hills)
-    hm.terrains.set('craters', craters)
+    hm.terrains.set(hills.name, hills)
+    hm.terrains.set(craters.name, craters)
     
     return hm
   }
