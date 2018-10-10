@@ -4,9 +4,13 @@ import './App.css';
 import logo from './images/one_hex.png';
 
 import HexmapCanvas from "./components/HexmapCanvas";
+import HexVector from "./lib/hexmap/hexvector";
+import HexMap from "./lib/hexmap/map";
 
 class App extends React.Component {
   public render() {
+    const size = new HexVector(15,21);
+    const hm = new HexMap("testmap", size);
     return (
       <div className="App">
         <header className="App-header">
@@ -16,7 +20,7 @@ class App extends React.Component {
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <HexmapCanvas />
+        <HexmapCanvas hexmap={hm} />
       </div>
     );
   }

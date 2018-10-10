@@ -6,30 +6,29 @@ import CanvasHex from './CanvasHex';
 
 import Hex from '../lib/hexmap/hex';
 import HexVector from '../lib/hexmap/hexvector';
-
+import HexMap from '../lib/hexmap/map';
 import "./HexmapCanvas.css";
 
 interface IHexmapCanvasProps {
-  size: HexVector
-  origin: HexVector,
+  hexmap: HexMap,
   hexrun: number,
+  origin: HexVector,
 }
 
 class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
 
   public static propTypes = {
+    hexmap: PropTypes.object,
     hexrun: PropTypes.number,
     origin: HexVector,
-    size: HexVector,
   }
 
   public static defaultProps = {
     hexrun: 30,
     origin: new HexVector(),
-    size: new HexVector(8, 10),
   }
 
-  public get size() { return this.props.size; }
+  public get size() { return this.props.hexmap.size; }
   public get hexrun() { return this.props.hexrun; }
   public get hexradius() { return this.hexrun * 2; }
   public get hexrise() { return Math.floor(this.hexradius * Math.sqrt(2/3)) }
@@ -59,9 +58,9 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
     let row = 0
     let location: HexVector;
 
-    for (col = 0 ; col < this.size.hx ; col++) {
+    for (col = 0 ; col < this.props.hexmap.size.hx ; col++) {
       const bias = this.yBias(col);
-      for (row = 0 ; row < this.size.hy ; row++) {
+      for (row = 0 ; row < this.props.hexmap.size.hy ; row++) {
         location = new HexVector(col, row + bias)
         // location = new HexVector(col, row)
         rows.push(<CanvasHex hexrun={this.hexrun} hex={new Hex(location=location)}/>);

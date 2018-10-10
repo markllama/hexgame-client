@@ -8,8 +8,8 @@ import Terrain from './terrain'
 export class HexMap {
   public static ybias(hx:number):number { return Math.floor(hx / 2) }
 
-  private Name: string,
-  private Size: HexVector,
+  private Name: string;
+  private Size: HexVector;
   private Terrains: Map<string, Terrain>
   // private Tokens: Token[]
 
