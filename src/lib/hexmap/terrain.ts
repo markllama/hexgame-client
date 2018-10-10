@@ -4,12 +4,13 @@ import { HexVector } from './hexvector'
 export class Terrain {
   private Name: string
   private Type: string
-  private Locations: HexVector[]
+  private Locations: Map<string, HexVector>
 
   constructor(name: string, type: string) {
     this.Name = name
     this.Type = type
-    this.Locations = new Array<HexVector>()
+    // this.Locations = new Array<HexVector>()
+    this.Locations = new Map<string, HexVector>()
   }
 
   public name() {
