@@ -31,7 +31,10 @@ class App extends React.Component {
     const hm = new HexMap("testmap", size);
 
     const hills = new Terrain("hills", "hill")
+    hills.locations[-1] = new HexVector(2, 3)
+    
     const craters = new Terrain("craters", "crater")
+    craters.locations[-1] = new HexVector(4, 9)
 
     hm.terrains.set(hills.name, hills)
     hm.terrains.set(craters.name, craters)

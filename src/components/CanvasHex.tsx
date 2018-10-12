@@ -5,17 +5,18 @@ import { Group, RegularPolygon, Text } from 'react-konva';
 
 import Hex from '../lib/hexmap/hex';
 import HexVector from '../lib/hexmap/hexvector';
+// import Terrain from '../lib/hexmap/terrain';
 
 interface ICanvasHexProps {
   hexrun: number,
-  hex: Hex
+  hex: Hex,
 }
 
 class CanvasHex extends React.Component<ICanvasHexProps, any> {
 
   public static propTypes = {
     hex: PropTypes.object,
-    hexrun: PropTypes.number
+    hexrun: PropTypes.number,
   }
 
   public static defaultProps = {
@@ -59,6 +60,10 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
 
   public get location() {
     return this.props.hex.location
+  }
+
+  public get terrains() {
+    return this.props.hex.terrains
   }
 
   // 

@@ -43,7 +43,7 @@ describe('<HexMap>', () => {
     // inside x, off the y edges
     new HexVector(0, -1),
     new HexVector(0, hm1.size.hy),
-    new HexVector(1, -1),
+   new HexVector(1, -1),
     new HexVector(1, hm1.size.hy),
 
     new HexVector(2, 0),
@@ -72,12 +72,43 @@ describe('<HexMap>', () => {
   
   it ('addTerrain', () => {
     const hm0 = new HexMap("Test Map", new HexVector(15, 22))
-    const t0 = new Terrain("hill", "hill")
+    const t0 = new Terrain("hills", "hill", new HexVector(5, 5))
+    const h0 = new HexVector(4, 4)
+    t0.locations[-1] = h0
+  
+    const t1 = new Terrain("craters", "crater")
     
     expect(hm0.terrains.size).toEqual(0)
-    hm0.terrains.set("hill", t0)
+    hm0.terrains.set("hills", t0)
     expect(hm0.terrains.size).toEqual(1)
-    hm0.terrains.set("dale", t0)
+    hm0.terrains.set("craters", t1)
+  });
 
+  it ('invertTerrains', () => {
+    const hm0 = new HexMap("Test Map", new HexVector(15, 22))
+    const t0 = new Terrain("hills", "hill")
+    t0.locations.push(new HexVector(6, 10))
+
+    const t1 = new Terrain("craters", "crater")
+
+    expect(t1.locations).toEqual([])
+    t1.locations.push(new HexVector(4, 5))
+    expect(t1.locations.length).toEqual(1)
+    
+    expect(hm0.terrains.size).toEqual(0)
+    hm0.terrains.set("hills", t0)
+    expect(hm0.terrains.size).toEqual(1)
+    hm0.terrains.set("craters", t1)
+
+    const terrains = hm0.terrains
+    // expect(terrains).toBe(new Map())
+    
+    const terrainByLocation = hm0.invertTerrains()
+    console.log(terrainByLocation)
+    expect(terrainByLocation).toBeTruthy()
+    expect(terrainByLocation).toMatchObject(new Map<HexVector,Terrain>())
+
+    // expect(terrainByLocation).toBe({})
+    // expect(terrainByLocation.keys()).toBe({}))
   });
 });

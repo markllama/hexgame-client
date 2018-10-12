@@ -10,8 +10,17 @@ export class HexMap {
 
   private Name: string;
   private Size: HexVector;
-  private Terrains: Map<string, Terrain>
+  private Terrains: Map<string, Terrain>;
   // private Tokens: Token[]
+  // create a sorted map of terrains by location
+  protected invertTerrains():Map<HexVector,Terrain[]> {
+
+    const terrainLocations = new Map<HexVector,Terrain[]>()
+
+    // terrainLocations.set(this.Terrains.get('craters').locations[0], this.Terrains.get('craters'))
+
+    return terrainLocations
+  }
 
   constructor(name: string, size: HexVector) {
     this.Name = name
@@ -24,6 +33,8 @@ export class HexMap {
   get size():HexVector { return this.Size }
   get terrains(): Map<string, Terrain> { return this.Terrains }
 
+  
+  
   public contains(hv: HexVector):boolean {
     //
     // In the first two columns, things are what you expect

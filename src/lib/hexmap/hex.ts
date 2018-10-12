@@ -1,15 +1,21 @@
-import HexVector from './hexvector'
+import HexVector from './hexvector';
+import Terrain from './terrain';
 
 export class Hex {
   private Location: HexVector
-  // private Terrains: [] of Terrain
+  private Terrains: Terrain[]
 
-  constructor(location: HexVector) {
+  constructor(location: HexVector, terrains: Terrain[] = new Array<Terrain>()) {
     this.Location = location
+    this.Terrains = terrains
   }
 
   public get location() {
     return this.Location
+  }
+
+  public get terrains() {
+    return this.Terrains
   }
 
   public get hx() {
