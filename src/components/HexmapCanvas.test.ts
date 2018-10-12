@@ -1,6 +1,6 @@
 // import HexmapCanvas from './HexmapCanvas';
-import HexMap from '../lib/hexmap/map';
 import HexVector from '../lib/hexmap/hexvector';
+import HexMap from '../lib/hexmap/map';
 
 describe('HexmapCanvas', () => {
 

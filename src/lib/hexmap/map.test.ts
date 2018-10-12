@@ -72,7 +72,7 @@ describe('<HexMap>', () => {
   
   it ('addTerrain', () => {
     const hm0 = new HexMap("Test Map", new HexVector(15, 22))
-    const t0 = new Terrain("hills", "hill", new HexVector(5, 5))
+    const t0 = new Terrain("hills", "hill")
     const h0 = new HexVector(4, 4)
     t0.locations[-1] = h0
   
@@ -100,11 +100,11 @@ describe('<HexMap>', () => {
     expect(hm0.terrains.size).toEqual(1)
     hm0.terrains.set("craters", t1)
 
-    const terrains = hm0.terrains
+    // const terrains = hm0.terrains
     // expect(terrains).toBe(new Map())
     
     const terrainByLocation = hm0.invertTerrains()
-    console.log(terrainByLocation)
+    // console.log(terrainByLocation)
     expect(terrainByLocation).toBeTruthy()
     expect(terrainByLocation).toMatchObject(new Map<HexVector,Terrain>())
 

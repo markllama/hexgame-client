@@ -7,7 +7,7 @@ import CanvasHex from './CanvasHex';
 import Hex from '../lib/hexmap/hex';
 import HexVector from '../lib/hexmap/hexvector';
 import HexMap from '../lib/hexmap/map';
-import Terrain from '../lib/hexmap/terrain';
+// import Terrain from '../lib/hexmap/terrain';
 import "./HexmapCanvas.css";
 
 interface IHexmapCanvasProps {
@@ -29,9 +29,10 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
     origin: new HexVector(),
   }
 
-  constructor(props) {
-    super(props)
-  }
+  // constructor(props) {
+  //  super(props)
+  // }
+
   public get size() { return this.props.hexmap.size; }
   public get hexrun() { return this.props.hexrun; }
   public get hexradius() { return this.hexrun * 2; }
