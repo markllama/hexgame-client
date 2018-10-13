@@ -10,8 +10,9 @@ describe('<HexMap>', () => {
 
     expect(hm0.name).toBe("Test Map")
     expect(hm0.size).toBe(s0)
-    expect(hm0.terrains).toEqual(new Map())
-    expect(hm0.terrains.size).toEqual(0)
+    expect(hm0.terrains()).toEqual(new Set())
+
+    expect(hm0.terrains().size).toEqual(0)
   });
 
   it ('ybias', () => {
@@ -78,36 +79,33 @@ describe('<HexMap>', () => {
   
     const t1 = new Terrain("craters", "crater")
     
-    expect(hm0.terrains.size).toEqual(0)
-    hm0.terrains.set("hills", t0)
-    expect(hm0.terrains.size).toEqual(1)
-    hm0.terrains.set("craters", t1)
+    expect(hm0.terrains().size).toEqual(0)
+    hm0.terrains().add(t0)
+    expect(hm0.terrains().size).toEqual(1)
+    hm0.terrains().add(t1)
   });
 
-  it ('invertTerrains', () => {
+  it ('terrains by location', () => {
     const hm0 = new HexMap("Test Map", new HexVector(15, 22))
     const t0 = new Terrain("hills", "hill")
-    t0.locations.push(new HexVector(6, 10))
+    const l0 = new HexVector(6, 10)
+    t0.locations.add(l0)
 
     const t1 = new Terrain("craters", "crater")
-
-    expect(t1.locations).toEqual([])
-    t1.locations.push(new HexVector(4, 5))
-    expect(t1.locations.length).toEqual(1)
+    const l1 = new HexVector(4, 5)
+    expect(t1.locations).toMatchObject(new Set<HexVector>())
+    t1.locations.add(l1)
+    expect(t1.locations.size).toEqual(1)
     
-    expect(hm0.terrains.size).toEqual(0)
-    hm0.terrains.set("hills", t0)
-    expect(hm0.terrains.size).toEqual(1)
-    hm0.terrains.set("craters", t1)
+    expect(hm0.terrains().size).toEqual(0)
+    hm0.terrains().add(t0)
+    expect(hm0.terrains().size).toEqual(1)
+    hm0.terrains().add(t1)
 
-    // const terrains = hm0.terrains
-    // expect(terrains).toBe(new Map())
+    expect(hm0.terrains().size).toBe(2)
+    expect(hm0.terrains(l1).size).toBe(1)
     
-    const terrainByLocation = hm0.invertTerrains()
-    // console.log(terrainByLocation)
-    expect(terrainByLocation).toBeTruthy()
-    expect(terrainByLocation).toMatchObject(new Map<HexVector,Terrain>())
-
+   
     // expect(terrainByLocation).toBe({})
     // expect(terrainByLocation.keys()).toBe({}))
   });

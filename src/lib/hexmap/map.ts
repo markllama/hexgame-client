@@ -10,29 +10,33 @@ export class HexMap {
 
   private Name: string;
   private Size: HexVector;
-  private Terrains: Map<string, Terrain>;
+  private Terrains: Set<Terrain>;
   // private Tokens: Token[]
 
   constructor(name: string, size: HexVector) {
     this.Name = name
     this.Size = size
-    this.Terrains = new Map<string, Terrain>()
+    this.Terrains = new Set<Terrain>()
     // this.Tokens = []
-  }
-
-  // create a sorted map of terrains by location
-  public invertTerrains():Map<HexVector,Terrain[]> {
-
-    const terrainLocations = new Map<HexVector,Terrain[]>()
-
-    // terrainLocations.set(this.Terrains.get('craters').locations[0], this.Terrains.get('craters'))
-
-    return terrainLocations
   }
 
   get name():string { return this.Name }
   get size():HexVector { return this.Size }
-  get terrains(): Map<string, Terrain> { return this.Terrains }
+  public terrains(location?: HexVector): Set<Terrain> {
+    if (location) {
+      const tset = new Set<Terrain>()
+
+      this.Terrains.forEach((t, d, s) => {
+        if (t.locations.has(location)) {
+          tset.add(t)
+        }
+      });
+      // add all the terrains that match the location
+      return tset
+      
+    }
+    return this.Terrains
+  }
 
   
   

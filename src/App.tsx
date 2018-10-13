@@ -36,8 +36,8 @@ class App extends React.Component {
     const craters = new Terrain("craters", "crater")
     craters.locations[-1] = new HexVector(4, 9)
 
-    hm.terrains.set(hills.name, hills)
-    hm.terrains.set(craters.name, craters)
+    hm.terrains().add(hills)
+    hm.terrains().add(craters)
     
     return hm
   }
