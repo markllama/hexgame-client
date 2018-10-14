@@ -10,9 +10,12 @@ import HexMap from '../lib/hexmap/map';
 // import Terrain from '../lib/hexmap/terrain';
 import "./HexmapCanvas.css";
 
+enum Orientation { Portrait = "portrait", Landscape = "landscape" }
+
 interface IHexmapCanvasProps {
   hexmap: HexMap,
   hexrun: number,
+  orientation: Orientation,
   origin: HexVector,
 }
 
@@ -21,11 +24,13 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
   public static propTypes = {
     hexmap: PropTypes.object,
     hexrun: PropTypes.number,
+    orientation: PropTypes.string,
     origin: HexVector,
   }
 
   public static defaultProps = {
     hexrun: 30,
+    orientation: Orientation.Portrait,
     origin: new HexVector(),
   }
 
@@ -39,11 +44,14 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
   public get hexrise() { return Math.floor(this.hexradius * Math.sqrt(2/3)) }
   public get hexheight() { return Math.floor(this.hexrise * 2) }
 
+  public get width() { return this.hexrun * (this.size.hx*3+1) }
+  public get height() { return this.hexrise * ((this.size.hy + 1)*2) }
+  
   public render() {
     
     return (
         <div className="HexmapCanvas">
-        <Stage width={this.hexrun * (this.size.hx*3+1)} height={this.hexrise * ((this.size.hy + 1)*2)} >
+        <Stage width={this.width} height={this.height} >
         <Layer>
         <Text text={this.props.hexmap.name} />
         {this.fill_map()}
@@ -54,9 +62,31 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
 
   }
 
-  
+  public get origin() {
+    return new HexVector(
+      this.hexrun * 2,
+      this.hexrun * 4 * Math.sqrt(2/3)
+    )
+  }
+
+  public hexToPixel(hv: HexVector):HexVector {
+
+    const rowShift = new HexVector(0, this.hexrise * 2)
+    const colShift = new HexVector(this.hexrun * 3, 0)
+    // const sawtooth = new HexVector()
+    const sawtooth = (hv.hx % 2) === 0 ?
+      new HexVector() :
+      new HexVector(0, - this.hexrise)
+    
+    return this.origin
+      .add(colShift.mul(hv.hx))
+      .add(rowShift.mul(hv.hy - Math.floor(hv.hx / 2)))
+      .add(sawtooth)
+  }
+
   private yBias(x:number) { return Math.floor(x / 2) }
 
+  
   private fill_map() {
 
     // const terrains = this.invert_terrains()
