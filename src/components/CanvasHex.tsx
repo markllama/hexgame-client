@@ -12,7 +12,9 @@ enum Orientation { Portrait = 'portrait', Landscape = 'landscape' }
 interface ICanvasHexProps {
   hexrun: number,
   hex: Hex,
-  orientation: Orientation
+  orientation: Orientation,
+  pixel: HexVector,
+  radius: number
 }
 
 class CanvasHex extends React.Component<ICanvasHexProps, any> {
@@ -20,12 +22,15 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
   public static propTypes = {
     hex: PropTypes.object,
     hexrun: PropTypes.number,
-    orientation: PropTypes.string
+    orientation: PropTypes.string,
+    pixel: PropTypes.object,
+    radius: PropTypes.number
   }
 
   public static defaultProps = {
     hexrun: 15,
-    orientation: Orientation.Portrait
+    orientation: Orientation.Portrait,
+    radius: 30
   }
   
   public state = {
@@ -47,22 +52,6 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
     return this.props.hexrun * 2 * Math.sqrt(2/3)
   }
 
-  // pixel location of the hex on the canvas
-  public get center() {
-    const hexrise = this.hexrise
-    const rowShift = new HexVector(0, hexrise * 2)
-    const colShift = new HexVector(this.props.hexrun * 3, 0)
-    // const sawtooth = new HexVector()
-    const sawtooth = (this.props.hex.hx % 2) === 0 ?
-      new HexVector() :
-      new HexVector(0, - hexrise)
-    
-    return this.origin
-      .add(colShift.mul(this.props.hex.hx))
-      .add(rowShift.mul(this.props.hex.hy - Math.floor(this.props.hex.hx / 2)))
-      .add(sawtooth)
-  }
-
   public get location() {
     return this.props.hex.location
   }
@@ -76,21 +65,21 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
 
     // calculate the pixel location for the hex
     const hexrise = this.hexrise
-    const p = this.center
+    // const p = this.center
     return (
       <Group>
         <RegularPolygon
-      x={p.hx}
-      y={p.hy}
+      x={this.props.pixel.hx}
+      y={this.props.pixel.hy}
       sides={6}
-      radius={this.props.hexrun * 2}
+      radius={this.props.radius}
       rotation={30}
       stroke={'1px'}
       fill={this.state.color}
       // shadowBlur={5}
       onClick={this.handleClick}
         />
-        <Text x={p.hx} y={p.hy + hexrise / 2} align="center" text={this.props.hex.location.toString()} listening={false}/>
+        <Text x={this.props.pixel.hx} y={this.props.pixel.hy + hexrise / 2} align="center" text={this.props.hex.location.toString()} listening={false}/>
         </Group>
     );
   }
