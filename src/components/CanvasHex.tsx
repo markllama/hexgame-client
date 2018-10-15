@@ -64,22 +64,25 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
   public render() {
 
     // calculate the pixel location for the hex
-    const hexrise = this.hexrise
-    // const p = this.center
+    // const hexrise = this.hexrise
+    const p = this.props.pixel
+    const r = this.props.radius
+    const label = this.location.toString()
+
     return (
       <Group>
         <RegularPolygon
-      x={this.props.pixel.hx}
-      y={this.props.pixel.hy}
+      x={p.hx}
+      y={p.hy}
       sides={6}
-      radius={this.props.radius}
+      radius={r}
       rotation={30}
       stroke={'1px'}
       fill={this.state.color}
       // shadowBlur={5}
       onClick={this.handleClick}
         />
-        <Text x={this.props.pixel.hx} y={this.props.pixel.hy + hexrise / 2} align="center" text={this.props.hex.location.toString()} listening={false}/>
+        <Text x={p.hx} y={p.hy + (r / 2)} align="center" text={label} listening={false}/>
         </Group>
     );
   }
