@@ -22,24 +22,25 @@ export class HexMap {
 
   get name():string { return this.Name }
   get size():HexVector { return this.Size }
-  public terrains(location?: HexVector): Set<Terrain> {
+  get terrains():Set<Terrain> { return this.Terrains }
+  public terrainsAt(location?: HexVector): Set<Terrain> {
     if (location) {
       const tset = new Set<Terrain>()
-
-      this.Terrains.forEach((t, d, s) => {
-        if (t.locations.has(location)) {
-          tset.add(t)
+      this.Terrains.forEach((t:Terrain) => {
+        // check that the location is in the terrain
+        for (const l of t.locations) {
+          if (location.eq(l)) {
+            tset.add(t)
+            break
+          }
         }
       });
       // add all the terrains that match the location
       return tset
-      
     }
     return this.Terrains
   }
 
-  
-  
   public contains(hv: HexVector):boolean {
     //
     // In the first two columns, things are what you expect

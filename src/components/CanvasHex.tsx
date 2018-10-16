@@ -41,15 +41,8 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
     super(props)
   }
 
-  public get origin() {
-    return new HexVector(
-      this.props.hexrun * 2,
-      this.props.hexrun * 4 * Math.sqrt(2/3)
-    )
-  }
-
   get hexrise() {
-    return this.props.hexrun * 2 * Math.sqrt(2/3)
+    return this.props.radius * Math.sqrt(2/3) / 2
   }
 
   public get location() {
@@ -63,8 +56,6 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
   // 
   public render() {
 
-    // calculate the pixel location for the hex
-    // const hexrise = this.hexrise
     const p = this.props.pixel
     const r = this.props.radius
     const label = this.location.toString()
@@ -75,14 +66,14 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
       x={p.hx}
       y={p.hy}
       sides={6}
-      radius={r}
+      radius={r-3}
       rotation={30}
       stroke={'1px'}
       fill={this.state.color}
       // shadowBlur={5}
       onClick={this.handleClick}
         />
-        <Text x={p.hx} y={p.hy + (r / 2)} align="center" text={label} listening={false}/>
+        <Text x={p.hx} y={p.hy + (this.hexrise)} align="center" text={label} listening={false}/>
         </Group>
     );
   }

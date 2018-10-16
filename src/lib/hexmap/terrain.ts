@@ -4,13 +4,13 @@ import { HexVector } from './hexvector'
 export class Terrain {
   private Name: string
   private Type: string
-  private Locations: Set<HexVector>
+  private Locations: HexVector[]
 
   constructor(name: string, type: string) {
     this.Name = name
     this.Type = type
     // this.Locations = new Array<HexVector>()
-    this.Locations = new Set<HexVector>()
+    this.Locations = new Array<HexVector>()
   }
 
   public get name() {
@@ -23,6 +23,15 @@ export class Terrain {
 
   public get locations() {
     return this.Locations;
+  }
+
+  public addLocation(newHv: HexVector) {
+    // check if it's already in the list
+    for (const i of this.Locations) {
+      if (i.eq(newHv)) { return }
+    }
+    // add it if not
+    this.Locations.push(newHv)
   }
 }
 
