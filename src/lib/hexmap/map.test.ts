@@ -105,10 +105,6 @@ describe('<HexMap>', () => {
     expect(hm0.terrains.size).toBe(2)
     expect(hm0.terrainsAt(l1).size).toBe(1)
 
-    // console.log(hm0.terrains(l1))
-
-    // expect(hm0.terrains(new HexVector(4, 5)).size).toBe(1)
-    // expect(terrainByLocation).toBe({})
-    // expect(terrainByLocation.keys()).toBe({}))
+    expect(hm0.terrainsAt(new HexVector(4, 5)).size).toBe(1)
   });
 });

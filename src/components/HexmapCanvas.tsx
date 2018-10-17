@@ -7,7 +7,7 @@ import CanvasHex from './CanvasHex';
 import Hex from '../lib/hexmap/hex';
 import HexVector from '../lib/hexmap/hexvector';
 import HexMap from '../lib/hexmap/map';
-// import Terrain from '../lib/hexmap/terrain';
+import Terrain from '../lib/hexmap/terrain';
 import "./HexmapCanvas.css";
 
 enum Orientation { Portrait = "portrait", Landscape = "landscape" }
@@ -95,15 +95,17 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
     let col = 0
     let row = 0
     let location: HexVector;
+    let terrains: Set<Terrain>;
     let pixel: HexVector;
     
     for (col = 0 ; col < this.props.hexmap.size.hx ; col++) {
       const bias = this.yBias(col);
       for (row = 0 ; row < this.props.hexmap.size.hy ; row++) {
         location = new HexVector(col, row + bias)
+        terrains = this.props.hexmap.terrainsAt(location)
         pixel = this.hexToPixel(location)
         
-        rows.push(<CanvasHex hex={new Hex(location=location)} pixel={pixel} radius={this.hexradius}/>);
+        rows.push(<CanvasHex hex={new Hex(location=location, terrains=terrains)} pixel={pixel} radius={this.hexradius}/>);
       }
     }
     return rows

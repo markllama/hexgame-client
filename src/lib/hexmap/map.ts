@@ -25,6 +25,7 @@ export class HexMap {
   get terrains():Set<Terrain> { return this.Terrains }
   public terrainsAt(location?: HexVector): Set<Terrain> {
     if (location) {
+      // add all the terrains that match the location
       const tset = new Set<Terrain>()
       this.Terrains.forEach((t:Terrain) => {
         // check that the location is in the terrain
@@ -35,7 +36,6 @@ export class HexMap {
           }
         }
       });
-      // add all the terrains that match the location
       return tset
     }
     return this.Terrains

@@ -1,5 +1,9 @@
 .App {
-  text-align: center;
+    overflow: scroll;
+    padding: 0;
+    margin: auto;
+    display: block;
+    text-align: center;
 }
 
 .App-logo {
@@ -8,11 +12,12 @@
 }
 
 .App-header {
-  background-image: url("images/hexmap_background.svg");
-  background-color: brown;
-  height: 100px;
-  padding: 10px;
-  color: black;
+    display: block;
+    padding: 20px;
+    margin: auto;
+    background-size: auto auto; 
+    background-image: url("images/hexmap_background.svg");
+    background-repeat: repeat;
 }
 
 .App-title {

@@ -3,9 +3,9 @@ import Terrain from './terrain';
 
 export class Hex {
   private Location: HexVector
-  private Terrains: Terrain[]
+  private Terrains: Set<Terrain>
 
-  constructor(location: HexVector, terrains: Terrain[] = new Array<Terrain>()) {
+  constructor(location: HexVector, terrains = new Set<Terrain>()) {
     this.Location = location
     this.Terrains = terrains
   }

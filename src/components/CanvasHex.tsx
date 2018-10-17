@@ -10,7 +10,6 @@ import HexVector from '../lib/hexmap/hexvector';
 enum Orientation { Portrait = 'portrait', Landscape = 'landscape' }
 
 interface ICanvasHexProps {
-  hexrun: number,
   hex: Hex,
   orientation: Orientation,
   pixel: HexVector,
@@ -21,14 +20,12 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
 
   public static propTypes = {
     hex: PropTypes.object,
-    hexrun: PropTypes.number,
     orientation: PropTypes.string,
     pixel: PropTypes.object,
     radius: PropTypes.number
   }
 
   public static defaultProps = {
-    hexrun: 15,
     orientation: Orientation.Portrait,
     radius: 30
   }
