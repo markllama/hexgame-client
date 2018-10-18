@@ -80,7 +80,7 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
   private renderTerrains() {
     const t:JSX.Element[] = []
     this.terrains.forEach((terrain, dummy, set) => {
-      t.push(<CanvasTerrain center={this.props.pixel} radius={this.props.radius} />)
+      t.push(<CanvasTerrain center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
       // t.push(<Ring x={p.hx} y={p.hy} innerRadius={20} outerRadius={30} stroke='black' fill='brown' />)
     })
     

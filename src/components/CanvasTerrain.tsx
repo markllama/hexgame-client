@@ -4,11 +4,13 @@ import * as React from 'react';
 import { Group, Ring } from 'react-konva';
 
 import HexVector from '../lib/hexmap/hexvector';
-// import Terrain from '../lib/hexmap/terrain';
+import Terrain from '../lib/hexmap/terrain';
 
 interface ICanvasTerrain {
   center: HexVector,
-  radius: number
+  radius: number,
+  terrain: Terrain
+  
 }
 
 class CanvasTerrain extends React.Component<ICanvasTerrain, any> {
