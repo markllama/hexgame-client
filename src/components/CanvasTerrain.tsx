@@ -21,7 +21,7 @@ class CanvasTerrain extends React.Component<ICanvasTerrain, any> {
     return (
       <Group>
         <Text text="Heythere" listening={false} />
-        </Group>
+      </Group>
     );
   }
 }

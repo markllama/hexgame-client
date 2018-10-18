@@ -1,7 +1,7 @@
 import * as Konva from  'konva';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import { Group, RegularPolygon, Text } from 'react-konva';
+import { Group, RegularPolygon, Ring, Text } from 'react-konva';
 
 import Hex from '../lib/hexmap/hex';
 import HexVector from '../lib/hexmap/hexvector';
@@ -70,9 +70,20 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
       // shadowBlur={5}
       onClick={this.handleClick}
         />
+        {this.renderTerrains()}
         <Text x={p.hx} y={p.hy + (this.hexrise)} align="center" text={label} listening={false}/>
         </Group>
     );
+  }
+
+  private renderTerrains() {
+    const terrains = []
+    const p = this.props.pixel
+
+    if (this.terrains.size > 0) {
+      terrains.push(<Ring x={p.hx} y={p.hy} innerRadius={10} outerRadius={20} stroke='black' fill='brown' />)
+    }
+    return terrains
   }
 
   private handleClick = () => {
