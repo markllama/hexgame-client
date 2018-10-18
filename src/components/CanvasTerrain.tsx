@@ -16,7 +16,8 @@ interface ICanvasTerrain {
 class CanvasTerrain extends React.Component<ICanvasTerrain, any> {
   public static propTypes = {
     center: PropTypes.object,
-    radius: PropTypes.number
+    radius: PropTypes.number,
+    terrain: PropTypes.object
   }
 
   public render() {
