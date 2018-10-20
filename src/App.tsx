@@ -3,7 +3,7 @@ import './App.css';
 
 import logo from './images/one_hex.png';
 
-import HexmapCanvas from "./components/HexmapCanvas";
+import { HexmapCanvas, Orientation } from "./components/HexmapCanvas";
 import HexVector from "./lib/hexmap/hexvector";
 import HexMap from "./lib/hexmap/map";
 import Terrain from "./lib/hexmap/terrain";
@@ -21,7 +21,7 @@ class App extends React.Component {
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <HexmapCanvas hexmap={hm} />
+        <HexmapCanvas hexmap={hm} orientation={Orientation.Landscape} />
       </div>
     );
   }

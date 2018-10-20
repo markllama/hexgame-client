@@ -58,6 +58,8 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
     const r = this.props.radius
     const label = this.location.toString()
 
+    const rotation = this.props.orientation === Orientation.Portrait ? 30 : 120
+    
     return (
       <Group>
         <RegularPolygon
@@ -65,7 +67,7 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
       y={p.hy}
       sides={6}
       radius={r-3}
-      rotation={30}
+      rotation={rotation}
       stroke={'1px'}
       fill={this.state.color}
       // shadowBlur={5}

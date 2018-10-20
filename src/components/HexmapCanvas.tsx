@@ -10,7 +10,7 @@ import HexMap from '../lib/hexmap/map';
 import Terrain from '../lib/hexmap/terrain';
 import "./HexmapCanvas.css";
 
-enum Orientation { Portrait = "portrait", Landscape = "landscape" }
+export enum Orientation { Portrait = "portrait", Landscape = "landscape" }
 
 interface IHexmapCanvasProps {
   hexmap: HexMap,
@@ -19,7 +19,7 @@ interface IHexmapCanvasProps {
   origin: HexVector,
 }
 
-class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
+export class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
 
   public static propTypes = {
     hexmap: PropTypes.object,
@@ -63,10 +63,27 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
   }
 
   public get origin() {
-    return new HexVector(
-      this.hexrun * 2,
-      this.hexrun * 4 * Math.sqrt(2/3)
-    )
+    
+    let point:HexVector = new HexVector()
+    
+    switch(this.props.orientation) {
+      case Orientation.Portrait: {
+        point = new HexVector(
+          this.hexrun * 2,
+          this.hexrun * 4 * Math.sqrt(2/3)
+        )
+        break;
+      }
+      case Orientation.Landscape: {
+        point = new HexVector(
+          this.hexrun * 2,
+          this.hexrun * 4 * Math.sqrt(2/3)
+        )
+        break;      
+      }
+    }
+
+    return point
   }
 
   public hexToPixel(hv: HexVector):HexVector {
@@ -77,16 +94,33 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
     const sawtooth = (hv.hx % 2) === 0 ?
       new HexVector() :
       new HexVector(0, - this.hexrise)
+
+    let point:HexVector = this.origin
     
-    return this.origin
-      .add(colShift.mul(hv.hx))
-      .add(rowShift.mul(hv.hy - Math.floor(hv.hx / 2)))
-      .add(sawtooth)
+    switch(this.props.orientation) {
+    case Orientation.Portrait: {
+      point = point
+        .add(colShift.mul(hv.hx))
+        .add(rowShift.mul(hv.hy - Math.floor(hv.hx / 2)))
+        .add(sawtooth)
+      break;
+    }
+
+    case Orientation.Landscape: {
+      point = point
+        .add(colShift.mul(hv.hx))
+        .add(rowShift.mul(hv.hy - Math.floor(hv.hx / 2)))
+        .add(sawtooth)
+      break;
+    }
+      
+    }
+
+    return point
   }
 
   private yBias(x:number) { return Math.floor(x / 2) }
 
-  
   private fill_map() {
 
     // const terrains = this.invert_terrains()
@@ -110,7 +144,7 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
 
         pixel = this.hexToPixel(location)
         
-        rows.push(<CanvasHex hex={new Hex(location=location, terrains=terrains)} pixel={pixel} radius={this.hexradius}/>);
+        rows.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location, terrains=terrains)} pixel={pixel} radius={this.hexradius}/>);
       }
     }
     return rows
