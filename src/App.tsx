@@ -32,9 +32,19 @@ class App extends React.Component {
 
     const hills = new Terrain("hills", "hill")
     hills.locations.push(new HexVector(2, 3))
+    hills.locations.push(new HexVector(6, 17))
+    hills.locations.push(new HexVector(12, 24))
+    hills.locations.push(new HexVector(10, 14))
+    hills.locations.push(new HexVector(4, 22))
     
     const craters = new Terrain("craters", "crater")
-    craters.locations.push(new HexVector(4, 9))
+    craters.locations.push(new HexVector(14, 9))
+    craters.locations.push(new HexVector(12, 4))
+    craters.locations.push(new HexVector(13, 18))
+    craters.locations.push(new HexVector(9, 21))
+    craters.locations.push(new HexVector(7 , 14))
+    craters.locations.push(new HexVector(3 , 20))
+    craters.locations.push(new HexVector(6, 9))
 
     hm.terrains.add(hills)
     hm.terrains.add(craters)
