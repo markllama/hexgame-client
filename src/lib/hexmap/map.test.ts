@@ -5,7 +5,7 @@ import Terrain from "./terrain"
 describe('<HexMap>', () => {
   it ('constructor', () => {
     const s0 = new HexVector(15, 22)
-    const hm0 = new HexMap("Test Map", s0)
+    const hm0 = new HexMap("Test Map", 'testgame', s0)
     expect(hm0).toBeTruthy()
 
     expect(hm0.name).toBe("Test Map")
@@ -24,7 +24,7 @@ describe('<HexMap>', () => {
     expect(HexMap.ybias(5)).toEqual(2)
   });
 
-  const hm1 = new HexMap("Test Map", new HexVector(15, 22))
+  const hm1 = new HexMap("Test Map", 'testgame', new HexVector(15, 22))
 
   const inside = [
     new HexVector(0, 0),
@@ -72,7 +72,7 @@ describe('<HexMap>', () => {
   });
   
   it ('addTerrain', () => {
-    const hm0 = new HexMap("Test Map", new HexVector(15, 22))
+    const hm0 = new HexMap("Test Map", 'testgame', new HexVector(15, 22))
     const t0 = new Terrain("hills", "hill")
     const h0 = new HexVector(4, 4)
     t0.locations[-1] = h0
@@ -86,7 +86,7 @@ describe('<HexMap>', () => {
   });
 
   it ('terrains by location', () => {
-    const hm0 = new HexMap("Test Map", new HexVector(15, 22))
+    const hm0 = new HexMap("Test Map", 'testgame', new HexVector(15, 22))
     const t0 = new Terrain("hills", "hill")
     const l0 = new HexVector(6, 10)
     t0.addLocation(l0)

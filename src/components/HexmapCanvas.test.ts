@@ -4,7 +4,7 @@ import HexMap from '../lib/hexmap/map';
 
 describe('HexmapCanvas', () => {
 
-  const hm0 = new HexMap("sample", new HexVector(15,22))
+  const hm0 = new HexMap("sample", "sample", new HexVector(15,22))
   
   it("hexmap", () => {
     expect(hm0.name).toBe("sample")

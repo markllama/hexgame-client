@@ -102,7 +102,12 @@ class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
       const bias = this.yBias(col);
       for (row = 0 ; row < this.props.hexmap.size.hy ; row++) {
         location = new HexVector(col, row + bias)
+
+        // look up the terrain canvas object, create them and pass them into
+        // the CanvasHex
         terrains = this.props.hexmap.terrainsAt(location)
+
+
         pixel = this.hexToPixel(location)
         
         rows.push(<CanvasHex hex={new Hex(location=location, terrains=terrains)} pixel={pixel} radius={this.hexradius}/>);

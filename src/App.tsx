@@ -28,7 +28,7 @@ class App extends React.Component {
 
   private createMap():HexMap {
     const size = new HexVector(15,21);
-    const hm = new HexMap("testmap", size);
+    const hm = new HexMap("testmap", "testgame", size);
 
     const hills = new Terrain("hills", "hill")
     hills.locations.push(new HexVector(2, 3))

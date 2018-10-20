@@ -9,18 +9,21 @@ export class HexMap {
   public static ybias(hx:number):number { return Math.floor(hx / 2) }
 
   private Name: string;
+  private Game: string;
   private Size: HexVector;
   private Terrains: Set<Terrain>;
   // private Tokens: Token[]
 
-  constructor(name: string, size: HexVector) {
+  constructor(name: string, game: string, size: HexVector) {
     this.Name = name
+    this.Game = game
     this.Size = size
     this.Terrains = new Set<Terrain>()
     // this.Tokens = []
   }
 
   get name():string { return this.Name }
+  get game():string { return this.Game }
   get size():HexVector { return this.Size }
   get terrains():Set<Terrain> { return this.Terrains }
   public terrainsAt(location?: HexVector): Set<Terrain> {
