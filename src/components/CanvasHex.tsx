@@ -74,7 +74,7 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
       onClick={this.handleClick}
         />
         {this.renderTerrains()}
-        <Text x={p.hx - 15 } y={p.hy} align="center" text={label} listening={false}/>
+        <Text x={p.hx} y={p.hy + this.hexrise / 2} align="center" text={label} listening={false}/>
         </Group>
     );
   }
