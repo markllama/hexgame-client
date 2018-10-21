@@ -6,7 +6,9 @@ import { Group, RegularPolygon, Text } from 'react-konva';
 import Hex from '../lib/hexmap/hex';
 import HexVector from '../lib/hexmap/hexvector';
 // import Terrain from '../lib/hexmap/terrain';
-import CanvasTerrain from './CanvasTerrain'
+// import CanvasTerrain from './CanvasTerrain'
+import Crater from './terrain/crater'
+import Hill from './terrain/hill'
 
 enum Orientation { Portrait = 'portrait', Landscape = 'landscape' }
 
@@ -80,10 +82,20 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
   }
 
   private renderTerrains() {
+
     const t:JSX.Element[] = []
     this.terrains.forEach((terrain, dummy, set) => {
-      t.push(<CanvasTerrain center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
-      // t.push(<Ring x={p.hx} y={p.hy} innerRadius={20} outerRadius={30} stroke='black' fill='brown' />)
+      switch (terrain.type) {
+        case 'crater': {
+          t.push(<Crater center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+          break;
+        }
+        case 'hill': {
+          t.push(<Hill center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+          break;
+        }
+        
+      }
     })
     
     return t
