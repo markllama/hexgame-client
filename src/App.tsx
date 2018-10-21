@@ -21,17 +21,17 @@ class App extends React.Component {
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <HexmapCanvas hexmap={hm} orientation={Orientation.Landscape} />
+        <HexmapCanvas hexmap={hm} orientation={Orientation.Landscape} hexrun={15}/>
       </div>
     );
   }
 
   private createMap():HexMap {
-    const size = new HexVector(15,21);
+    const size = new HexVector(15,22);
     const hm = new HexMap("testmap", "testgame", size);
 
     const hills = new Terrain("hills", "hill")
-    hills.locations.push(new HexVector(2, 3))
+    hills.locations.push(new HexVector(0, 0))
     hills.locations.push(new HexVector(6, 17))
     hills.locations.push(new HexVector(12, 24))
     hills.locations.push(new HexVector(10, 14))
@@ -44,7 +44,7 @@ class App extends React.Component {
     craters.locations.push(new HexVector(9, 21))
     craters.locations.push(new HexVector(7 , 14))
     craters.locations.push(new HexVector(3 , 20))
-    craters.locations.push(new HexVector(6, 9))
+    craters.locations.push(new HexVector(6, 6))
 
     hm.terrains.add(hills)
     hm.terrains.add(craters)

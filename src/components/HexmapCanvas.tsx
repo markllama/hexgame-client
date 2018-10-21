@@ -48,10 +48,18 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
   public get height() { return this.hexrise * (((this.size.hy)*2)+1)  }
   
   public render() {
+
+    let width = this.width
+    let height = this.height
+
+    if (this.props.orientation === Orientation.Landscape) {
+      width = this.height
+      height = this.width
+    }
     
     return (
         <div className="HexmapCanvas">
-        <Stage width={this.width} height={this.height} >
+        <Stage width={width} height={height} >
         <Layer>
         <Text text={this.props.hexmap.name} />
         {this.fill_map()}
@@ -76,8 +84,8 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
       }
       case Orientation.Landscape: {
         point = new HexVector(
-          this.hexrun * 2,
-          this.hexrun * 4 * Math.sqrt(2/3)
+          5 + this.hexrun * 4 * Math.sqrt(2/3),
+          this.width - this.hexrun * 2
         )
         break;      
       }
@@ -88,17 +96,17 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
 
   public hexToPixel(hv: HexVector):HexVector {
 
-    const rowShift = new HexVector(0, (this.hexrise * 2))
-    const colShift = new HexVector(this.hexrun * 3, 0)
-    // const sawtooth = new HexVector()
-    const sawtooth = (hv.hx % 2) === 0 ?
-      new HexVector() :
-      new HexVector(0, - this.hexrise)
 
     let point:HexVector = this.origin
     
     switch(this.props.orientation) {
     case Orientation.Portrait: {
+      const rowShift = new HexVector(0, (this.hexrise * 2))
+      const colShift = new HexVector(this.hexrun * 3, 0)
+      // const sawtooth = new HexVector()
+      const sawtooth = (hv.hx % 2) === 0 ?
+        new HexVector() :
+        new HexVector(0, - this.hexrise)
       point = point
         .add(colShift.mul(hv.hx))
         .add(rowShift.mul(hv.hy - Math.floor(hv.hx / 2)))
@@ -107,6 +115,12 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
     }
 
     case Orientation.Landscape: {
+      const rowShift = new HexVector((this.hexrise * 2), 0)
+      const colShift = new HexVector(0, - this.hexrun * 3)
+      // const sawtooth = new HexVector()
+      const sawtooth = (hv.hx % 2) === 0 ?
+        new HexVector() :
+        new HexVector(- this.hexrise, 0)
       point = point
         .add(colShift.mul(hv.hx))
         .add(rowShift.mul(hv.hy - Math.floor(hv.hx / 2)))
