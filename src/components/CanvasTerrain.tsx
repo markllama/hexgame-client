@@ -6,6 +6,14 @@ import { Arc, Group, Ring } from 'react-konva';
 import HexVector from '../lib/hexmap/hexvector';
 import Terrain from '../lib/hexmap/terrain';
 
+import Crater from './terrain/crater'
+import Hill from './terrain/hill'
+
+export const Terrains = {
+  crater: Crater,
+  hill: Hill
+}
+
 interface ICanvasTerrain {
   center: HexVector,
   radius: number,

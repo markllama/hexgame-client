@@ -6,9 +6,11 @@ import { Group, RegularPolygon, Text } from 'react-konva';
 import Hex from '../lib/hexmap/hex';
 import HexVector from '../lib/hexmap/hexvector';
 // import Terrain from '../lib/hexmap/terrain';
-// import CanvasTerrain from './CanvasTerrain'
-import Crater from './terrain/crater'
-import Hill from './terrain/hill'
+import { Terrains } from './CanvasTerrain'
+// import { Crater, Hill } from './CanvasTerrain'
+
+const Crater = Terrains.crater
+const Hill = Terrains.hill
 
 enum Orientation { Portrait = 'portrait', Landscape = 'landscape' }
 
