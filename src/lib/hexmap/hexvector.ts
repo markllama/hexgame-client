@@ -1,19 +1,28 @@
+//
+//
+//
+import { JsonObject, JsonProperty } from 'json2typescript'
+
+@JsonObject('hexvector')
 export class HexVector {
-  private hX: number;
-  private hY: number;
+
+  @JsonProperty('hx', Number)
+  public hx: number;
+  @JsonProperty('hy', Number)
+  public hy: number;
 
   constructor(hx=0, hy=0) {
-    this.hX = hx,
-    this.hY = hy
-  }
+    this.hx = hx,
+    this.hy = hy
+   }
 
   public toString = () : string => {
-    return '(' + this.hX + ',' + this.hY + ')';
+    return '(' + this.hx + ',' + this.hy + ')';
   }
 
-  get hx():number { return this.hX }
-  get hy():number { return this.hY }
-  get hz():number { return this.hY - this.hY }
+  // get hx():number { return this.hX }
+  // get hy():number { return this.hY }
+  get hz():number { return this.hy - this.hx }
 
   get length():number {
     return Math.max(Math.abs(this.hx), Math.abs(this.hy), Math.abs(this.hz))

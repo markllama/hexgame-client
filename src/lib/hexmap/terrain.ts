@@ -1,16 +1,26 @@
 // A Hex game terrain
 import { HexVector } from './hexvector'
 
+// function serializable<T extends Type>(value: Type, Constructor: C): C | null {
+
+// }
+
+// @serializable
 export class Terrain {
   private Name: string
   private Type: string
   private Locations: HexVector[]
 
-  constructor(name: string, type: string) {
+  constructor(name: string, type: string, locations: HexVector[] = new Array<HexVector>()) {
     this.Name = name
     this.Type = type
     // this.Locations = new Array<HexVector>()
+
+    // if (!locations) {
     this.Locations = new Array<HexVector>()
+    // } else {
+    //  this.Locations = locations
+    // }
   }
 
   public get name() {

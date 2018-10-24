@@ -30,7 +30,7 @@ class App extends React.Component {
     const size = new HexVector(15,22);
     const hm = new HexMap("testmap", "testgame", size);
 
-    const hills = new Terrain("hills", "hill")
+    const hills = new Terrain("hills", "hill", new Array<HexVector>())
     hills.locations.push(new HexVector(0, 0))
     hills.locations.push(new HexVector(6, 17))
     hills.locations.push(new HexVector(12, 24))

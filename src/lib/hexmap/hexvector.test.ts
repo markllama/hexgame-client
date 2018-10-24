@@ -1,6 +1,7 @@
 //
 // Test the HexVector object
 //
+import { JsonConvert } from 'json2typescript'
 import HexVector from './hexvector';
 import * as hexvector from './hexvector';
 
@@ -73,6 +74,17 @@ describe('<HexVector>', () => {
     expect(hv0.mul(3).eq(result)).toBeTruthy()
   });
 
-  
-});
 
+  it ("JSON", () => {
+
+    const hvString = '{"hx": 3, "hy": 12}'
+    const hvJson = JSON.parse(hvString)
+    
+    const jsonConvert: JsonConvert = new JsonConvert();
+    const hv0: HexVector = jsonConvert.deserializeObject(hvJson, HexVector);
+    expect(hv0).toBeTruthy()
+    expect(hv0.hx).toEqual(3)
+    expect(hv0.hy).toEqual(12)
+    expect(hv0.hz).toEqual(9)
+  });
+});

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "json2typescript": "^1.0.6",
     "konva": "*",
     "react": "*",
     "react-bootstrap": "*",
