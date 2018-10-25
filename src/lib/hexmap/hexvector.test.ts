@@ -75,9 +75,9 @@ describe('<HexVector>', () => {
   });
 
 
-  it ("JSON", () => {
+  it ("JSON deserialize", () => {
 
-    const hvString = '{"hx": 3, "hy": 12}'
+    const hvString = '{"hx":3,"hy":12}'
     const hvJson = JSON.parse(hvString)
     
     const jsonConvert: JsonConvert = new JsonConvert();
@@ -86,5 +86,8 @@ describe('<HexVector>', () => {
     expect(hv0.hx).toEqual(3)
     expect(hv0.hy).toEqual(12)
     expect(hv0.hz).toEqual(9)
+
+    const hv0String:string = JSON.stringify(jsonConvert.serializeObject(hv0))
+    expect(hv0String).toEqual(hvString)
   });
 });
