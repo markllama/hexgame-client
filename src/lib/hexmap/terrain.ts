@@ -1,3 +1,6 @@
+
+import { JsonObject, JsonProperty } from 'json2typescript'
+
 // A Hex game terrain
 import { HexVector } from './hexvector'
 
@@ -5,43 +8,37 @@ import { HexVector } from './hexvector'
 
 // }
 
-// @serializable
-export class Terrain {
-  private Name: string
-  private Type: string
-  private Locations: HexVector[]
 
-  constructor(name: string, type: string, locations: HexVector[] = new Array<HexVector>()) {
-    this.Name = name
-    this.Type = type
+@JsonObject('terrain')
+export class Terrain {
+
+  @JsonProperty("name", String)
+  public name: string
+  @JsonProperty("type", String)
+  public type: string
+  @JsonProperty("locations", [HexVector], true)
+  public locations: HexVector[]
+
+  constructor(name: string, type: string, locations?: HexVector[]) {
+    this.name = name
+    this.type = type
     // this.Locations = new Array<HexVector>()
 
-    // if (!locations) {
-    this.Locations = new Array<HexVector>()
-    // } else {
-    //  this.Locations = locations
-    // }
+    if (locations === undefined) {
+      this.locations = new Array<HexVector>()
+    } else {
+      this.locations = locations
+    }
   }
 
-  public get name() {
-    return this.Name;
-  }
-
-  public get type() {
-    return this.Type
-  }
-
-  public get locations() {
-    return this.Locations;
-  }
 
   public addLocation(newHv: HexVector) {
     // check if it's already in the list
-    for (const i of this.Locations) {
+    for (const i of this.locations) {
       if (i.eq(newHv)) { return }
     }
     // add it if not
-    this.Locations.push(newHv)
+    this.locations.push(newHv)
   }
 }
 

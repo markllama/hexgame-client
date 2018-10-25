@@ -1,3 +1,4 @@
+// import { JsonConvert } from 'json2typescript'
 import HexVector from './hexvector'
 import Terrain from './terrain'
 
@@ -18,5 +19,15 @@ describe('<Terrain>', () => {
 
     expect(t1.name).toBe("hello")
   })
-  
+
+  // it('JSON', () => {
+  //   const jsonStringT0 = '{"name":"simple","type":"simpler"}'
+  //   const jsonT0 = JSON.parse(jsonStringT0)
+
+  //   const jsonConvert: JsonConvert = new JsonConvert();
+
+    // const t0 = jsonConvert.deserializeObject(jsonT0, Terrain)
+    // expect(t0.name).toEqual("simple")
+  //   expect(t0.terrains).toBeTruthy()
+  });
 });
