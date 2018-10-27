@@ -2,7 +2,7 @@
 //
 //
 import HexVector from './hexvector'
-import Terrain from './terrain'
+// import Terrain from './terrain'
 // import Token from './token'
 
 export class HexMap {
@@ -11,38 +11,38 @@ export class HexMap {
   private Name: string;
   private Game: string;
   private Size: HexVector;
-  private Terrains: Set<Terrain>;
+  // private Terrains: Set<Terrain>;
   // private Tokens: Token[]
 
   constructor(name: string, game: string, size: HexVector) {
     this.Name = name
     this.Game = game
     this.Size = size
-    this.Terrains = new Set<Terrain>()
+    // this.Terrains = new Set<Terrain>()
     // this.Tokens = []
   }
 
   get name():string { return this.Name }
   get game():string { return this.Game }
   get size():HexVector { return this.Size }
-  get terrains():Set<Terrain> { return this.Terrains }
-  public terrainsAt(location?: HexVector): Set<Terrain> {
-    if (location) {
-      // add all the terrains that match the location
-      const tset = new Set<Terrain>()
-      this.Terrains.forEach((t:Terrain) => {
-        // check that the location is in the terrain
-        for (const l of t.locations) {
-          if (location.eq(l)) {
-            tset.add(t)
-            break
-          }
-        }
-      });
-      return tset
-    }
-    return this.Terrains
-  }
+  // get terrains():Set<Terrain> { return this.Terrains }
+  // public terrainsAt(location?: HexVector): Set<Terrain> {
+  //   if (location) {
+  //     // add all the terrains that match the location
+  //     const tset = new Set<Terrain>()
+  //     this.Terrains.forEach((t:Terrain) => {
+  //       // check that the location is in the terrain
+  //       for (const l of t.locations) {
+  //         if (location.eq(l)) {
+  //           tset.add(t)
+  //           break
+  //         }
+  //       }
+  //     });
+  //     return tset
+  //   }
+  //   return this.Terrains
+  // }
 
   public contains(hv: HexVector):boolean {
     //
