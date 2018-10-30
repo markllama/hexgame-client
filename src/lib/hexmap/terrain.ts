@@ -2,7 +2,7 @@
 import { JsonObject, JsonProperty } from 'json2typescript'
 
 // A Hex game terrain
-// import { HexVector } from './hexvector'
+import { HexVector } from './hexvector'
 
 
 @JsonObject('terrain')
@@ -12,18 +12,18 @@ export class Terrain {
   public name: string
   @JsonProperty("type", String, true)
   public type: string
-//  @JsonProperty("locations", [HexVector], true)
-//  public locations: HexVector[]
+  @JsonProperty("locations", [HexVector], true)
+  public locations: HexVector[]
 
-//  constructor(name: string, type: string, locations?: HexVector[]) {
-    constructor(name: string, type: string) {
+  constructor(name: string, type: string, locations?: HexVector[]) {
+  //  constructor(name: string, type: string) {
     this.name = name
     this.type = type
-    // if (locations) {
-    //   this.locations = locations
-    // } else {
-    //   this.locations = new Array<HexVector>()
-    // }
+    if (locations) {
+      this.locations = locations
+    } else {
+      this.locations = new Array<HexVector>()
+    }
   }
 
   // public addLocation(newHv: HexVector) {

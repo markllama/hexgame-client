@@ -7,7 +7,7 @@ import CanvasHex from './CanvasHex';
 import Hex from '../lib/hexmap/hex';
 import HexVector from '../lib/hexmap/hexvector';
 import HexMap from '../lib/hexmap/map';
-// import Terrain from '../lib/hexmap/terrain';
+import Terrain from '../lib/hexmap/terrain';
 import "./HexmapCanvas.css";
 
 export enum Orientation { Portrait = "portrait", Landscape = "landscape" }
@@ -142,7 +142,7 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
     let col = 0
     let row = 0
     let location: HexVector;
-//     let terrains: Set<Terrain>;
+    let terrains: Set<Terrain>;
     let pixel: HexVector;
     
     for (col = 0 ; col < this.props.hexmap.size.hx ; col++) {
@@ -152,13 +152,13 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
 
         // look up the terrain canvas object, create them and pass them into
         // the CanvasHex
-        // terrains = this.props.hexmap.terrainsAt(location)
+        terrains = this.props.hexmap.terrainsAt(location)
 
 
         pixel = this.hexToPixel(location)
         
-//        rows.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location, terrains=terrains)} pixel={pixel} radius={this.hexradius}/>);
-        rows.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location)} pixel={pixel} radius={this.hexradius}/>);
+        rows.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location, terrains=terrains)} pixel={pixel} radius={this.hexradius}/>);
+//        rows.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location)} pixel={pixel} radius={this.hexradius}/>);
       }
     }
     return rows
