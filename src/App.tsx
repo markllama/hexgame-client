@@ -37,8 +37,8 @@ class App extends React.Component {
     // hills.locations.push(new HexVector(10, 14))
     // hills.locations.push(new HexVector(4, 22))
     
-    // const craters = new Terrain("craters", "crater")
-    // craters.locations.push(new HexVector(14, 9))
+    const craters = new Terrain("craters", "crater")
+    craters.locations.push(new HexVector(14, 9))
     // craters.locations.push(new HexVector(12, 4))
     // craters.locations.push(new HexVector(13, 18))
     // craters.locations.push(new HexVector(9, 21))
@@ -47,7 +47,7 @@ class App extends React.Component {
     // craters.locations.push(new HexVector(6, 6))
 
     hm.terrains.add(hills)
-    // hm.terrains.add(craters)
+    hm.terrains.add(craters)
     
     return hm
   }
