@@ -26,14 +26,14 @@ export class Terrain {
     }
   }
 
-  // public addLocation(newHv: HexVector) {
-  //   // check if it's already in the list
-  //   for (const i of this.locations) {
-  //     if (i.eq(newHv)) { return }
-  //   }
-  //   // add it if not
-  //   this.locations.push(newHv)
-  // }
+  public addLocation(newHv: HexVector) {
+    // check if it's already in the list
+    for (const i of this.locations) {
+      if (i.eq(newHv)) { return }
+    }
+    // add it if not
+    this.locations.push(newHv)
+  }
 }
 
 export default Terrain
