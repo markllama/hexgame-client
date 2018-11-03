@@ -15,7 +15,7 @@ export class Terrain {
   @JsonProperty("locations", [HexVector], true)
   public locations: HexVector[]
 
-  constructor(name: string, type: string, locations?: HexVector[]) {
+  constructor(name: string="", type: string="", locations?: HexVector[]) {
   //  constructor(name: string, type: string) {
     this.name = name
     this.type = type
