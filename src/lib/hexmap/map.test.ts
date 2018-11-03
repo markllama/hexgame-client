@@ -1,3 +1,5 @@
+import { JsonConvert } from 'json2typescript'
+
 import HexVector from './hexvector';
 import HexMap from './map';
 // import Terrain from "./terrain"
@@ -107,4 +109,31 @@ describe('<HexMap>', () => {
 
   //   expect(hm0.terrainsAt(new HexVector(4, 5)).size).toBe(1)
   // });
+
+  
+  it ('JSON', () => {
+    const jsonConvert: JsonConvert = new JsonConvert();
+
+    const jsonStringM0 = `
+    {
+      "name":"sampleMap",
+      "game":"sampleGame",
+      "size": {"hx":22, "hy":15},
+      "terrains": [
+        {
+          "name":"clear",
+          "type":"swamp"
+        }
+      ]
+    }`
+    
+    const jsonM0 = JSON.parse(jsonStringM0)
+    const M0 = jsonConvert.deserializeObject(jsonM0, HexMap)
+
+    expect(M0.name).toEqual("sampleMap")
+    expect(M0.game).toEqual("sampleGame")
+    expect(M0.size.eq(new HexVector(22, 15))).toBeTruthy()
+    expect(M0.terrains.length).toEqual(1)
+  });
+  
 });

@@ -1,36 +1,43 @@
 //
 //
+import { JsonObject, JsonProperty } from 'json2typescript'
 //
 import HexVector from './hexvector'
 import Terrain from './terrain'
 // import Token from './token'
 
+@JsonObject
 export class HexMap {
   public static ybias(hx:number):number { return Math.floor(hx / 2) }
 
-  private Name: string;
-  private Game: string;
-  private Size: HexVector;
-  private Terrains: Set<Terrain>;
+  @JsonProperty("name", String)
+  public name: string;
+  @JsonProperty("game", String)
+  public game: string;
+  @JsonProperty("size", HexVector, true)
+  public size: HexVector;
+  @JsonProperty("terrains", [Terrain], true)
+  public terrains: Set<Terrain>;
   // private Tokens: Token[]
 
-  constructor(name: string, game: string, size: HexVector) {
-    this.Name = name
-    this.Game = game
-    this.Size = size
-    this.Terrains = new Set<Terrain>()
+  constructor(name: string="", game: string="", size: HexVector=new HexVector(), terrains?: Terrain[]) {
+    this.name = name
+    this.game = game
+    this.size = size
+    if (terrains) {
+      this.terrains = new Set<Terrain>(terrains)
+    } else {
+      this.terrains = new Set<Terrain>()
+    }
+
     // this.Tokens = []
   }
 
-  get name():string { return this.Name }
-  get game():string { return this.Game }
-  get size():HexVector { return this.Size }
-  get terrains():Set<Terrain> { return this.Terrains }
   public terrainsAt(location?: HexVector): Set<Terrain> {
      if (location) {
       // add all the terrains that match the location
       const tset = new Set<Terrain>()
-      this.Terrains.forEach((t:Terrain) => {
+      this.terrains.forEach((t:Terrain) => {
         // check that the location is in the terrain
         for (const l of t.locations) {
           if (location.eq(l)) {
@@ -41,7 +48,7 @@ export class HexMap {
       });
       return tset
     }
-    return this.Terrains
+    return this.terrains
   }
 
   public contains(hv: HexVector):boolean {
