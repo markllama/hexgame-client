@@ -1,0 +1,31 @@
+{
+  "name": "sample map",
+  "game": "sample game",
+  "size": {"hx":22,"hy":15},
+  "terrains": [
+    {
+      "name":"hill",
+      "type":"hill",
+      "locations": [
+        {"hx":0,"hy":0},
+        {"hx":6,"hy":17},
+        {"hx":12,"hy":24},
+        {"hx":10,"hy":14},
+        {"hx":4,"hy":22}
+      ]
+    },
+    {
+      "name":"crater",
+      "type":"crater",
+      "locations": [
+        {"hx":14,"hy":9},
+        {"hx":12,"hy":4},
+        {"hx":13,"hy":18},
+        {"hx":9,"hy":21},
+        {"hx":7,"hy":14},
+        {"hx":3,"hy":20},
+        {"hx":6,"hy":6}
+      ]
+    }
+  ]
+}
