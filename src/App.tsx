@@ -32,20 +32,25 @@ class App extends React.Component {
 
   private createMap():HexMap {
 
-    const req = new XMLHttpRequest()
-    const mapUrl = "http://localhost:3001/samplemap.json"
+    const hmJson = require('./samplemap.json')
+    // const hmObject = JSON.parse(hmJson)
+    const jsonConvert: JsonConvert = new JsonConvert();
+    const hm = jsonConvert.deserialize(hmJson, HexMap)
+    
+    // const req = new XMLHttpRequest()
+    // const mapUrl = "http://localhost:3001/samplemap.json"
 
-    let hm:HexMap = new HexMap()
+    // let hm:HexMap = new HexMap()
 
-    req.onreadystatechange = () => {
-      if (req.readyState === 4 && req.status === 200) {
-        const mapObject = JSON.parse(req.responseText);
-        const jsonConvert: JsonConvert = new JsonConvert();
-        hm = jsonConvert.deserialize(mapObject, HexMap)
-      }
-    }
-    req.open("GET", mapUrl, true)
-    req.send()
+    // req.onreadystatechange = () => {
+    //   if (req.readyState === 4 && req.status === 200) {
+    //     const mapObject = JSON.parse(req.responseText);
+    //     const jsonConvert: JsonConvert = new JsonConvert();
+    //     hm = jsonConvert.deserialize(mapObject, HexMap)
+    //   }
+    // }
+    // req.open("GET", mapUrl, true)
+    // req.send()
 
     // const size = new HexVector(15,22);
     // const hm = new HexMap("testmap", "testgame", size);
