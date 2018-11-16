@@ -37,42 +37,6 @@ class App extends React.Component {
     const jsonConvert: JsonConvert = new JsonConvert();
     const hm = jsonConvert.deserialize(hmJson, HexMap)
     
-    // const req = new XMLHttpRequest()
-    // const mapUrl = "http://localhost:3001/samplemap.json"
-
-    // let hm:HexMap = new HexMap()
-
-    // req.onreadystatechange = () => {
-    //   if (req.readyState === 4 && req.status === 200) {
-    //     const mapObject = JSON.parse(req.responseText);
-    //     const jsonConvert: JsonConvert = new JsonConvert();
-    //     hm = jsonConvert.deserialize(mapObject, HexMap)
-    //   }
-    // }
-    // req.open("GET", mapUrl, true)
-    // req.send()
-
-    // const size = new HexVector(15,22);
-    // const hm = new HexMap("testmap", "testgame", size);
-
-    // const hills = new Terrain("hills", "hill", new Array<HexVector>())
-    // hills.locations.push(new HexVector(0, 0))
-    // hills.locations.push(new HexVector(6, 17))
-    // hills.locations.push(new HexVector(12, 24))
-    // hills.locations.push(new HexVector(10, 14))
-    // hills.locations.push(new HexVector(4, 22))
-    
-    // const craters = new Terrain("craters", "crater")
-    // craters.locations.push(new HexVector(14, 9))
-    // craters.locations.push(new HexVector(12, 4))
-    // craters.locations.push(new HexVector(13, 18))
-    // craters.locations.push(new HexVector(9, 21))
-    // craters.locations.push(new HexVector(7 , 14))
-    // craters.locations.push(new HexVector(3 , 20))
-    // craters.locations.push(new HexVector(6, 6))
-
-    // hm.terrains.add(hills)
-    // hm.terrains.add(craters)
     
     return hm
   }
