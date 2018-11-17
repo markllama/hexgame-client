@@ -2,6 +2,8 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { Layer, Stage, Text } from 'react-konva';
 
+import loadMap from "../LoadMap"
+
 import CanvasHex from './CanvasHex';
 
 import Hex from '../lib/hexmap/hex';
@@ -13,7 +15,6 @@ import "./HexmapCanvas.css";
 export enum Orientation { Portrait = "portrait", Landscape = "landscape" }
 
 interface IHexmapCanvasProps {
-  hexmap: HexMap,
   hexmapurl: string,
   hexrun: number,
   orientation: Orientation,
@@ -27,7 +28,6 @@ interface IHexmapCanvasState {
 export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCanvasState> {
 
   public static propTypes = {
-    hexmap: PropTypes.object,
     hexmapurl: PropTypes.string,
     hexrun: PropTypes.number,
     orientation: PropTypes.string,
@@ -43,7 +43,9 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
 
   constructor(props:IHexmapCanvasProps) {
     super(props)
-    this.state = {hexmap: props.hexmap}
+
+    const hexmap = loadMap(props.hexmapurl)
+    this.state = { 'hexmap': hexmap }
   }
 
   public get size() { return this.state.hexmap.size; }
