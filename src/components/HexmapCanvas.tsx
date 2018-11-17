@@ -14,31 +14,39 @@ export enum Orientation { Portrait = "portrait", Landscape = "landscape" }
 
 interface IHexmapCanvasProps {
   hexmap: HexMap,
+  hexmapurl: string,
   hexrun: number,
   orientation: Orientation,
   origin: HexVector,
 }
 
-export class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
+interface IHexmapCanvasState {
+  hexmap: HexMap
+}
+
+export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCanvasState> {
 
   public static propTypes = {
     hexmap: PropTypes.object,
+    hexmapurl: PropTypes.string,
     hexrun: PropTypes.number,
     orientation: PropTypes.string,
     origin: HexVector,
   }
 
   public static defaultProps = {
+    hexmapurl: "./sampleMap.json",
     hexrun: 30,
     orientation: Orientation.Portrait,
     origin: new HexVector(),
   }
 
-  // constructor(props) {
-  //  super(props)
-  // }
+  constructor(props:IHexmapCanvasProps) {
+    super(props)
+    this.state = {hexmap: props.hexmap}
+  }
 
-  public get size() { return this.props.hexmap.size; }
+  public get size() { return this.state.hexmap.size; }
   public get hexrun() { return this.props.hexrun; }
   public get hexradius() { return this.hexrun * 2; }
   public get hexrise() { return Math.floor(this.hexradius * Math.sqrt(2/3)) + 4 }
@@ -61,7 +69,7 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
         <div className="HexmapCanvas">
         <Stage width={width} height={height} >
         <Layer>
-        <Text text={this.props.hexmap.name} />
+        <Text text={this.state.hexmap.name} />
         {this.fill_map()}
         </Layer>
         </Stage>
@@ -145,14 +153,14 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, any> {
     let terrains: Set<Terrain>;
     let pixel: HexVector;
     
-    for (col = 0 ; col < this.props.hexmap.size.hx ; col++) {
+    for (col = 0 ; col < this.state.hexmap.size.hx ; col++) {
       const bias = this.yBias(col);
-      for (row = 0 ; row < this.props.hexmap.size.hy ; row++) {
+      for (row = 0 ; row < this.state.hexmap.size.hy ; row++) {
         location = new HexVector(col, row + bias)
 
         // look up the terrain canvas object, create them and pass them into
         // the CanvasHex
-        terrains = this.props.hexmap.terrainsAt(location)
+        terrains = this.state.hexmap.terrainsAt(location)
 
 
         pixel = this.hexToPixel(location)
