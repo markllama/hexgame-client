@@ -12,6 +12,8 @@ import HexMap from '../lib/hexmap/map';
 import Terrain from '../lib/hexmap/terrain';
 import "./HexmapCanvas.css";
 
+import * as HttpRequest from '../lib/request';
+
 export enum Orientation { Portrait = "portrait", Landscape = "landscape" }
 
 interface IHexmapCanvasProps {
@@ -56,6 +58,13 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
 
   public get width() { return this.hexrun * (this.size.hx*3+1) }
   public get height() { return this.hexrise * (((this.size.hy)*2)+1)  }
+
+
+  // start methods to get map from server
+
+  public getMap() {
+    HttpRequest.request('get', this.props.hexmapurl)
+  }
   
   public render() {
 
