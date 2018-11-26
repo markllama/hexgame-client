@@ -2,10 +2,9 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { Layer, Stage, Text } from 'react-konva';
 
-import loadMap from "../LoadMap"
-
 import CanvasHex from './CanvasHex';
 
+import { JsonConvert } from 'json2typescript'
 import Hex from '../lib/hexmap/hex';
 import HexVector from '../lib/hexmap/hexvector';
 import HexMap from '../lib/hexmap/map';
@@ -46,8 +45,8 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
   constructor(props:IHexmapCanvasProps) {
     super(props)
 
-    const hexmap = loadMap(props.hexmapurl)
-    this.state = { 'hexmap': hexmap }
+    // query the map from the hexmapurl
+    this.getMap()
   }
 
   public get size() { return this.state.hexmap.size; }
@@ -62,11 +61,18 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
 
   // start methods to get map from server
 
-  public getMap() {
-    HttpRequest.request('get', this.props.hexmapurl)
-  }
-  
   public render() {
+
+    if (this.state === null || this.state.hexmap === null) {
+      return (
+          <div className="HexMapCanvas">
+          <p>
+          <h1>Hello There</h1>
+          </p>
+          </div>
+      )
+
+    }
 
     let width = this.width
     let height = this.height
@@ -181,6 +187,16 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
       }
     }
     return rows
- }
+  }
+
+  private getMap() {
+    const response = HttpRequest.request('get', this.props.hexmapurl)
+    response.then( resp => {
+      const jsonConvert: JsonConvert = new JsonConvert();
+      const hm = jsonConvert.deserialize(resp.json(), HexMap)
+      this.setState( { 'hexmap': hm } )
+    })
+  }
+
 }
 export default HexmapCanvas;
