@@ -91,7 +91,6 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
         </Stage>
         </div>
     )
-
   }
 
   public get origin() {
@@ -177,10 +176,7 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
         // look up the terrain canvas object, create them and pass them into
         // the CanvasHex
         terrains = this.state.hexmap.terrainsAt(location)
-
-
         pixel = this.hexToPixel(location)
-        
         rows.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location, terrains=terrains)} pixel={pixel} radius={this.hexradius}/>);
 //        rows.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location)} pixel={pixel} radius={this.hexradius}/>);
       }
