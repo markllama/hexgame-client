@@ -9,7 +9,6 @@ import { HexmapCanvas, Orientation } from "./components/HexmapCanvas";
 class App extends React.Component {
 
   public render() {
-    // const hm = loadMap("./sampleMap.json")
     return (
       <div className="App">
         <header className="App-header">
