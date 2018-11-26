@@ -71,7 +71,6 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
           </p>
           </div>
       )
-
     }
 
     let width = this.width
