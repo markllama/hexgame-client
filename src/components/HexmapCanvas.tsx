@@ -11,8 +11,6 @@ import HexMap from '../lib/hexmap/map';
 import Terrain from '../lib/hexmap/terrain';
 import "./HexmapCanvas.css";
 
-import * as HttpRequest from '../lib/request';
-
 export enum Orientation { Portrait = "portrait", Landscape = "landscape" }
 
 interface IHexmapCanvasProps {
@@ -23,7 +21,7 @@ interface IHexmapCanvasProps {
 }
 
 interface IHexmapCanvasState {
-  hexmap: HexMap
+  hexmap: HexMap | null,
 }
 
 export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCanvasState> {
@@ -45,11 +43,12 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
   constructor(props:IHexmapCanvasProps) {
     super(props)
 
+    this.state = {'hexmap': null}
     // query the map from the hexmapurl
     this.getMap()
   }
 
-  public get size() { return this.state.hexmap.size; }
+  public get size() { return this.state.hexmap ? this.state.hexmap.size : new HexVector() }
   public get hexrun() { return this.props.hexrun; }
   public get hexradius() { return this.hexrun * 2; }
   public get hexrise() { return Math.floor(this.hexradius * Math.sqrt(2/3)) + 4 }
@@ -67,12 +66,13 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
       return (
           <div className="HexMapCanvas">
           <p>
-          <h1>Hello There</h1>
+          <h1>Waiting: No map has been loaded</h1>
           </p>
           </div>
       )
     }
-
+  
+ 
     let width = this.width
     let height = this.height
 
@@ -83,6 +83,8 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
     
     return (
         <div className="HexmapCanvas">
+        <h1>Hello There</h1>
+        <h2>{this.state.hexmap.name}</h2>
         <Stage width={width} height={height} >
         <Layer>
         <Text text={this.state.hexmap.name} />
@@ -167,29 +169,32 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
     let location: HexVector;
     let terrains: Set<Terrain>;
     let pixel: HexVector;
-    
-    for (col = 0 ; col < this.state.hexmap.size.hx ; col++) {
-      const bias = this.yBias(col);
-      for (row = 0 ; row < this.state.hexmap.size.hy ; row++) {
-        location = new HexVector(col, row + bias)
 
-        // look up the terrain canvas object, create them and pass them into
-        // the CanvasHex
-        terrains = this.state.hexmap.terrainsAt(location)
-        pixel = this.hexToPixel(location)
-        rows.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location, terrains=terrains)} pixel={pixel} radius={this.hexradius}/>);
-//        rows.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location)} pixel={pixel} radius={this.hexradius}/>);
+    if (this.state.hexmap) {
+      for (col = 0 ; col < this.state.hexmap.size.hx ; col++) {
+        const bias = this.yBias(col);
+        for (row = 0 ; row < this.state.hexmap.size.hy ; row++) {
+          location = new HexVector(col, row + bias)
+
+          // look up the terrain canvas object, create them and pass them into
+          // the CanvasHex
+          terrains = this.state.hexmap.terrainsAt(location)
+          pixel = this.hexToPixel(location)
+          rows.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location, terrains=terrains)} pixel={pixel} radius={this.hexradius}/>);
+        }
       }
     }
     return rows
   }
 
   private getMap() {
-    const response = HttpRequest.request('get', this.props.hexmapurl)
+    const response = fetch(this.props.hexmapurl)
     response.then( resp => {
+      return resp.json()
+    }).then( hmJson => {
       const jsonConvert: JsonConvert = new JsonConvert();
-      const hm = jsonConvert.deserialize(resp.json(), HexMap)
-      this.setState( { 'hexmap': hm } )
+      const hm = jsonConvert.deserialize(hmJson, HexMap)
+      this.setState( {'hexmap': hm } )
     })
   }
 
