@@ -9,6 +9,7 @@
     "react-bootstrap": "*",
     "react-dom": "*",
     "react-konva": "*",
+    "react-materialize": "^2.5.0",
     "react-router-dom": "*"
   },
   "scripts": {
