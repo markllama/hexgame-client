@@ -23,7 +23,7 @@ class Hill extends React.Component<IHill, any> {
   public render() {
     return (
       <Group>
-        <Arc x={this.props.center.hx} y={this.props.center.hy + this.props.radius / 3} angle={120} rotationDeg={210} innerRadius={this.props.radius / 2} outerRadius={this.props.radius * .75} stroke='black' fill='brown' listening={false} />
+        <Arc x={this.props.center.hx} y={this.props.center.hy + this.props.radius / 3} angle={120} rotation={210} innerRadius={this.props.radius / 2} outerRadius={this.props.radius * .75} stroke='black' fill='brown' listening={false} />
       </Group>
     );
   }

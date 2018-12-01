@@ -65,9 +65,7 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
     if (this.state === null || this.state.hexmap === null) {
       return (
           <div className="HexMapCanvas">
-          <p>
           <h1>Waiting: No map has been loaded</h1>
-          </p>
           </div>
       )
     }
