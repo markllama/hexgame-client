@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import './App.css';
 
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Button, Toolbar, Typography } from "@material-ui/core";
 
 import logo from './images/one_hex.png';
 
@@ -18,17 +18,19 @@ class App extends React.Component {
           <h1 className="App-title">Welcome to the Hexgame Server</h1>
         </header>
 
-        <AppBar position="static" color="default">
+        <AppBar position="static" color="primary">
           <Toolbar>
+            <Button>
+            <Typography variant="h6" color="secondary">
+            File
+            </Typography>
+            </Button>
             <Typography variant="h6" color="inherit">
-            Photos
+            Edit
             </Typography>
           </Toolbar>
         </AppBar>
 
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
         <HexmapCanvas hexmapurl={"./samplemap.json"} orientation={Orientation.Landscape} hexrun={30}/>
       </div>
     );
