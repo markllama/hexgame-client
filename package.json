@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.6.0",
+    "@material-ui/icons": "^3.0.1",
     "json2typescript": "^1.0.6",
     "konva": "*",
     "react": "*",
     "react-bootstrap": "*",
     "react-dom": "*",
     "react-konva": "*",
-    "react-materialize": "^2.5.0",
     "react-router-dom": "*"
   },
   "scripts": {
