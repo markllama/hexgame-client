@@ -1,17 +1,20 @@
+
+import { AppBar, Button, Toolbar, Typography } from "@material-ui/core";
 import * as React from 'react';
+import { HashRouter as Router } from "react-router-dom";
+// import { NavLink, Route, HashRouter as Router } from "react-router-dom";
+
+import { HexmapCanvas, Orientation } from "./components/HexmapCanvas";
 
 import './App.css';
 
-import { AppBar, Button, Toolbar, Typography } from "@material-ui/core";
-
 import logo from './images/one_hex.png';
-
-import { HexmapCanvas, Orientation } from "./components/HexmapCanvas";
 
 class App extends React.Component {
 
   public render() {
     return (
+      <Router>
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo"/>
@@ -31,8 +34,11 @@ class App extends React.Component {
           </Toolbar>
         </AppBar>
 
-        <HexmapCanvas hexmapurl={"./samplemap.json"} orientation={Orientation.Landscape} hexrun={30}/>
-      </div>
+        <div>
+          <HexmapCanvas hexmapurl={"./samplemap.json"} orientation={Orientation.Landscape} hexrun={30}/>
+        </div>
+        </div>
+      </Router>
     );
   }
 
