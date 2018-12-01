@@ -1,7 +1,7 @@
 {
   "name": "sample map",
   "game": "sample game",
-  "size": {"hx":22,"hy":15},
+  "size": {"hx":15,"hy":22},
   "terrains": [
     {
       "name":"hill",
