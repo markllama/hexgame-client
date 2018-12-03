@@ -30,7 +30,7 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
     hexmapurl: PropTypes.string,
     hexrun: PropTypes.number,
     orientation: PropTypes.string,
-    origin: HexVector,
+    origin: PropTypes.object,
   }
 
   public static defaultProps = {
