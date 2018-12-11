@@ -14,8 +14,10 @@ export class Terrain {
   public type: string
   @JsonProperty("locations", [HexVector], true)
   public locations: HexVector[]
+  @JsonProperty("parameters", Object, true)
+  public parameters: object
 
-  constructor(name: string="", type: string="", locations?: HexVector[]) {
+  constructor(name: string="", type: string="", locations?: HexVector[], parameters?: {}) {
   //  constructor(name: string, type: string) {
     this.name = name
     this.type = type
@@ -23,6 +25,11 @@ export class Terrain {
       this.locations = locations
     } else {
       this.locations = new Array<HexVector>()
+    }
+    if (parameters) {
+      this.parameters = parameters
+    } else {
+      this.parameters = {}
     }
   }
 
