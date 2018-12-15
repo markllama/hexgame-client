@@ -1,15 +1,18 @@
 import HexVector from './hexvector';
 import SawtoothMapShape from './sawtoothMapShape';
 
-describe('constructor', () => {
-  it('SawtoothMapShape', () => {
+describe('SawtoothMapShape', () => {
+  it('constructor', () => {
     const m0 = new SawtoothMapShape(new HexVector(15, 22))
 
     expect(m0.size).toBeTruthy();
 
     expect(m0.size.hx).toEqual(15)
     expect(m0.size.hy).toEqual(22)
+  })
 
+  describe('contains', () => {
+    const m0 = new SawtoothMapShape(new HexVector(15, 22))
     // check the boundaries
     expect(m0.contains(new HexVector(-1,0))).toBeFalsy()
     expect(m0.contains(new HexVector(-1,20))).toBeFalsy()
@@ -27,5 +30,8 @@ describe('constructor', () => {
     expect(m0.contains(new HexVector(14,28))).toBeTruthy()
     expect(m0.contains(new HexVector(14,29))).toBeFalsy()
   })
-  
+
+  describe('all', () => {
+    // 
+  })
 }):

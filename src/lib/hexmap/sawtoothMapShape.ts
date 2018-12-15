@@ -2,11 +2,11 @@
 // Define the standard sawtooth shaped rectangular maps for Metagames
 //
 import HexVector from './hexvector'
-import MapShape from './mapShape'
+import IMapShape from './mapShape'
 
 function ybias(hx:number):number { return Math.floor(hx / 2) }
 
-export class SawtoothMapShape implements MapShape {
+export class SawtoothMapShape implements IMapShape {
 
   public size: HexVector;
 
@@ -25,7 +25,7 @@ export class SawtoothMapShape implements MapShape {
   }
 
   public all() {
-    const hexes = []HexVector;
+    const hexes = Array<HexVector>;
     let row = 0
     let col = 0
    
@@ -34,7 +34,7 @@ export class SawtoothMapShape implements MapShape {
       for (row = 0 ; row < this.size.hy ; row++) {
         // look up the terrain canvas object, create them and pass them into
         // the CanvasHex
-        rows.push(new HexVector(col, row + bias));
+        hexes.push(new HexVector(col, row + bias));
       }
     }
     return hexes;
