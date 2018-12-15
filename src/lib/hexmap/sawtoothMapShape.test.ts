@@ -2,8 +2,9 @@ import HexVector from './hexvector';
 import SawtoothMapShape from './sawtoothMapShape';
 
 describe('SawtoothMapShape', () => {
+  const m0 = new SawtoothMapShape(new HexVector(15, 22))
+  
   it('constructor', () => {
-    const m0 = new SawtoothMapShape(new HexVector(15, 22))
 
     expect(m0.size).toBeTruthy();
 
@@ -12,7 +13,6 @@ describe('SawtoothMapShape', () => {
   })
 
   describe('contains', () => {
-    const m0 = new SawtoothMapShape(new HexVector(15, 22))
     // check the boundaries
     expect(m0.contains(new HexVector(-1,0))).toBeFalsy()
     expect(m0.contains(new HexVector(-1,20))).toBeFalsy()
@@ -32,6 +32,14 @@ describe('SawtoothMapShape', () => {
   })
 
   describe('all', () => {
-    // 
+    expect(m0.all().length).toBe(330)
+
+    expect(m0.all()[0].eq(new HexVector(0,0))).toBeTruthy()
+    expect(m0.all()[1].eq(new HexVector(0,1))).toBeTruthy()
+    expect(m0.all()[21].eq(new HexVector(0,21))).toBeTruthy()
+
+    expect(m0.all()[22].eq(new HexVector(1,0))).toBeTruthy()
+    expect(m0.all()[43].eq(new HexVector(1,21))).toBeTruthy()
+    
   })
 }):
