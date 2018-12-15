@@ -24,8 +24,8 @@ export class SawtoothMapShape implements IMapShape {
     return true
   }
 
-  public all() {
-    const hexes = Array<HexVector>;
+  public all(): HexVector[] {
+    const hexes = new Array<HexVector>;
     let row = 0
     let col = 0
    
