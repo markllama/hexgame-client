@@ -10,15 +10,15 @@ export class SawtoothMapShape implements MapShape {
 
   public size: HexVector;
 
-  constructor(size: HexVector = new HexVector(15,22)) {
+  constructor(size: HexVector) {
     this.size = size
   }
 
   public contains(hv: HexVector):boolean {
     // In the first two columns, things are what you expect
     // from then on the first and last hex increases by one for every two
-    if (hv.hx < 0 || hv.hx >= size.hx) { return false }
-    if (hv.hy < ybias(hv.hx) || hv.hy >= size.hy + ybias(hv.hx)) {
+    if (hv.hx < 0 || hv.hx >= this.size.hx) { return false }
+    if (hv.hy < ybias(hv.hx) || hv.hy >= this.size.hy + ybias(hv.hx)) {
       return false
     }
     return true
@@ -29,9 +29,9 @@ export class SawtoothMapShape implements MapShape {
     let row = 0
     let col = 0
    
-    for (col = 0 ; col < size.hx ; col++) {
+    for (col = 0 ; col < this.size.hx ; col++) {
       const bias = ybias(col);
-      for (row = 0 ; row < size.hy ; row++) {
+      for (row = 0 ; row < this.size.hy ; row++) {
         // look up the terrain canvas object, create them and pass them into
         // the CanvasHex
         rows.push(new HexVector(col, row + bias));
