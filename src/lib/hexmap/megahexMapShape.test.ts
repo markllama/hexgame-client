@@ -40,9 +40,17 @@ describe('MegahexMapShape', () => {
 
   })
 
+  it("mhTranslate", () => {
+    const mh0 = m0.mhTranslate(new HexVector())
+    expect(mh0.length).toBe(7)
+    expect(mh0[0]).toBeDefined()
+    expect(mh0[3].hx).toBe(0)
+    expect(mh0[3].hy).toBe(0)
+  });
+  
   it("all", () => {
     const m0Hexes = m0.all()
     expect(m0Hexes.length).toEqual(7)
-    // expect(m0Hexes[4]).toEqual(0)
-  }
+    expect(m0Hexes[3].hx).toEqual(0)
+  })
 )

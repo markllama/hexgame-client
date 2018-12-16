@@ -15,9 +15,13 @@ export class MegahexMapShape implements IMapShape {
   }
 
   public const Megahex: HexVector[] = [
-    {hx: -1, hy: -1}, {hx: -1, hy: 0},
-    {hx: 0, hy: -1), {hx: 0, hy: 0}, {hx: 0, hy: 1},
-    {hx: 1, hy: 0}, {hx: 1, hy: 1}
+    new HexVector(-1, -1),
+    new HexVector(-1,  0),
+    new HexVector( 0, -1),
+    new HexVector( 0,  0),
+    new HexVector( 0,  1),
+    new HexVector( 1,  0),
+    new HexVector( 1,  1)
   ]
 
   public mhCenter(mh: HexVector): HexVector  {
@@ -25,7 +29,7 @@ export class MegahexMapShape implements IMapShape {
   }
 
   public mhTranslate(center: HexVector): HexVector[] {
-    return this.Megahex.map((hv) => {center.add(hv)})
+    return this.Megahex.map((hv) => {return center.add(hv)})
   }
   
   // public contains(hv: HexVector):boolean {
