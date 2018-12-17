@@ -6,6 +6,19 @@ import IMapShape from './mapShape'
 
 function ybias(hx:number):number { return Math.floor(hx / 2) }
 
+const Megahex: HexVector[] = [
+  new HexVector(-1, -1),
+  new HexVector(-1,  0),
+  new HexVector( 0, -1),
+  new HexVector( 0,  0),
+  new HexVector( 0,  1),
+  new HexVector( 1,  0),
+  new HexVector( 1,  1)
+]
+
+const xShift = new HexVector(2, 3)
+const yShift = new HexVector(-1, 2)
+
 export class MegahexMapShape implements IMapShape {
 
   public size: HexVector;
@@ -14,33 +27,27 @@ export class MegahexMapShape implements IMapShape {
     this.size = size
   }
 
-  public const Megahex: HexVector[] = [
-    new HexVector(-1, -1),
-    new HexVector(-1,  0),
-    new HexVector( 0, -1),
-    new HexVector( 0,  0),
-    new HexVector( 0,  1),
-    new HexVector( 1,  0),
-    new HexVector( 1,  1)
-  ]
-
   public mhCenter(mh: HexVector): HexVector  {
-    return new HexVector(mh.hx*3 - mh.hy, mh.hx + mh.hy*2)
+    //
+    const xdiff = xShift.mul(mh.hx)
+    const ydiff = yShift.mul(mh.hy - Math.floor(mh.hx / 3))
+    return xdiff.add(ydiff)
   }
 
   public mhTranslate(center: HexVector): HexVector[] {
-    return this.Megahex.map((hv) => {return center.add(hv)})
+    return Megahex.map((hv) => {return center.add(hv)})
   }
   
-  // public contains(hv: HexVector):boolean {
-  //   // In the first two columns, things are what you expect
-  //   // from then on the first and last hex increases by one for every two
+  public contains(hv: HexVector):boolean {
+    // In the first two columns, things are what you expect
+    // from then on the first and last hex increases by one for every two
+    // which megahex?
   //   if (hv.hx < 0 || hv.hx >= this.size.hx) { return false }
   //   if (hv.hy < ybias(hv.hx) || hv.hy >= this.size.hy + ybias(hv.hx)) {
   //     return false
   //   }
-  //   return true
-  // }
+    return true
+  }
 
   public all(): HexVector[] {
     let hexes = new Array<HexVector>()
