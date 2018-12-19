@@ -27,25 +27,28 @@ export class MegahexMapShape implements IMapShape {
     this.size = size
   }
 
-  public mhCenter(mh: HexVector): HexVector  {
+  public mhCenter(mh: HexVector): HexVector {
     //
     const xdiff = xShift.mul(mh.hx)
     const ydiff = yShift.mul(mh.hy - Math.floor(mh.hx / 3))
     return xdiff.add(ydiff)
   }
 
+  public megaHex(hv: HexVector): HexVector {
+    const my = Math.floor((hv.hy - hv.hx) / 3)
+    const mx = Math.ceil((hv.hy+my) / 3)
+    return new HexVector(mx, my)
+  }
+  
   public mhTranslate(center: HexVector): HexVector[] {
     return Megahex.map((hv) => {return center.add(hv)})
   }
   
   public contains(hv: HexVector):boolean {
-    // In the first two columns, things are what you expect
-    // from then on the first and last hex increases by one for every two
-    // which megahex?
-  //   if (hv.hx < 0 || hv.hx >= this.size.hx) { return false }
-  //   if (hv.hy < ybias(hv.hx) || hv.hy >= this.size.hy + ybias(hv.hx)) {
-  //     return false
-  //   }
+    // which column triple
+    
+    // which hex?
+
     return true
   }
 

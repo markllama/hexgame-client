@@ -22,114 +22,53 @@ describe('MegahexMapShape', () => {
     expect(m0.size.hy).toBe(1)
   })
 
+  const samples = [
+    { mh: new HexVector(0, 0), center: new HexVector(0, 0) },
+    { mh: new HexVector(1, 0), center: new HexVector(2, 3) },
+    { mh: new HexVector(2, 0), center: new HexVector(4, 6) },
+    { mh: new HexVector(3, 0), center: new HexVector(7, 7) },
+    { mh: new HexVector(4, 0), center: new HexVector(9, 10) },
+
+    { mh: new HexVector(0, 1), center: new HexVector(-1, 2) },
+    { mh: new HexVector(1, 1), center: new HexVector(1, 5) },
+    { mh: new HexVector(2, 1), center: new HexVector(3, 8) },
+    { mh: new HexVector(3, 1), center: new HexVector(6, 9) },
+    { mh: new HexVector(4, 1), center: new HexVector(8, 12) },
+
+    { mh: new HexVector(0, 2), center: new HexVector(-2, 4) },
+    { mh: new HexVector(1, 2), center: new HexVector(0, 7) },
+    { mh: new HexVector(2, 2), center: new HexVector(2, 10) },
+    { mh: new HexVector(3, 2), center: new HexVector(5, 11) },
+    { mh: new HexVector(4, 2), center: new HexVector(7, 14) },
+
+    { mh: new HexVector(0, 3), center: new HexVector(-3, 6) },
+    { mh: new HexVector(1, 3), center: new HexVector(-1, 9) },
+    { mh: new HexVector(2, 3), center: new HexVector(1, 12) },
+    { mh: new HexVector(3, 3), center: new HexVector(4, 13) },
+    { mh: new HexVector(4, 3), center: new HexVector(6, 16) },
+
+    { mh: new HexVector(0, 4), center: new HexVector(-4, 8) },
+    { mh: new HexVector(1, 4), center: new HexVector(-2, 11) },
+    { mh: new HexVector(2, 4), center: new HexVector(0, 14) },
+    { mh: new HexVector(3, 4), center: new HexVector(3, 15) },
+    { mh: new HexVector(4, 4), center: new HexVector(5, 18) },
+
+  ]
+
   it("mhCenter", () => {
+    samples.forEach( (s) => {
+      const center = m0.mhCenter(s.mh)
+      expect(center.hx).toBe(s.center.hx)
+      expect(center.hy).toBe(s.center.hy)
+    })
+  })
 
-    //
-    const c0 = m0.mhCenter(new HexVector())
-    expect(c0.hx).toBe(0)
-    expect(c0.hy).toBe(0)
-    
-    const c1x0 = m0.mhCenter(new HexVector(1, 0))
-    expect(c1x0.hx).toBe(2)
-    expect(c1x0.hy).toBe(3)
-
-    const c2x0 = m0.mhCenter(new HexVector(2, 0))
-    expect(c2x0.hx).toBe(4)
-    expect(c2x0.hy).toBe(6)
-
-    const c3x0 = m0.mhCenter(new HexVector(3, 0))
-    expect(c3x0.hx).toBe(7)
-    expect(c3x0.hy).toBe(7)
-
-    const c4x0 = m0.mhCenter(new HexVector(4, 0))
-    expect(c4x0.hx).toBe(9)
-    expect(c4x0.hy).toBe(10)
-
-    //
-    const c0x1 = m0.mhCenter(new HexVector(0, 1))
-    expect(c0x1.hx).toBe(-1)
-    expect(c0x1.hy).toBe(2)
-
-    const c1x1 = m0.mhCenter(new HexVector(1, 1))
-    expect(c1x1.hx).toBe(1)
-    expect(c1x1.hy).toBe(5)
-
-    const c2x1 = m0.mhCenter(new HexVector(2, 1))
-    expect(c2x1.hx).toBe(3)
-    expect(c2x1.hy).toBe(8)
-
-    const c3x1 = m0.mhCenter(new HexVector(3, 1))
-    expect(c3x1.hx).toBe(6)
-    expect(c3x1.hy).toBe(9)
-    
-    const c4x1 = m0.mhCenter(new HexVector(4, 1))
-    expect(c4x1.hx).toBe(8)
-    expect(c4x1.hy).toBe(12)
-    
-    //
-    const c0x2 = m0.mhCenter(new HexVector(0, 2))
-    expect(c0x2.hx).toBe(-2)
-    expect(c0x2.hy).toBe(4)
-
-    const c1x2 = m0.mhCenter(new HexVector(1, 2))
-    expect(c1x2.hx).toBe(0)
-    expect(c1x2.hy).toBe(7)
-
-    const c2x2 = m0.mhCenter(new HexVector(2, 2))
-    expect(c2x2.hx).toBe(2)
-    expect(c2x2.hy).toBe(10)
-
-    const c3x2 = m0.mhCenter(new HexVector(3, 2))
-    expect(c3x2.hx).toBe(5)
-    expect(c3x2.hy).toBe(11)
-    
-    const c4x2 = m0.mhCenter(new HexVector(4, 2))
-    expect(c4x2.hx).toBe(7)
-    expect(c4x2.hy).toBe(14)
-    
-    //
-    const c0x3 = m0.mhCenter(new HexVector(0, 3))
-    expect(c0x3.hx).toBe(-3)
-    expect(c0x3.hy).toBe(6)
-
-    const c1x3 = m0.mhCenter(new HexVector(1, 3))
-    expect(c1x3.hx).toBe(-1)
-    expect(c1x3.hy).toBe(9)
-
-    const c2x3 = m0.mhCenter(new HexVector(2, 3))
-    expect(c2x3.hx).toBe(1)
-    expect(c2x3.hy).toBe(12)
-
-    const c3x3 = m0.mhCenter(new HexVector(3, 3))
-    expect(c3x3.hx).toBe(4)
-    expect(c3x3.hy).toBe(13)
-    
-    const c4x3 = m0.mhCenter(new HexVector(4, 3))
-    expect(c4x3.hx).toBe(6)
-    expect(c4x3.hy).toBe(16)
-
-    //
-    const c0x4 = m0.mhCenter(new HexVector(0, 4))
-    expect(c0x4.hx).toBe(-4)
-    expect(c0x4.hy).toBe(8)
-
-    const c1x4 = m0.mhCenter(new HexVector(1, 4))
-    expect(c1x4.hx).toBe(-2)
-    expect(c1x4.hy).toBe(11)
-
-    const c2x4 = m0.mhCenter(new HexVector(2, 4))
-    expect(c2x4.hx).toBe(0)
-    expect(c2x4.hy).toBe(14)
-
-    const c3x4 = m0.mhCenter(new HexVector(3, 4))
-    expect(c3x4.hx).toBe(3)
-    expect(c3x4.hy).toBe(15)
-
-    const c4x4 = m0.mhCenter(new HexVector(4, 4))
-    expect(c4x4.hx).toBe(5)
-    expect(c4x4.hy).toBe(18)
-
-
+  it("megaHex", () => {
+    samples.forEach( (s) => {
+      const mh = m0.megaHex(s.center)
+      // expect(mh.hx).toBe(s.mh.hx)
+      expect(mh.hy).toBe(s.mh.hy)
+    })
   })
 
   it("mhTranslate", () => {
