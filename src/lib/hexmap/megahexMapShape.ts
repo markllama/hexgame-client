@@ -7,13 +7,13 @@ import IMapShape from './mapShape'
 // function ybias(hx:number):number { return Math.floor(hx / 2) }
 
 export const Megahex = [
-  new HexVector( 0, -1),
+  new HexVector( 0,  0),
+  new HexVector( 0,  1),
   new HexVector( 1,  0), 
   new HexVector( 1,  1),
-  new HexVector( 0,  1),
-  new HexVector(-1,  0),
   new HexVector(-1, -1),
-  new HexVector( 0,  0),
+  new HexVector(-1,  0),
+  new HexVector( 0, -1),
 ]  
 
 const xShift = new HexVector(2, 3)
@@ -40,19 +40,17 @@ export class MegahexMapShape implements IMapShape {
   // 4) When a hexvector is "normalized" to hx=0, placing the megahex origin at
   //    {hx: 0, hy: 0} each of the hexes hy=[1-6] represents a unit hexvector
   //    to a MH center
-  public mhOffset(hv: HexVector): HexVector {
-    let xmod = mh.hx % 7
+  public normalize(hv: HexVector): number {
+    let xmod = hv.hx % 7
     if (xmod < 0) { xmod += 7 }
     
-    let ymod = mh.hy % 7
-
-    let ymod = ((5 * xmod) + mh.hy) % 7
+    let ymod = ((2 * xmod) + hv.hy) % 7
     if (ymod < 0) { xmod += 7 }
 
-    return mh.add(HexVector.unit[recenter[ymod]])
+    return ymod
   }
 
-  //
+  // Get the center of a given megahex
   public mhCenter(mh: HexVector): HexVector {
     //
     const xdiff = xShift.mul(mh.hx)

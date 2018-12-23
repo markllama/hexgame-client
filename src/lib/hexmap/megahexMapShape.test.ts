@@ -1,4 +1,4 @@
-import HexVector from './hexvector';
+import { HexVector, ORIGIN, UNIT } from './hexvector';
 import { Megahex, MegahexMapShape } from './megahexMapShape';
 
 describe('MegahexMapShape', () => {
@@ -73,7 +73,7 @@ describe('MegahexMapShape', () => {
 
   it("megaHex(offCenter)", () => {
     // Megahex.forEach( (hv) => {
-    const hv = Megahex[6]
+    const hv = Megahex[0]
     const mh = m0.megaHex(hv)
     // expect(mh.hx).toBe(0)
     expect(mh.hy).toBe(0)
@@ -84,20 +84,43 @@ describe('MegahexMapShape', () => {
     const mh0 = m0.mhTranslate(new HexVector())
     expect(mh0.length).toBe(7)
     expect(mh0[0]).toBeDefined()
-    expect(mh0[6].hx).toBe(0)
-    expect(mh0[6].hy).toBe(0)
+    expect(mh0[0].hx).toBe(0)
+    expect(mh0[0].hy).toBe(0)
   });
 
-  it("mhOffset", () => {
-    const hv0 = new HexVector()
+  it("normalize", () => {
+    expect(m0.normalize(new HexVector())).toBe(0)
+    expect(m0.normalize(new HexVector(0, 1))).toBe(1)
+    expect(m0.normalize(new HexVector(0, 2))).toBe(2)
+    expect(m0.normalize(new HexVector(0, 3))).toBe(3)
+    expect(m0.normalize(new HexVector(0, 4))).toBe(4)
+    expect(m0.normalize(new HexVector(0, 5))).toBe(5)
+    expect(m0.normalize(new HexVector(0, 6))).toBe(6)
+    
+    expect(m0.normalize(new HexVector(0, 7))).toBe(0)
+    expect(m0.normalize(new HexVector(0, 14))).toBe(0)
 
-    expect m0.mhOffset(hv0.eq(HexVector.ORIGIN))
+    expect(m0.normalize(new HexVector(1, 0))).toBe(2)
+    expect(m0.normalize(new HexVector(1, 5))).toBe(0)
+    expect(m0.normalize(new HexVector(2, 10))).toBe(0)
+    expect(m0.normalize(new HexVector(2, 3))).toBe(0)
+    expect(m0.normalize(new HexVector(3, 15))).toBe(0)
+    expect(m0.normalize(new HexVector(3, 8))).toBe(0)
+    expect(m0.normalize(new HexVector(3, 1))).toBe(0)
+        
+    expect(m0.normalize(new HexVector(-1, 0))).toBe(5)
+    expect(m0.normalize(new HexVector(-1, 1))).toBe(6)
+    expect(m0.normalize(new HexVector(-1, 2))).toBe(0)
+    expect(m0.normalize(new HexVector(-1, 3))).toBe(1)
+    expect(m0.normalize(new HexVector(-1 ,4))).toBe(2)
+    expect(m0.normalize(new HexVector(-1, 5))).toBe(3)
+    expect(m0.normalize(new HexVector(-1, 6))).toBe(4)
   })
   
   it("all", () => {
     const m0Hexes = m0.all()
     expect(m0Hexes.length).toEqual(7)
-    expect(m0Hexes[3].hx).toEqual(0)
+    expect(m0Hexes[0].hx).toEqual(0)
 
     const m2x2 = new MegahexMapShape(new HexVector(2, 2))
 
