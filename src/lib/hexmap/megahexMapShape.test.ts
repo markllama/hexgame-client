@@ -1,5 +1,5 @@
 import HexVector from './hexvector';
-import MegahexMapShape from './megahexMapShape';
+import { Megahex, MegahexMapShape } from './megahexMapShape';
 
 describe('MegahexMapShape', () => {
   const m0 = new MegahexMapShape(new HexVector(1, 1))
@@ -22,7 +22,7 @@ describe('MegahexMapShape', () => {
     expect(m0.size.hy).toBe(1)
   })
 
-  const samples = [
+  const centerSamples = [
     { mh: new HexVector(0, 0), center: new HexVector(0, 0) },
     { mh: new HexVector(1, 0), center: new HexVector(2, 3) },
     { mh: new HexVector(2, 0), center: new HexVector(4, 6) },
@@ -55,29 +55,44 @@ describe('MegahexMapShape', () => {
 
   ]
 
-  it("mhCenter", () => {
-    samples.forEach( (s) => {
+  it("mhCenter()", () => {
+    centerSamples.forEach( (s) => {
       const center = m0.mhCenter(s.mh)
       expect(center.hx).toBe(s.center.hx)
       expect(center.hy).toBe(s.center.hy)
     })
   })
 
-  it("megaHex", () => {
-    samples.forEach( (s) => {
+  it("megaHex(center)", () => {
+    centerSamples.forEach( (s) => {
       const mh = m0.megaHex(s.center)
-      // expect(mh.hx).toBe(s.mh.hx)
+      expect(mh.hx).toBe(s.mh.hx)
       expect(mh.hy).toBe(s.mh.hy)
     })
+  })
+
+  it("megaHex(offCenter)", () => {
+    // Megahex.forEach( (hv) => {
+    const hv = Megahex[6]
+    const mh = m0.megaHex(hv)
+    // expect(mh.hx).toBe(0)
+    expect(mh.hy).toBe(0)
+    //  })
   })
 
   it("mhTranslate", () => {
     const mh0 = m0.mhTranslate(new HexVector())
     expect(mh0.length).toBe(7)
     expect(mh0[0]).toBeDefined()
-    expect(mh0[3].hx).toBe(0)
-    expect(mh0[3].hy).toBe(0)
+    expect(mh0[6].hx).toBe(0)
+    expect(mh0[6].hy).toBe(0)
   });
+
+  it("mhOffset", () => {
+    const hv0 = new HexVector()
+
+    expect m0.mhOffset(hv0.eq(HexVector.ORIGIN))
+  })
   
   it("all", () => {
     const m0Hexes = m0.all()
