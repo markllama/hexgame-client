@@ -24,34 +24,34 @@ describe('MegahexMapShape', () => {
 
   const centerSamples = [
     { mh: new HexVector(0, 0), center: new HexVector(0, 0) },
-    { mh: new HexVector(1, 0), center: new HexVector(2, 3) },
-    { mh: new HexVector(2, 0), center: new HexVector(4, 6) },
-    { mh: new HexVector(3, 0), center: new HexVector(7, 7) },
-    { mh: new HexVector(4, 0), center: new HexVector(9, 10) },
+    { mh: new HexVector(1, 0), center: new HexVector(3, 1) },
+    { mh: new HexVector(2, 0), center: new HexVector(6, 2) },
+    { mh: new HexVector(3, 0), center: new HexVector(9, 3) },
+    { mh: new HexVector(4, 0), center: new HexVector(12, 4) },
 
     { mh: new HexVector(0, 1), center: new HexVector(-1, 2) },
-    { mh: new HexVector(1, 1), center: new HexVector(1, 5) },
-    { mh: new HexVector(2, 1), center: new HexVector(3, 8) },
-    { mh: new HexVector(3, 1), center: new HexVector(6, 9) },
-    { mh: new HexVector(4, 1), center: new HexVector(8, 12) },
+    { mh: new HexVector(1, 1), center: new HexVector(2, 3) },
+    { mh: new HexVector(2, 1), center: new HexVector(5, 4) },
+    { mh: new HexVector(3, 1), center: new HexVector(8, 5) },
+    { mh: new HexVector(4, 1), center: new HexVector(11, 6) },
 
     { mh: new HexVector(0, 2), center: new HexVector(-2, 4) },
-    { mh: new HexVector(1, 2), center: new HexVector(0, 7) },
-    { mh: new HexVector(2, 2), center: new HexVector(2, 10) },
-    { mh: new HexVector(3, 2), center: new HexVector(5, 11) },
-    { mh: new HexVector(4, 2), center: new HexVector(7, 14) },
+    { mh: new HexVector(1, 2), center: new HexVector(1, 5) },
+    { mh: new HexVector(2, 2), center: new HexVector(4, 6) },
+    { mh: new HexVector(3, 2), center: new HexVector(7, 7) },
+    { mh: new HexVector(4, 2), center: new HexVector(10, 8) },
 
     { mh: new HexVector(0, 3), center: new HexVector(-3, 6) },
-    { mh: new HexVector(1, 3), center: new HexVector(-1, 9) },
-    { mh: new HexVector(2, 3), center: new HexVector(1, 12) },
-    { mh: new HexVector(3, 3), center: new HexVector(4, 13) },
-    { mh: new HexVector(4, 3), center: new HexVector(6, 16) },
+    { mh: new HexVector(1, 3), center: new HexVector(0, 7) },
+    { mh: new HexVector(2, 3), center: new HexVector(3, 8) },
+    { mh: new HexVector(3, 3), center: new HexVector(6, 9) },
+    { mh: new HexVector(4, 3), center: new HexVector(9, 10) },
 
     { mh: new HexVector(0, 4), center: new HexVector(-4, 8) },
-    { mh: new HexVector(1, 4), center: new HexVector(-2, 11) },
-    { mh: new HexVector(2, 4), center: new HexVector(0, 14) },
-    { mh: new HexVector(3, 4), center: new HexVector(3, 15) },
-    { mh: new HexVector(4, 4), center: new HexVector(5, 18) },
+    { mh: new HexVector(1, 4), center: new HexVector(-1, 9) },
+    { mh: new HexVector(2, 4), center: new HexVector(2, 10) },
+    { mh: new HexVector(3, 4), center: new HexVector(5, 11) },
+    { mh: new HexVector(4, 4), center: new HexVector(8, 12) },
 
   ]
 
@@ -89,6 +89,9 @@ describe('MegahexMapShape', () => {
   });
 
   it("normalize", () => {
+
+    // normalize should translate all hv to {hx: 0, hy: [0-6]}
+    
     expect(m0.normalize(new HexVector())).toBe(0)
     expect(m0.normalize(new HexVector(0, 1))).toBe(1)
     expect(m0.normalize(new HexVector(0, 2))).toBe(2)
@@ -115,6 +118,10 @@ describe('MegahexMapShape', () => {
     expect(m0.normalize(new HexVector(-1 ,4))).toBe(2)
     expect(m0.normalize(new HexVector(-1, 5))).toBe(3)
     expect(m0.normalize(new HexVector(-1, 6))).toBe(4)
+  })
+
+  it("nearestCenter", () {
+    
   })
   
   it("all", () => {

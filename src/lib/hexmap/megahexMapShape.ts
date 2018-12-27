@@ -16,7 +16,19 @@ export const Megahex = [
   new HexVector( 0, -1),
 ]  
 
-const xShift = new HexVector(2, 3)
+// hx = (3mx - my), hy = (mx + 2my)
+//                  hy - 2my = mx
+// hx = 3(hy - 2my) = my
+// hx = 3hy - 6my - my
+// hx = 3hy - 7my
+// hx + 7my = 3hy
+// 7my = 3hy - hx
+// my = (3hy - hx)/7
+//
+//                  hy = mx + 2my
+//                  mx = hy - 2my
+
+const xShift = new HexVector(3, 1)
 const yShift = new HexVector(-1, 2)
 
 // when a hex is normalized to (hx=0, hy % 7) which unit hex will move it to
@@ -54,17 +66,16 @@ export class MegahexMapShape implements IMapShape {
   public mhCenter(mh: HexVector): HexVector {
     //
     const xdiff = xShift.mul(mh.hx)
-    const ydiff = yShift.mul(mh.hy - Math.floor(mh.hx / 3))
+    const ydiff = yShift.mul(mh.hy)
     return xdiff.add(ydiff)
   }
 
+  // return the megahex which contains the given hex
   public megaHex(hv: HexVector): HexVector {
-    const my = Math.floor((hv.hy - hv.hx) / 3)
 
-    // subtract that much y?
-    const xref = hv.sub(yShift.mul(my))
-    const mx = (Math.floor(xref.hx / 7) * 3) + (xref.hy - xref.hx)
-    // const mx = Math.ceil((hv.hy+my) / 3)
+    const my = (3*hv.hy - hv.hx) / 7
+    const mx = hv.hy - 2*my
+    
     return new HexVector(mx, my)
   }
   
