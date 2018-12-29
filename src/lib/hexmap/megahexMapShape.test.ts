@@ -1,6 +1,14 @@
 import { HexVector, ORIGIN, UNIT } from './hexvector';
 import { Megahex, MegahexMapShape } from './megahexMapShape';
 
+// expect.extend({
+//   hexVectorEquals(recieved, expected) {
+//     const pass = recieved.eq(expected)
+    
+//     return {actual: received, message, pass}
+//   }
+// })
+
 describe('MegahexMapShape', () => {
   const m0 = new MegahexMapShape(new HexVector(1, 1))
 
@@ -72,12 +80,15 @@ describe('MegahexMapShape', () => {
   })
 
   it("megaHex(offCenter)", () => {
-    // Megahex.forEach( (hv) => {
-    const hv = Megahex[0]
-    const mh = m0.megaHex(hv)
-    // expect(mh.hx).toBe(0)
-    expect(mh.hy).toBe(0)
-    //  })
+    centerSamples.forEach( (s) => {
+    // const s = {center: new HexVector(0, 0), mh: {hx: 0, hy: 0}}
+      Megahex.forEach( (offset) => {
+        const hv = s.center.add(offset)
+        const mh = m0.megaHex(hv)
+        expect(mh.hx).toBe(s.mh.hx)
+        expect(mh.hy).toBe(s.mh.hy)
+      })
+    })
   })
 
   it("mhTranslate", () => {

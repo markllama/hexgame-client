@@ -8,12 +8,12 @@ import IMapShape from './mapShape'
 
 export const Megahex = [
   new HexVector( 0,  0),
-  new HexVector( 0,  1),
+  new HexVector( 0,  -1),
   new HexVector( 1,  0), 
   new HexVector( 1,  1),
-  new HexVector(-1, -1),
+  new HexVector( 0,  1),
   new HexVector(-1,  0),
-  new HexVector( 0, -1),
+  new HexVector(-1, -1),
 ]  
 
 // hx = (3mx - my), hy = (mx + 2my)
@@ -73,10 +73,14 @@ export class MegahexMapShape implements IMapShape {
   // return the megahex which contains the given hex
   public megaHex(hv: HexVector): HexVector {
 
-    const my = (3*hv.hy - hv.hx) / 7
+    const my = (3*hv.hy - hv.hx) / 7.0
     const mx = hv.hy - 2*my
-    
-    return new HexVector(mx, my)
+
+    // now you can round both off
+    const mxi = Math.round(mx)
+    const myi = Math.round(my)
+
+    return new HexVector(mxi, myi)
   }
   
   public mhTranslate(center: HexVector): HexVector[] {
