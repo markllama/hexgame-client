@@ -88,10 +88,22 @@ export class MegahexMapShape implements IMapShape {
   }
   
   public contains(hv: HexVector):boolean {
-    // which column triple
-    
-    // which hex?
+    // which megahex?
+    const mh = this.megaHex(hv)
 
+    // is the mh outside the x boundaries?
+    if (mh.hx < 0 || mh.hx >= this.size.hx) {
+      return false
+    }
+
+    // is the mh outside the y boundaries?
+    const myBias = mh.hx % 3
+
+    if (mh.hy < + myBias || mh.hy >= this.size.hy + myBias) {
+      return false
+    } 
+    
+    // console.log("should be outside: " + mh.toString())
     return true
   }
 

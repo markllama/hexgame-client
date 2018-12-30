@@ -131,18 +131,125 @@ describe('MegahexMapShape', () => {
     expect(m0.normalize(new HexVector(-1, 6))).toBe(4)
   })
 
-  it("nearestCenter", () {
+  it("contains", () {
+    // create a Wizard map
+
+    const wm = new MegahexMapShape(new HexVector(5, 5))
+
+    const outside = [
+      new HexVector(-2, 0),
+      new HexVector(-3, 1),
+      new HexVector(-3, 2),
+
+      new HexVector(-4, 2),
+      new HexVector(-4, 3),
+      new HexVector(-4, 4)
+
+      new HexVector(-5, 4),
+      new HexVector(-5, 5),
+      new HexVector(-5, 6),
+
+      new HexVector(-6, 6),
+      new HexVector(-6, 7),
+
+      new HexVector(4, 4),
+      new HexVector(5, 5),
+
+      new HexVector(11, 11),
+      new HexVector(11, 12),
+      
+      new HexVector(10, 13),
+      new HexVector(10, 14),
+      new HexVector(10, 15),
+
+      new HexVector(9, 16),
+      new HexVector(9, 17),
+      new HexVector(9, 18),
+
+      new HexVector(8, 19),
+      new HexVector(8, 20),
+      new HexVector(8, 21),
+
+      new HexVector(7, 22),
+      new HexVector(7, 23),
+      new HexVector(7, 24),
+    ]
+
+    const inside = [
+      //
+      new HexVector(-1, -1),
+      new HexVector(0, -1),
+      new HexVector(1, 0),
+      //
+      new HexVector(-2, 1),
+      new HexVector(-2, 2),
+      new HexVector(-2, 3),
+
+      new HexVector(-3, 3),
+      new HexVector(-3, 4),
+      new HexVector(-3, 5),
+
+      new HexVector(-4, 5),
+      new HexVector(-4, 6),
+      new HexVector(-4, 7),
+
+      new HexVector(-5, 7),
+      new HexVector(-5, 8),
+
+      // new HexVector(-3, 11),
+      // new HexVector(-2, 12),
+      // new HexVector(-1, 12),
+      
+      // new HexVector(0, 12),
+      // new HexVector(1, 13),
+      // new HexVector(2, 14),
+
+      // new HexVector(2, 15),
+      // new HexVector(3, 16),
+      // new HexVector(4, 17),
+      
+      // new HexVector(4, 18),
+      
+      new HexVector(0, 0),
+      new HexVector(1, 1),
+      new HexVector(2, 2),
+      new HexVector(3, 3),
+
+      new HexVector(4, 5),
+      new HexVector(5, 6),
+
+      new HexVector(6, 6),
+      new HexVector(7, 6),
+      new HexVector(8, 7),
+
+      new HexVector(8, 8),
+      new HexVector(9, 9),
+      new HexVector(10, 10),
+
+    ]
     
+    outside.forEach( (hv) => {
+      expect(wm.contains(hv)).toBeFalsy()
+    });
+
+    inside.forEach( (hv) => {
+      expect(wm.contains(hv)).toBeTruthy()
+    });
+    
+    // expect(wm.contains(new HexVector())).toBeTruthy()
+    // check the zero corner
+
+    // expect(wm.contains(new HexVector(-2, 0))).toBeFalsy()
   })
-  
+ 
   it("all", () => {
     const m0Hexes = m0.all()
     expect(m0Hexes.length).toEqual(7)
     expect(m0Hexes[0].hx).toEqual(0)
 
-    const m2x2 = new MegahexMapShape(new HexVector(2, 2))
+    const m3x5 = new MegahexMapShape(new HexVector(3, 5))
 
-    const m2x2all = m2x2.all()
-    expect(m2x2all.length).toEqual(28)
+    const m3x5all = m3x5.all()
+    expect(m3x5all.length).toEqual(105)
   })
 )
