@@ -131,7 +131,33 @@ describe('MegahexMapShape', () => {
     expect(m0.normalize(new HexVector(-1, 6))).toBe(4)
   })
 
-  it("contains", () {
+  it("allMegahexes()", () => {
+    const wm = new MegahexMapShape(new HexVector(5, 5))
+    const mhexes = wm.allMegahexes()
+
+    expect(mhexes.length).toBe(25)
+
+    // how many in each column?
+
+    const col0 = mhexes.filter( (it) => it.hx === 0 )
+    expect(col0.length).toBe(5)
+    expect(col0[0].hy).toBe(0)
+    expect(col0[4].hy).toBe(4)
+
+    const col1 = mhexes.filter( (it) => it.hx === 1 )
+    expect(col1.length).toBe(5)
+    expect(col1[0].hy).toBe(1)
+    expect(col1[4].hy).toBe(5)
+
+
+    const col4 = mhexes.filter( (it) => it.hx === 4 )
+    expect(col4.length).toBe(5)
+    expect(col4[0].hy).toBe(3)
+    expect(col4[4].hy).toBe(7)
+    
+  });
+  
+  it("contains", () => {
     // create a Wizard map
 
     const wm = new MegahexMapShape(new HexVector(5, 5))
@@ -175,71 +201,15 @@ describe('MegahexMapShape', () => {
       new HexVector(7, 24),
     ]
 
-    const inside = [
-      //
-      new HexVector(-1, -1),
-      new HexVector(0, -1),
-      new HexVector(1, 0),
-      //
-      new HexVector(-2, 1),
-      new HexVector(-2, 2),
-      new HexVector(-2, 3),
-
-      new HexVector(-3, 3),
-      new HexVector(-3, 4),
-      new HexVector(-3, 5),
-
-      new HexVector(-4, 5),
-      new HexVector(-4, 6),
-      new HexVector(-4, 7),
-
-      new HexVector(-5, 7),
-      new HexVector(-5, 8),
-
-      // new HexVector(-3, 11),
-      // new HexVector(-2, 12),
-      // new HexVector(-1, 12),
-      
-      // new HexVector(0, 12),
-      // new HexVector(1, 13),
-      // new HexVector(2, 14),
-
-      // new HexVector(2, 15),
-      // new HexVector(3, 16),
-      // new HexVector(4, 17),
-      
-      // new HexVector(4, 18),
-      
-      new HexVector(0, 0),
-      new HexVector(1, 1),
-      new HexVector(2, 2),
-      new HexVector(3, 3),
-
-      new HexVector(4, 5),
-      new HexVector(5, 6),
-
-      new HexVector(6, 6),
-      new HexVector(7, 6),
-      new HexVector(8, 7),
-
-      new HexVector(8, 8),
-      new HexVector(9, 9),
-      new HexVector(10, 10),
-
-    ]
     
     outside.forEach( (hv) => {
       expect(wm.contains(hv)).toBeFalsy()
     });
 
-    inside.forEach( (hv) => {
-      expect(wm.contains(hv)).toBeTruthy()
+    wm.all().forEach( (hv) => {
+      // console.log("hv: " + hv.toString() + ", mh: " + wm.megaHex(hv))
+      expect(wm.contains(hv)).toBeTruthy()  
     });
-    
-    // expect(wm.contains(new HexVector())).toBeTruthy()
-    // check the zero corner
-
-    // expect(wm.contains(new HexVector(-2, 0))).toBeFalsy()
   })
  
   it("all", () => {
@@ -251,5 +221,9 @@ describe('MegahexMapShape', () => {
 
     const m3x5all = m3x5.all()
     expect(m3x5all.length).toEqual(105)
+
+    const m5x5 = new MegahexMapShape(new HexVector(5, 5))
+    const m5x5all = m5x5.all()
+    expect(m5x5all.length).toEqual(175)
   })
 )

@@ -97,9 +97,9 @@ export class MegahexMapShape implements IMapShape {
     }
 
     // is the mh outside the y boundaries?
-    const myBias = mh.hx % 3
+    const myBias = mh.hx - (mh.hx / 3)
 
-    if (mh.hy < + myBias || mh.hy >= this.size.hy + myBias) {
+    if (mh.hy < myBias || mh.hy >= this.size.hy + myBias) {
       return false
     } 
     
@@ -107,17 +107,32 @@ export class MegahexMapShape implements IMapShape {
     return true
   }
 
+  public allMegahexes(): HexVector {
+    let col: number
+    let row: number
+
+    let mhexes = new Array<HexVector>()
+
+    for (col = 0 ; col < this.size.hx ; col++) {
+      const start = col - Math.floor(col / 3)
+      const end = start + this.size.hy
+      for (row = start ; row < end ; row++) {
+        mhexes = mhexes.concat(new HexVector(col, row))
+      }
+    } 
+
+    return mhexes
+  }
+  
   public all(): HexVector[] {
     let hexes = new Array<HexVector>()
     let row = 0
     let col = 0
-   
-    for (col = 0 ; col < this.size.hx ; col++) {
-      for (row = 0 ; row < this.size.hy ; row++) {
-        const mhc = this.mhCenter(new HexVector(col, row))
-        hexes = hexes.concat(this.mhTranslate(mhc))
-      }
-    }
+
+    this.allMegahexes().forEach( (mh) => {
+     hexes = hexes.concat(this.mhTranslate(this.mhCenter(mh)))
+    })
+
     return hexes;
   }
 }
