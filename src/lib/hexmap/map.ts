@@ -17,12 +17,12 @@ export class HexMap {
   public name: string;
   @JsonProperty("game", String)
   public game: string;
-  @JsonProperty("size", HexVector, true)
-  public size: HexVector;
-  @JsonProperty("shape", String, true)
-  public shape: string;
   @JsonProperty("copyright", String, true)
   public copyright: string;
+  @JsonProperty("shape", String, true)
+  public shape: string;
+  @JsonProperty("size", HexVector, true)
+  public size: HexVector;
   @JsonProperty("terrains", [Terrain], true)
   public terrains: Set<Terrain>;
   // private Tokens: Token[]
@@ -37,6 +37,8 @@ export class HexMap {
               terrains?: Terrain[]) {
     this.name = name
     this.game = game
+    this.shape = shape
+    this.copyright = copyright
     this.size = size
     if (terrains) {
       this.terrains = new Set<Terrain>(terrains)
@@ -98,6 +100,13 @@ export class HexMap {
       break;      
     }
     }
+  }
+
+  public shapeName(): string {
+    if (!this.mapShape) {
+      this.initShape()
+    }
+    return this.mapShape.name
   }
 }
 

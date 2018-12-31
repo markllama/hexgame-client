@@ -81,7 +81,7 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
     return (
         <div className="HexmapCanvas">
         <h1>Hello There</h1>
-        <h2>{this.state.hexmap.name}</h2>
+        <h2>{this.state.hexmap.name}: ({this.state.hexmap.shape}/{this.state.hexmap.shapeName()})</h2>
         <Stage width={width} height={height} >
         <Layer>
         <Text text={this.state.hexmap.name} />

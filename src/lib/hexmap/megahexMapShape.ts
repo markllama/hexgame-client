@@ -37,9 +37,11 @@ const yShift = new HexVector(-1, 2)
 
 export class MegahexMapShape implements IMapShape {
 
+  public readonly name: string;
   public size: HexVector;
 
   constructor(size: HexVector) {
+    this.name = "megahex"
     this.size = size
   }
 

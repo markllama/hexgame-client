@@ -8,9 +8,11 @@ function ybias(hx:number):number { return Math.floor(hx / 2) }
 
 export class SawtoothMapShape implements IMapShape {
 
+  public readonly name: string;
   public size: HexVector;
 
   constructor(size: HexVector) {
+    this.name = "sawtooth"
     this.size = size
   }
 
