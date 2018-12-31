@@ -1,6 +1,7 @@
 {
   "name": "sample map",
   "game": "sample game",
+  "shape": "sawtooth",
   "size": {"hx":15,"hy":22},
   "terrains": [
     {

@@ -3,7 +3,6 @@ import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import * as React from 'react';
 import { HashRouter as Router, NavLink, Route, } from "react-router-dom";
-// import { NavLink, Route, HashRouter as Router } from "react-router-dom";
 
 import Dashboard from "./components/Dashboard";
 import { HexmapCanvas } from "./components/HexmapCanvas";

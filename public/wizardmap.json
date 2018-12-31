@@ -1,0 +1,28 @@
+{
+  "name": "wizard",
+  "game": "wizard",
+  "copyright": "2018 Steve Jackson Games Incorporated",
+  "shape": "megahex",
+  "size": {"hx":5,"hy":5},
+  "terrains": [
+    {
+      "name": "northentry",
+      "type": "entry",
+      "locations": [
+        {"hx":-1,"hy":0},
+        {"hx":0,"hy":0},
+        {"hx":1,"hy":1},
+      ]
+    },
+    {
+      "name": "southentry",
+      "type": "entry",
+      "locations": [
+        {"hx":4,"hy":17},
+        {"hx":5,"hy":18},
+        {"hx":6,"hy":18},
+      ]
+    },
+  ]
+
+}
