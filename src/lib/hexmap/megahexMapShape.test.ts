@@ -1,4 +1,4 @@
-import { HexVector, ORIGIN, UNIT } from './hexvector';
+import { HexVector } from './hexvector';
 import { Megahex, MegahexMapShape } from './megahexMapShape';
 
 // expect.extend({
@@ -200,7 +200,6 @@ describe('MegahexMapShape', () => {
       new HexVector(7, 23),
       new HexVector(7, 24),
     ]
-
     
     outside.forEach( (hv) => {
       expect(wm.contains(hv)).toBeFalsy()

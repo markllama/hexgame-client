@@ -33,7 +33,7 @@ const yShift = new HexVector(-1, 2)
 
 // when a hex is normalized to (hx=0, hy % 7) which unit hex will move it to
 // center
-const recenter = [ 3, 6, 0, 4, 5, 1, 2 ]
+// const recenter = [ 3, 6, 0, 4, 5, 1, 2 ]
 
 export class MegahexMapShape implements IMapShape {
 
@@ -56,7 +56,7 @@ export class MegahexMapShape implements IMapShape {
     let xmod = hv.hx % 7
     if (xmod < 0) { xmod += 7 }
     
-    let ymod = ((2 * xmod) + hv.hy) % 7
+    const ymod = ((2 * xmod) + hv.hy) % 7
     if (ymod < 0) { xmod += 7 }
 
     return ymod
@@ -107,7 +107,7 @@ export class MegahexMapShape implements IMapShape {
     return true
   }
 
-  public allMegahexes(): HexVector {
+  public allMegahexes(): HexVector[] {
     let col: number
     let row: number
 
@@ -126,8 +126,6 @@ export class MegahexMapShape implements IMapShape {
   
   public all(): HexVector[] {
     let hexes = new Array<HexVector>()
-    let row = 0
-    let col = 0
 
     this.allMegahexes().forEach( (mh) => {
      hexes = hexes.concat(this.mhTranslate(this.mhCenter(mh)))
