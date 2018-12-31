@@ -102,10 +102,13 @@ export class HexMap {
     }
   }
 
+  public borders(): {low: HexVector, high: HexVector} {
+    if (!this.mapShape) { this.initShape() }
+    return this.mapShape.borders()
+  }
+
   public shapeName(): string {
-    if (!this.mapShape) {
-      this.initShape()
-    }
+    if (!this.mapShape) { this.initShape() }
     return this.mapShape.name
   }
 }

@@ -41,6 +41,10 @@ export class SawtoothMapShape implements IMapShape {
     }
     return hexes;
   }
+
+  public borders(): {low: HexVector, high: HexVector} {
+    return {low: new HexVector(), high: this.size}
+  }
 }
 
 export default SawtoothMapShape

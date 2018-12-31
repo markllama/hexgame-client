@@ -11,6 +11,7 @@ export interface IMapShape {
   size: HexVector;
   contains(hv: HexVector): boolean;
   all(): HexVector[];
+  borders(): {low: HexVector, high: HexVector};
 }
 
 export default IMapShape;
