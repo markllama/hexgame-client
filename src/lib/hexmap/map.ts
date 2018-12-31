@@ -3,6 +3,9 @@
 import { JsonObject, JsonProperty } from 'json2typescript'
 //
 import HexVector from './hexvector'
+import IMapShape from './mapShape'
+import MegahexMapShape from './megahexMapShape'
+import SawtoothMapShape from './sawtoothMapShape'
 import Terrain from './terrain'
 // import Token from './token'
 
@@ -16,11 +19,22 @@ export class HexMap {
   public game: string;
   @JsonProperty("size", HexVector, true)
   public size: HexVector;
+  @JsonProperty("shape", String, true)
+  public shape: string;
+  @JsonProperty("copyright", String, true)
+  public copyright: string;
   @JsonProperty("terrains", [Terrain], true)
   public terrains: Set<Terrain>;
   // private Tokens: Token[]
 
-  constructor(name: string="", game: string="", size: HexVector=new HexVector(), terrains?: Terrain[]) {
+  private mapShape: IMapShape
+  
+  constructor(name: string="",
+              game: string="",
+              size: HexVector=new HexVector(),
+              shape: string="sawtooth",
+              copyright: string="unset",
+              terrains?: Terrain[]) {
     this.name = name
     this.game = game
     this.size = size
@@ -30,8 +44,10 @@ export class HexMap {
       this.terrains = new Set<Terrain>()
     }
 
+    this.initShape()
     // this.Tokens = []
   }
+
 
   public terrainsAt(location?: HexVector): Set<Terrain> {
      if (location) {
@@ -52,16 +68,36 @@ export class HexMap {
   }
 
   public contains(hv: HexVector):boolean {
-    //
-    // In the first two columns, things are what you expect
-    // from then on the first and last hex increases by one for every two
-    //
-
-    if (hv.hx < 0 || hv.hx >= this.size.hx) { return false }
-    if (hv.hy < HexMap.ybias(hv.hx) || hv.hy >= this.size.hy + HexMap.ybias(hv.hx)) {
-      return false
+    if (!this.mapShape) {
+      this.initShape()
     }
-    return true
+    return this.mapShape.contains(hv)
+  }
+
+  public all(): HexVector[] {
+    if (!this.mapShape) {
+      this.initShape()
+    }
+    return this.mapShape.all()
+  }
+
+  public initShape() {
+    switch(this.shape) {
+    case "sawtooth": {
+      this.mapShape = new SawtoothMapShape(this.size)
+      break;
+    }
+
+    case "megahex": {
+      this.mapShape = new MegahexMapShape(this.size)
+      break;
+    }
+      
+    default: {
+      this.mapShape = new SawtoothMapShape(this.size)
+      break;      
+    }
+    }
   }
 }
 

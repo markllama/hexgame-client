@@ -154,34 +154,24 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
     return point
   }
 
-  private yBias(x:number) { return Math.floor(x / 2) }
-
   private fill_map() {
 
     // const terrains = this.invert_terrains()
     
-    const rows = []
-    let col = 0
-    let row = 0
-    let location: HexVector;
+    const hexes = new Array<JSX.Element>()
     let terrains: Set<Terrain>;
     let pixel: HexVector;
 
     if (this.state.hexmap) {
-      for (col = 0 ; col < this.state.hexmap.size.hx ; col++) {
-        const bias = this.yBias(col);
-        for (row = 0 ; row < this.state.hexmap.size.hy ; row++) {
-          location = new HexVector(col, row + bias)
-
-          // look up the terrain canvas object, create them and pass them into
-          // the CanvasHex
+      this.state.hexmap.all().forEach( (location: HexVector) => {
+        if (this.state.hexmap) {
           terrains = this.state.hexmap.terrainsAt(location)
           pixel = this.hexToPixel(location)
-          rows.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location, terrains=terrains)} pixel={pixel} radius={this.hexradius}/>);
-        }
-      }
+          hexes.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location, terrains=terrains)} pixel={pixel} radius={this.hexradius}/>);}
+        
+      })
     }
-    return rows
+    return hexes
   }
 
   private getMap() {
@@ -191,6 +181,7 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
     }).then( hmJson => {
       const jsonConvert: JsonConvert = new JsonConvert();
       const hm = jsonConvert.deserialize(hmJson, HexMap)
+      hm.initShape()
       this.setState( {'hexmap': hm } )
     })
   }
