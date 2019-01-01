@@ -137,7 +137,22 @@ export class MegahexMapShape implements IMapShape {
   }
 
   public borders(): {low: HexVector, high: HexVector} {
-    return {low: new HexVector(), high: this.size}
+
+    // find the low and high hx
+    // this can clearly be optimized
+
+    const allHexes = this.all()
+
+    const allhx = allHexes.map((hv) => hv.hx)
+    const allhy = allHexes.map((hv) => hv.hy)
+
+    const xlow = Math.min.apply(null, allhx)
+    const xhigh = Math.max.apply(null, allhx)
+
+    const ylow = Math.min.apply(null, allhy)
+    const yhigh = Math.max.apply(null, allhy)
+
+    return {low: new HexVector(xlow, ylow), high: new HexVector(xhigh, yhigh) }
   }
 }
 

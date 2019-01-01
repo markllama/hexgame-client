@@ -225,4 +225,13 @@ describe('MegahexMapShape', () => {
     const m5x5all = m5x5.all()
     expect(m5x5all.length).toEqual(175)
   })
+
+  it("borders()", () => {
+    const m5x5 = new MegahexMapShape(new HexVector(5, 5))
+    const borders = m5x5.borders()
+    expect(borders.low.hx).toBe(-5)
+    expect(borders.low.hy).toBe(-1)
+    expect(borders.high.hx).toBe(10)
+    expect(borders.high.hy).toBe(19)
+  })
 )
