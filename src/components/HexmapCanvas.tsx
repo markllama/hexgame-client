@@ -58,10 +58,14 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
     const borders = this.state.hexmap.borders()
     return borders.high.sub(borders.low)
   }
+
+  public get offset() {
+    if (!this.state.hexmap) { return ORIGIN }
+    return this.state.hexmap.borders().low
+  }
   
   public get width() { return this.hexrun * (this.size.hx*3+1) }
   public get height() { return this.hexrise * (((this.size.hy)*2)+1)  }
-
 
   // start methods to get map from server
 
@@ -97,6 +101,9 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
     )
   }
 
+  //
+  // Place the (0, 0) hex so the entire map fits
+  //
   public get origin() {
     
     let point:HexVector = ORIGIN
@@ -166,12 +173,13 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
     const hexes = new Array<JSX.Element>()
     let terrains: Set<Terrain>;
     let pixel: HexVector;
+    const offset = this.state.hexmap ? this.state.hexmap.borders().low : ORIGIN
 
     if (this.state.hexmap) {
       this.state.hexmap.all().forEach( (location: HexVector) => {
         if (this.state.hexmap) {
           terrains = this.state.hexmap.terrainsAt(location)
-          pixel = this.hexToPixel(location)
+          pixel = this.hexToPixel(location.sub(offset))
           hexes.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location, terrains=terrains)} pixel={pixel} radius={this.hexradius}/>);}
         
       })
