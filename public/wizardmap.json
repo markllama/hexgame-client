@@ -6,6 +6,18 @@
   "size": {"hx":5,"hy":5},
   "terrains": [
     {
+      "name": "null",
+      "type": "null",
+      "locations": [
+        {"hx":-1,"hy":-1},
+        {"hx":0,"hy":-1},
+        {"hx":1,"hy":0},
+        {"hx":4,"hy":18},
+        {"hx":5,"hy":19},
+        {"hx":6,"hy":19}
+      ]
+    },
+    {
       "name": "northentry",
       "type": "entry",
       "locations": [
