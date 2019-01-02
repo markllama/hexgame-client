@@ -21,7 +21,7 @@ class App extends React.Component {
       {name: "wizard", url: "./wizardmap.json" }
     ]
 
-    const hm = () => <HexmapCanvas hexmapurl={maps[0].url} />
+    const hm = () => <HexmapCanvas hexmapurl={maps[2].url} />
       
     return (
         <Router>

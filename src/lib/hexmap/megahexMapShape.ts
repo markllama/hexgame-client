@@ -144,14 +144,28 @@ export class MegahexMapShape implements IMapShape {
     const allHexes = this.all()
 
     const allhx = allHexes.map((hv) => hv.hx)
-    const allhy = allHexes.map((hv) => hv.hy)
-
     const xlow = Math.min.apply(null, allhx)
-    const xhigh = Math.max.apply(null, allhx)
+    const xhigh = Math.max.apply(null, allhx) + 1
 
-    const ylow = Math.min.apply(null, allhy)
-    const yhigh = Math.max.apply(null, allhy)
+    // find the extreme then normalize
+    const yhexlow = allHexes.reduce((current, test) => {
+      if (current.hy === test.hy) {
+        return current.hx < test.hx ? current : test
+      }
+      return current.hy < test.hy ? current : test
+    })
+    const ylow = yhexlow.hy + Math.floor(yhexlow.hx / 2) - 1
+    
+    // // find the extreme then normalize
+    const yhexhigh = allHexes.reduce((current, test) => {
+      if (current.hy === test.hy) {
+        return current.hx > test.hx ? current : test
+      }
+      return current.hy > test.hy ? current : test
+    })
+    const yhigh = yhexhigh.hy - Math.floor(yhexhigh.hx / 2) - 1
 
+    
     return {low: new HexVector(xlow, ylow), high: new HexVector(xhigh, yhigh) }
   }
 }
