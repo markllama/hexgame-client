@@ -2,7 +2,7 @@
 import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import * as React from 'react';
-import { HashRouter as Router, NavLink, Route, } from "react-router-dom";
+import { HashRouter as Router, NavLink, Route, RouteComponentProps } from "react-router-dom";
 
 import Dashboard from "./components/Dashboard";
 import { HexmapCanvas } from "./components/HexmapCanvas";
@@ -21,7 +21,19 @@ class App extends React.Component {
       {name: "wizard", url: "./wizardmap.json" }
     ]
 
-    const hm = () => <HexmapCanvas hexmapurl={maps[1].url} />
+    const hm = ( props: RouteComponentProps<any> ) => {
+      const mapname = props.match.params.name
+      // find the map spec with the right name
+      let mapspec = maps[0]
+      for (const s of maps) {
+        if (s.name === mapname) { mapspec = s }
+      }
+      return <HexmapCanvas hexmapurl={mapspec.url} />
+    }
+    
+    // const hm = () => {
+    //  return <HexmapCanvas hexmapurl={maps[1].url} />
+    // }
       
     return (
         <Router>
@@ -45,14 +57,14 @@ class App extends React.Component {
                 </Typography>
                 &nbsp;
                 <Typography variant="h6" color="inherit">
-                  <NavLink to="/map">Map</NavLink>
+                  <NavLink to="/map/samplemap">Map</NavLink>
                 </Typography>
               </Toolbar>
             </AppBar>
 
             <div className="content">
               <Route path="/dashboard" component={Dashboard} />
-              <Route path="/map" render={hm} />
+              <Route path="/map/:name" render={hm} />
             </div>
           </div>
       </Router>
