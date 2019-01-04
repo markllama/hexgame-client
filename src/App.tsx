@@ -6,6 +6,7 @@ import { HashRouter as Router, NavLink, Route, RouteComponentProps } from "react
 
 import Dashboard from "./components/Dashboard";
 import { HexmapCanvas } from "./components/HexmapCanvas";
+import MapMenu from "./MapMenu";
 
 import './App.css';
 
@@ -56,9 +57,7 @@ class App extends React.Component {
                   <NavLink to="/dashboard">Home</NavLink>
                 </Typography>
                 &nbsp;
-                <Typography variant="h6" color="inherit">
-                  <NavLink to="/map/samplemap">Map</NavLink>
-                </Typography>
+                <MapMenu />
               </Toolbar>
             </AppBar>
 
