@@ -4,19 +4,15 @@
   "copyright": "2018 Steve Jackson Games Incorporated",
   "shape": "megahex",
   "size": {"hx":3,"hy":5},
+  "exclude": [
+    {"hx":-1,"hy":-1},
+    {"hx":0,"hy":-1},
+    {"hx":1,"hy":0},
+    {"hx":-1,"hy":14},
+    {"hx":0,"hy":15},
+    {"hx":1,"hy":15}
+  ],
   "terrains": [
-    {
-      "name": "null",
-      "type": "null",
-      "locations": [
-        {"hx":-1,"hy":-1},
-        {"hx":0,"hy":-1},
-        {"hx":1,"hy":0},
-        {"hx":-1,"hy":14},
-        {"hx":0,"hy":15},
-        {"hx":1,"hy":15}
-      ]
-    },
     {
       "name": "northentry",
       "type": "entry",

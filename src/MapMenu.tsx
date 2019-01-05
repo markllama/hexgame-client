@@ -16,7 +16,12 @@ export class MapMenu extends React.Component {
     
     return (
       <div>
-        <IconButton onClick={this.handleMenuOpen} >Maps</IconButton>
+        <IconButton
+           aria-owns={open ? 'map-menu' : undefined}
+           aria-haspopup="true"
+           onClick={this.handleMenuOpen} >
+          Maps
+        </IconButton>
         <Menu id="map-menu"
               anchorEl={anchorEl}
               anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
