@@ -2,24 +2,11 @@ import { IconButton, Menu, MenuItem, MenuList, Typography } from "@material-ui/c
 import * as React from 'react';
 import { NavLink } from "react-router-dom";
 
-const timeoutLength = 300;
-
 export class MapMenu extends React.Component {
 
   public state = {
     anchorEl: null,
-    mouseOverMenu: false
   };
-
-  public enterMenu = () => {
-    this.setState({ mouseOverMenu: true });
-  }
-
-  public leaveMenu = () => {
-     setTimeout(() => {
-      this.setState({ mouseOverMenu: false });
-     }, timeoutLength);
-  }
 
   public render() {
 
@@ -35,8 +22,6 @@ export class MapMenu extends React.Component {
               anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
               transformOrigin={{ vertical: 'top', horizontal: 'right' }}
               open={isMenuOpen}
-              onMouseEnter={this.enterMenu}
-              onMouseLeave={this.leaveMenu}
               onClose={this.handleMenuClose}
         >
           <MenuList>
