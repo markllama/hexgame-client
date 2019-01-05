@@ -39,12 +39,10 @@ export class MegahexMapShape implements IMapShape {
 
   public readonly name: string;
   public size: HexVector;
-  public exclude: HexVector[]
 
-  constructor(size: HexVector, exclude: HexVector[]|undefined) {
+  constructor(size: HexVector) {
     this.name = "megahex"
     this.size = size
-    this.exclude = exclude
   }
 
   // I noticed several things about Megahexes:

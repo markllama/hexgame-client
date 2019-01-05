@@ -23,8 +23,6 @@ export class HexMap {
   public shape: string;
   @JsonProperty("size", HexVector, true)
   public size: HexVector;
-  @JsonProperty("exclude", [HexVector], true)
-  public exclude: HexVector[];
   @JsonProperty("terrains", [Terrain], true)
   public terrains: Set<Terrain>;
   // private Tokens: Token[]
@@ -34,7 +32,6 @@ export class HexMap {
   constructor(name: string="",
               game: string="",
               size: HexVector=new HexVector(),
-              exclude: HexVector[] = new Array<HexVector>(),
               shape: string="sawtooth",
               copyright: string="unset",
               terrains?: Terrain[]) {
@@ -43,7 +40,6 @@ export class HexMap {
     this.shape = shape
     this.copyright = copyright
     this.size = size
-    this.exclude = exclude
     if (terrains) {
       this.terrains = new Set<Terrain>(terrains)
     } else {
@@ -90,17 +86,17 @@ export class HexMap {
   public initShape() {
     switch(this.shape) {
     case "sawtooth": {
-      this.mapShape = new SawtoothMapShape(this.size, this.exclude)
+      this.mapShape = new SawtoothMapShape(this.size)
       break;
     }
 
     case "megahex": {
-      this.mapShape = new MegahexMapShape(this.size, this.exclude)
+      this.mapShape = new MegahexMapShape(this.size)
       break;
     }
       
     default: {
-      this.mapShape = new SawtoothMapShape(this.size, this.exclude)
+      this.mapShape = new SawtoothMapShape(this.size)
       break;      
     }
     }

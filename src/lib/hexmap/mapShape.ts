@@ -9,7 +9,6 @@ import HexVector from "./hexvector"
 export interface IMapShape {
   name: string;
   size: HexVector;
-  exclude: HexVector[];
   contains(hv: HexVector): boolean;
   all(): HexVector[];
   borders(): {low: HexVector, high: HexVector};

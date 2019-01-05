@@ -10,12 +10,10 @@ export class SawtoothMapShape implements IMapShape {
 
   public readonly name: string;
   public size: HexVector;
-  public exclude: HexVector[];
 
-  constructor(size: HexVector, exclude: HexVector[]) {
+  constructor(size: HexVector) {
     this.name = "sawtooth"
     this.size = size
-    this.exclude = exclude
   }
 
   public contains(hv: HexVector):boolean {
