@@ -39,10 +39,12 @@ export class MegahexMapShape implements IMapShape {
 
   public readonly name: string;
   public size: HexVector;
+  public readonly exclude: HexVector[];
 
-  constructor(size: HexVector) {
+  constructor(size: HexVector, exclude: HexVector[] = new Array<HexVector>()) {
     this.name = "megahex"
     this.size = size
+    this.exclude = exclude
   }
 
   // I noticed several things about Megahexes:
@@ -90,6 +92,9 @@ export class MegahexMapShape implements IMapShape {
   }
   
   public contains(hv: HexVector):boolean {
+
+    // if it's in the exclude list, it's not on the map
+    
     // which megahex?
     const mh = this.megaHex(hv)
 
@@ -109,7 +114,15 @@ export class MegahexMapShape implements IMapShape {
     return true
   }
 
+  public excluded(hex: HexVector) {
+    for (const h of this.exclude) {
+      if (hex.eq(h)) { return true }
+    }
+    return false
+  }
+
   public allMegahexes(): HexVector[] {
+
     let col: number
     let row: number
 
@@ -119,7 +132,8 @@ export class MegahexMapShape implements IMapShape {
       const start = col - Math.floor(col / 3)
       const end = start + this.size.hy
       for (row = start ; row < end ; row++) {
-        mhexes = mhexes.concat(new HexVector(col, row))
+        const hex = new HexVector(col,row)
+        mhexes = mhexes.concat(hex)
       }
     } 
 

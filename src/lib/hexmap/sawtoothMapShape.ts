@@ -9,11 +9,13 @@ function ybias(hx:number):number { return Math.floor(hx / 2) }
 export class SawtoothMapShape implements IMapShape {
 
   public readonly name: string;
-  public size: HexVector;
+  public readonly size: HexVector;
+  public readonly exclude: HexVector[];
 
-  constructor(size: HexVector) {
+  constructor(size: HexVector, exclude: HexVector[]=new Array<HexVector>()) {
     this.name = "sawtooth"
     this.size = size
+    this.exclude = exclude
   }
 
   public contains(hv: HexVector):boolean {
@@ -28,6 +30,7 @@ export class SawtoothMapShape implements IMapShape {
 
   public all(): HexVector[] {
     const hexes = new Array<HexVector>();
+    const exclude = new Set<HexVector>(this.exclude)
     let row = 0
     let col = 0
    
@@ -36,9 +39,15 @@ export class SawtoothMapShape implements IMapShape {
       for (row = 0 ; row < this.size.hy ; row++) {
         // look up the terrain canvas object, create them and pass them into
         // the CanvasHex
-        hexes.push(new HexVector(col, row + bias));
+        const loc = new HexVector(col, row + bias)
+        if (!exclude.has(loc)) {
+          hexes.push(loc);
+        }
       }
     }
+
+    
+    
     return hexes;
   }
 
