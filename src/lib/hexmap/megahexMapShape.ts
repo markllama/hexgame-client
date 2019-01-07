@@ -142,9 +142,9 @@ export class MegahexMapShape implements IMapShape {
   
   public all(): HexVector[] {
     let hexes = new Array<HexVector>()
-
     this.allMegahexes().forEach( (mh) => {
-     hexes = hexes.concat(this.mhTranslate(this.mhCenter(mh)))
+      const mhHexes = this.mhTranslate(this.mhCenter(mh))
+      hexes = hexes.concat(mhHexes)
     })
 
     return hexes;

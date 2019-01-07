@@ -90,17 +90,17 @@ export class HexMap {
   public initShape() {
     switch(this.shape) {
     case "sawtooth": {
-      this.mapShape = new SawtoothMapShape(this.size)
+      this.mapShape = new SawtoothMapShape(this.size, this.exclude)
       break;
     }
 
     case "megahex": {
-      this.mapShape = new MegahexMapShape(this.size)
+      this.mapShape = new MegahexMapShape(this.size, this.exclude)
       break;
     }
       
     default: {
-      this.mapShape = new SawtoothMapShape(this.size)
+      this.mapShape = new SawtoothMapShape(this.size, this.exclude)
       break;      
     }
     }

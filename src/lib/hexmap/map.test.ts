@@ -26,7 +26,10 @@ describe('<HexMap>', () => {
     expect(HexMap.ybias(5)).toEqual(2)
   });
 
-  const hm1 = new HexMap("Test Map", 'testgame', new HexVector(15, 22))
+  const hm1 = new HexMap(
+    "Test Map", 'testgame', new HexVector(15, 22),
+    "sawtooth", [new HexVector(0, 0)]]
+  )
 
   const inside = [
     new HexVector(0, 0),
@@ -118,7 +121,9 @@ describe('<HexMap>', () => {
     {
       "name":"sampleMap",
       "game":"sampleGame",
-      "size": {"hx":22, "hy":15},
+      "shape": "sawtooth",
+      "size": {"hx":22,"hy":15},
+      "exclude": [{"hx":0,"hy":0}],
       "terrains": [
         {
           "name":"clear",
@@ -126,14 +131,19 @@ describe('<HexMap>', () => {
         }
       ]
     }`
-    
+
+
     const jsonM0 = JSON.parse(jsonStringM0)
     const M0 = jsonConvert.deserializeObject(jsonM0, HexMap)
 
     expect(M0.name).toEqual("sampleMap")
     expect(M0.game).toEqual("sampleGame")
     expect(M0.size.eq(new HexVector(22, 15))).toBeTruthy()
+    expect(M0.exclude.length).toEqual(1)
     expect(M0.terrains.length).toEqual(1)
+
+
+    expect(M0.all().length).toEqual(0)
   });
   
 });

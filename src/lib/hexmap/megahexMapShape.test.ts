@@ -10,7 +10,7 @@ import { Megahex, MegahexMapShape } from './megahexMapShape';
 // })
 
 describe('MegahexMapShape', () => {
-  const m0 = new MegahexMapShape(new HexVector(1, 1))
+  const m0 = new MegahexMapShape(new HexVector(1, 1), [new HexVector()])
 
   // it("static Megahex", () => {
   //   expect(MegahexMapShape.Megahex.length).toBe(7)
@@ -28,6 +28,7 @@ describe('MegahexMapShape', () => {
   it("constructor", () => {
     expect(m0.size.hx).toBe(1)
     expect(m0.size.hy).toBe(1)
+    expect(m0.exclude.length).toBe(1)
   })
 
   const centerSamples = [
