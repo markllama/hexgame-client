@@ -184,4 +184,23 @@ export class MegahexMapShape implements IMapShape {
   }
 }
 
+export function filterHex(list: HexVector[], hex: HexVector) {
+  return list.filter(h => h.eq(hex))  
+}
+
+export function filterlist(input: HexVector[], exclude:HexVector[]): HexVector[] {
+
+  const result = new Array<HexVector>()
+
+  for (const hex of input) {
+    for (const test of exclude) {
+      if (!hex.eq(test)) {
+        result.push(test)
+      }
+    }
+  }
+  
+  return result 
+}
+
 export default MegahexMapShape

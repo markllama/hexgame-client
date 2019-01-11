@@ -1,5 +1,5 @@
 import { HexVector } from './hexvector';
-import { Megahex, MegahexMapShape } from './megahexMapShape';
+import { filterlist, Megahex, MegahexMapShape } from './megahexMapShape';
 
 // expect.extend({
 //   hexVectorEquals(recieved, expected) {
@@ -10,7 +10,7 @@ import { Megahex, MegahexMapShape } from './megahexMapShape';
 // })
 
 describe('MegahexMapShape', () => {
-  const m0 = new MegahexMapShape(new HexVector(1, 1), [new HexVector()])
+  const m0 = new MegahexMapShape(new HexVector(5, 5), [new HexVector()])
 
   // it("static Megahex", () => {
   //   expect(MegahexMapShape.Megahex.length).toBe(7)
@@ -26,8 +26,8 @@ describe('MegahexMapShape', () => {
   // })
 
   it("constructor", () => {
-    expect(m0.size.hx).toBe(1)
-    expect(m0.size.hy).toBe(1)
+    expect(m0.size.hx).toBe(5)
+    expect(m0.size.hy).toBe(5)
     expect(m0.exclude.length).toBe(1)
   })
 
@@ -214,7 +214,7 @@ describe('MegahexMapShape', () => {
  
   it("all", () => {
     const m0Hexes = m0.all()
-    expect(m0Hexes.length).toEqual(7)
+    expect(m0Hexes.length).toEqual(175)
     expect(m0Hexes[0].hx).toEqual(0)
 
     const m3x5 = new MegahexMapShape(new HexVector(3, 5))
@@ -234,5 +234,25 @@ describe('MegahexMapShape', () => {
     expect(borders.low.hy).toBe(-3)
     expect(borders.high.hx).toBe(11)
     expect(borders.high.hy).toBe(15)
+  })
+
+  it("filterlist", () => {
+
+    const input = new Array<HexVector>(
+      new HexVector(0, -1),
+      new HexVector(1, 0),
+      new HexVector(1, 1),
+      new HexVector(0, 1),
+      new HexVector(-1, 0),
+      new HexVector(-1, -1),
+      new HexVector(0, 0)
+    )
+
+    const exclude = new Array<HexVector>(
+      new HexVector(0, 0)
+    )
+
+    const result = filterlist(input, exclude)
+    expect(result.length).toBe(6)
   })
 )
