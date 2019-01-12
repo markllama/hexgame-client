@@ -1,5 +1,5 @@
 import { HexVector } from './hexvector';
-import { filterlist, Megahex, MegahexMapShape } from './megahexMapShape';
+import { filterMap, Megahex, MegahexMapShape } from './megahexMapShape';
 
 // expect.extend({
 //   hexVectorEquals(recieved, expected) {
@@ -10,7 +10,10 @@ import { filterlist, Megahex, MegahexMapShape } from './megahexMapShape';
 // })
 
 describe('MegahexMapShape', () => {
-  const m0 = new MegahexMapShape(new HexVector(5, 5), [new HexVector()])
+  const m0 = new MegahexMapShape(
+    new HexVector(5, 5),
+    [new HexVector(), new HexVector(0, -1)]
+  )
 
   // it("static Megahex", () => {
   //   expect(MegahexMapShape.Megahex.length).toBe(7)
@@ -28,7 +31,7 @@ describe('MegahexMapShape', () => {
   it("constructor", () => {
     expect(m0.size.hx).toBe(5)
     expect(m0.size.hy).toBe(5)
-    expect(m0.exclude.length).toBe(1)
+    expect(m0.exclude.length).toBe(2)
   })
 
   const centerSamples = [
@@ -214,8 +217,8 @@ describe('MegahexMapShape', () => {
  
   it("all", () => {
     const m0Hexes = m0.all()
-    expect(m0Hexes.length).toEqual(175)
-    expect(m0Hexes[0].hx).toEqual(0)
+    expect(m0Hexes.length).toEqual(173)
+    expect(m0Hexes[0].hx).toEqual(1)
 
     const m3x5 = new MegahexMapShape(new HexVector(3, 5))
 
@@ -252,7 +255,8 @@ describe('MegahexMapShape', () => {
       new HexVector(0, 0)
     )
 
-    const result = filterlist(input, exclude)
-    expect(result.length).toBe(6)
+    const result0 = filterMap(input, exclude)
+    expect(result0.length).toBe(6)
+
   })
 )

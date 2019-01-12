@@ -111,7 +111,7 @@ export class MegahexMapShape implements IMapShape {
     } 
     
     // console.log("should be outside: " + mh.toString())
-    return true
+    return !this.excluded(hv)
   }
 
   public excluded(hex: HexVector) {
@@ -147,7 +147,7 @@ export class MegahexMapShape implements IMapShape {
       hexes = hexes.concat(mhHexes)
     })
 
-    return hexes;
+    return filterMap(hexes, this.exclude);
   }
 
   public borders(): {low: HexVector, high: HexVector} {
@@ -184,23 +184,12 @@ export class MegahexMapShape implements IMapShape {
   }
 }
 
-export function filterHex(list: HexVector[], hex: HexVector) {
-  return list.filter(h => h.eq(hex))  
-}
-
-export function filterlist(input: HexVector[], exclude:HexVector[]): HexVector[] {
-
-  const result = new Array<HexVector>()
-
-  for (const hex of input) {
-    for (const test of exclude) {
-      if (!hex.eq(test)) {
-        result.push(test)
-      }
-    }
+export function filterMap(input: HexVector[], exclude:HexVector[]) {
+  let result = input;
+  for (const outside of exclude) {
+    result = result.filter(h => !h.eq(outside))
   }
-  
-  return result 
+  return result
 }
 
 export default MegahexMapShape
