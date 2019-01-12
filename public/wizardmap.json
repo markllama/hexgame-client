@@ -14,6 +14,36 @@
   ],
   "terrains": [
     {
+      "name": "mhcenter",
+      "type": "mhcenter",
+      "locations": [
+        {"hx":-1,"hy":2},
+        {"hx":-2,"hy":4},
+        {"hx":-3,"hy":6},
+        {"hx":-4,"hy":8},
+        {"hx":2,"hy":3},
+        {"hx":1,"hy":5},
+        {"hx":0,"hy":7},
+        {"hx":-1,"hy":9},
+        {"hx":-2,"hy":11},
+        {"hx":4,"hy":6},
+        {"hx":3,"hy":8},
+        {"hx":2,"hy":10},
+        {"hx":1,"hy":12},
+        {"hx":0,"hy":14},
+        {"hx":4,"hy":6},
+        {"hx":7,"hy":7},
+        {"hx":6,"hy":9},
+        {"hx":5,"hy":11},
+        {"hx":4,"hy":13},
+        {"hx":3,"hy":15},
+        {"hx":9,"hy":10},
+        {"hx":8,"hy":12},
+        {"hx":7,"hy":14},
+        {"hx":6,"hy":16}
+      ]
+    },
+    {
       "name": "northentry",
       "type": "entry",
       "locations": [
