@@ -50,7 +50,7 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
 
   public get hexrun() { return this.props.hexrun; }
   public get hexradius() { return this.hexrun * 2; }
-  public get hexrise() { return Math.floor(this.hexradius * Math.sqrt(2/3))+4 }
+  public get hexrise() { return Math.floor(this.hexradius * Math.sqrt(2/3)) }
   public get hexheight() { return Math.floor(this.hexrise * 2) }
 
   public get size() {

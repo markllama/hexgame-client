@@ -20,6 +20,8 @@ export class HexVector {
     return '(' + this.hx + ',' + this.hy + ')';
   }
 
+  public toArray = (): number[] =>  [this.hx, this.hy]
+  
   // get hx():number { return this.hX }
   // get hy():number { return this.hY }
   get hz():number { return this.hy - this.hx }
