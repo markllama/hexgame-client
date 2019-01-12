@@ -6,14 +6,14 @@ import { Arc, Group } from 'react-konva';
 import HexVector from '../../lib/hexmap/hexvector';
 import Terrain from '../../lib/hexmap/terrain';
 
-interface IHill {
+interface IEntry {
   center: HexVector,
   radius: number,
   terrain: Terrain
   
 }
 
-class Hill extends React.Component<IHill, any> {
+class Entry extends React.Component<IEntry, any> {
   public static propTypes = {
     center: PropTypes.object,
     radius: PropTypes.number,
@@ -30,4 +30,4 @@ class Hill extends React.Component<IHill, any> {
 
 }
 
-export default Hill;
+export default Entry;

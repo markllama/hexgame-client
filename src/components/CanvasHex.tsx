@@ -10,6 +10,7 @@ import { Terrains } from './CanvasTerrain'
 // import { Crater, Hill } from './CanvasTerrain'
 
 const Crater = Terrains.crater
+const Entry = Terrains.entry
 const Hill = Terrains.hill
 const MegahexCenter = Terrains.mhcenter
 const Pillar = Terrains.pillar
@@ -92,6 +93,10 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
       switch (terrain.type) {
         case 'crater': {
           t.push(<Crater center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+          break;
+        }
+        case 'entry': {
+          t.push(<Entry center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
           break;
         }
         case 'hill': {
