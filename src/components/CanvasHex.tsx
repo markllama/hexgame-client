@@ -11,6 +11,8 @@ import { Terrains } from './CanvasTerrain'
 
 const Crater = Terrains.crater
 const Hill = Terrains.hill
+const MegahexCenter = Terrains.mhcenter
+const Pillar = Terrains.pillar
 
 enum Orientation { Portrait = 'portrait', Landscape = 'landscape' }
 
@@ -96,7 +98,15 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
           t.push(<Hill center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
           break;
         }
+        case 'mhcenter': {
+          t.push(<MegahexCenter center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+          break;
+        }
         
+        case 'pillar': {
+          t.push(<Pillar center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+          break;
+        }
       }
     })
     
