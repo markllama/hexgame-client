@@ -25,7 +25,13 @@ class MegahexCenter extends React.Component<IMegahexCenter, any> {
     const hexrise = hexradius * Math.sqrt(2/3)
     
     return [
+
+      
+      new HexVector(-hexradius*2.5, -hexrise),
+
       new HexVector(-hexradius*2, -hexrise*2),
+
+
       new HexVector(-hexradius, -hexrise*2),
 
       new HexVector(-hexradius/2, -hexrise*3),
@@ -34,6 +40,10 @@ class MegahexCenter extends React.Component<IMegahexCenter, any> {
       new HexVector(hexradius, -hexrise*2),
       new HexVector(hexradius*2, -hexrise*2),
 
+      new HexVector(hexradius*2.5, -hexrise),
+      new HexVector(hexradius*2, 0),
+      new HexVector(hexradius*2.5, hexrise),
+
       new HexVector(hexradius*2, hexrise*2),      
       new HexVector(hexradius, hexrise*2),
 
@@ -41,7 +51,10 @@ class MegahexCenter extends React.Component<IMegahexCenter, any> {
       new HexVector(-hexradius/2, hexrise*3),
 
       new HexVector(-hexradius, hexrise*2),
-      new HexVector(-hexradius*2, hexrise*2)
+      new HexVector(-hexradius*2, hexrise*2),
+
+      new HexVector(-hexradius*2.5, hexrise),
+      new HexVector(-hexradius*2, 0)
 
     ]
   }
@@ -53,9 +66,10 @@ class MegahexCenter extends React.Component<IMegahexCenter, any> {
     
     return (
       <Group>
-        <Ring x={this.props.center.hx} y={this.props.center.hy} innerRadius={this.props.radius / 2} outerRadius={this.props.radius * .75} stroke='black' fill='gray' listening={false} />
 
-        <Line closed={true} points={mhpoints} stroke='black' strokeWidth={3} listening={false} />
+        <Ring x={this.props.center.hx} y={this.props.center.hy} innerRadius={2} outerRadius={4} stroke='black' fill='gray' listening={false} />
+
+        <Line closed={true} points={mhpoints} stroke='black' strokeWidth={5} listening={false} />
       </Group>
     );
   }
