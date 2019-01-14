@@ -24,24 +24,19 @@ export class MapMenu extends React.Component {
       open: false,
     };
 
-    this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.enterButton = this.enterButton.bind(this);
     this.leaveButton = this.leaveButton.bind(this);
     this.enterMenu = this.enterMenu.bind(this);
     this.leaveMenu = this.leaveMenu.bind(this);
   }
-  
-  public handleClick(event: React.SyntheticEvent) {
-    this.setState({ open: true, anchorEl: event.currentTarget });
-  };
 
   public handleClose() {
     this.setState({ mouseOverButton: false, mouseOverMenu: false });
   };
 
-  public enterButton() {
-    this.setState({ mouseOverButton: true });
+  public enterButton(event: React.SyntheticEvent) {
+    this.setState({ mouseOverButton: true, anchorEl: event.currentTarget });
   }
 
   public leaveButton() {
@@ -52,8 +47,8 @@ export class MapMenu extends React.Component {
     }, timeoutLength);
   }
 
-  public enterMenu() {
-    this.setState({ mouseOverMenu: true });
+  public enterMenu(event: React.SyntheticEvent) {
+    this.setState({ mouseOverMenu: true, anchorEl: event.currentTarget });
   }
 
   public leaveMenu() {
@@ -66,17 +61,20 @@ export class MapMenu extends React.Component {
 
     const open: boolean = (this.state.mouseOverButton || this.state.mouseOverMenu);
 
-    return (
-      <div>
+    const iconButton = 
         <IconButton
           aria-owns={this.state.open ? 'map-menu' : undefined}
           aria-haspopup="true"
-          onClick={this.handleClick}
           onMouseEnter={this.enterButton}
-          onMouseLeave={this.leaveButton}
-        >Maps</IconButton>
+          onMouseLeave={this.leaveButton}>
+          Maps
+        </IconButton>
+    
+
+    return (
+      <div>
+        {iconButton}
         <Menu id="map-menu"
-          anchorEl={this.state.anchorEl}
           open={open}
           onClose={this.handleClose}
           MenuListProps={{

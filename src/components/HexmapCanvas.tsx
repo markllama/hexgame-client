@@ -190,38 +190,6 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
     return hexes
   }
 
-  // private renderTerrains() {
-
-  //   const t:JSX.Element[] = []
-  //   this.terrains.forEach((terrain, dummy, set) => {
-  //     switch (terrain.type) {
-  //       case 'crater': {
-  //         t.push(<Crater center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
-  //         break;
-  //       }
-  //       case 'entry': {
-  //         t.push(<Entry center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
-  //         break;
-  //       }
-  //       case 'hill': {
-  //         t.push(<Hill center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
-  //         break;
-  //       }
-  //       case 'mhcenter': {
-  //         t.push(<MegahexCenter center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
-  //         break;
-  //       }
-        
-  //       case 'pillar': {
-  //         t.push(<Pillar center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
-  //         break;
-  //       }
-  //     }
-  //   })
-    
-  //   return t
-  // }
-
   private draw_terrains() {
 
     const offset = this.state.hexmap ? this.state.hexmap.borders().low : ORIGIN
@@ -263,8 +231,6 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
         })
       })
     }
-
-    terrains.push(<Text text="Hello there, this is long enough to show" />)
 
     return terrains
   }
