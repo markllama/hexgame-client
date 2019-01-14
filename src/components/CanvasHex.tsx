@@ -6,14 +6,14 @@ import { Group, RegularPolygon, Text } from 'react-konva';
 import Hex from '../lib/hexmap/hex';
 import HexVector from '../lib/hexmap/hexvector';
 // import Terrain from '../lib/hexmap/terrain';
-import { Terrains } from './CanvasTerrain'
+// import { Terrains } from './CanvasTerrain'
 // import { Crater, Hill } from './CanvasTerrain'
 
-const Crater = Terrains.crater
-const Entry = Terrains.entry
-const Hill = Terrains.hill
-const MegahexCenter = Terrains.mhcenter
-const Pillar = Terrains.pillar
+// const Crater = Terrains.crater
+// const Entry = Terrains.entry
+// const Hill = Terrains.hill
+// const MegahexCenter = Terrains.mhcenter
+// const Pillar = Terrains.pillar
 
 enum Orientation { Portrait = 'portrait', Landscape = 'landscape' }
 
@@ -80,44 +80,45 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
       // shadowBlur={5}
       onClick={this.handleClick}
         />
-        {this.renderTerrains()}
         <Text x={p.hx} y={p.hy + this.hexrise / 2} align="center" text={label} listening={false}/>
         </Group>
     );
   }
 
-  private renderTerrains() {
+  //        {this.renderTerrains()}
 
-    const t:JSX.Element[] = []
-    this.terrains.forEach((terrain, dummy, set) => {
-      switch (terrain.type) {
-        case 'crater': {
-          t.push(<Crater center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
-          break;
-        }
-        case 'entry': {
-          t.push(<Entry center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
-          break;
-        }
-        case 'hill': {
-          t.push(<Hill center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
-          break;
-        }
-        case 'mhcenter': {
-          t.push(<MegahexCenter center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
-          break;
-        }
+  // private renderTerrains() {
+
+  //   const t:JSX.Element[] = []
+  //   this.terrains.forEach((terrain, dummy, set) => {
+  //     switch (terrain.type) {
+  //       case 'crater': {
+  //         t.push(<Crater center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+  //         break;
+  //       }
+  //       case 'entry': {
+  //         t.push(<Entry center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+  //         break;
+  //       }
+  //       case 'hill': {
+  //         t.push(<Hill center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+  //         break;
+  //       }
+  //       case 'mhcenter': {
+  //         t.push(<MegahexCenter center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+  //         break;
+  //       }
         
-        case 'pillar': {
-          t.push(<Pillar center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
-          break;
-        }
-      }
-    })
+  //       case 'pillar': {
+  //         t.push(<Pillar center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+  //         break;
+  //       }
+  //     }
+  //   })
     
-    return t
-  }
-
+  //   return t
+  // }
+ 
   private handleClick = () => {
     this.setState({
       color: Konva.Util.getRandomColor()

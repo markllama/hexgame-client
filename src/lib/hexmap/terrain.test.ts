@@ -30,7 +30,7 @@ describe('<Terrain>', () => {
     expect(t0.type).toEqual("sample")
     expect(t0.locations.length).toEqual(0)
 
-    const jsonStringT1 = '{"name":"one", "type":"crater", "locations": [{"hx":3, "hy": 4}]}'
+    const jsonStringT1 = '{"name":"one", "type":"crater", "layer":0, "locations": [{"hx":3, "hy": 4}]}'
     const jsonT1 = JSON.parse(jsonStringT1)
     const t1 = jsonConvert.deserializeObject(jsonT1, Terrain)
     

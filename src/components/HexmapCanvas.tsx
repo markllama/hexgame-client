@@ -8,8 +8,10 @@ import { JsonConvert } from 'json2typescript'
 import Hex from '../lib/hexmap/hex';
 import { HexVector, ORIGIN } from '../lib/hexmap/hexvector';
 import HexMap from '../lib/hexmap/map';
-import Terrain from '../lib/hexmap/terrain';
+// import Terrain from '../lib/hexmap/terrain';
 import "./HexmapCanvas.css";
+
+import { Terrains } from './CanvasTerrain'
 
 export enum Orientation { Portrait = "portrait", Landscape = "landscape" }
 
@@ -92,10 +94,14 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
         <h1>Hello There</h1>
         <h2>{this.state.hexmap.name}: ({this.state.hexmap.shape}/{this.state.hexmap.shapeName()})</h2>
         <Stage width={width} height={height} >
-        <Layer>
+        <Layer id="hex-layer">
         <Text text={this.state.hexmap.name} />
-        {this.fill_map()}
+        {this.draw_hexes()}
+         </Layer>
+        <Layer id="terrain-layer" >
+        {this.draw_terrains()}
         </Layer>
+        <Layer id="token-layer" />
         </Stage>
         </div>
     )
@@ -166,25 +172,74 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
     return point
   }
 
-  private fill_map() {
+  // 
+  private draw_hexes() {
 
     // const terrains = this.invert_terrains()
     
     const hexes = new Array<JSX.Element>()
-    let terrains: Set<Terrain>;
     let pixel: HexVector;
     const offset = this.state.hexmap ? this.state.hexmap.borders().low : ORIGIN
 
     if (this.state.hexmap) {
       this.state.hexmap.all().forEach( (location: HexVector) => {
-        if (this.state.hexmap) {
-          terrains = this.state.hexmap.terrainsAt(location)
           pixel = this.hexToPixel(location.sub(offset))
-          hexes.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location, terrains=terrains)} pixel={pixel} radius={this.hexradius}/>);}
-        
+        hexes.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location)} pixel={pixel} radius={this.hexradius}/>);
       })
     }
     return hexes
+  }
+
+  // private renderTerrains() {
+
+  //   const t:JSX.Element[] = []
+  //   this.terrains.forEach((terrain, dummy, set) => {
+  //     switch (terrain.type) {
+  //       case 'crater': {
+  //         t.push(<Crater center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+  //         break;
+  //       }
+  //       case 'entry': {
+  //         t.push(<Entry center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+  //         break;
+  //       }
+  //       case 'hill': {
+  //         t.push(<Hill center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+  //         break;
+  //       }
+  //       case 'mhcenter': {
+  //         t.push(<MegahexCenter center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+  //         break;
+  //       }
+        
+  //       case 'pillar': {
+  //         t.push(<Pillar center={this.props.pixel} radius={this.props.radius} terrain={terrain} />)
+  //         break;
+  //       }
+  //     }
+  //   })
+    
+  //   return t
+  // }
+
+  private draw_terrains() {
+
+    const offset = this.state.hexmap ? this.state.hexmap.borders().low : ORIGIN
+    const terrains = new Array<JSX.Element>()
+    // let pixel: HexVector;
+
+    if (this.state.hexmap) {
+      this.state.hexmap.terrains.forEach((terrain) => {
+        terrain.locations.forEach((hv: HexVector) => {
+          const pixel = this.hexToPixel(hv.sub(offset))
+          terrains.push(<Terrains.pillar center={pixel} radius={this.hexradius} terrain={terrain} />)
+        })
+      })
+    }
+
+    terrains.push(<Text text="Hello there, this is long enough to show" />)
+
+    return terrains
   }
 
   private getMap() {
