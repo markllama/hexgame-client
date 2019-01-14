@@ -232,7 +232,34 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
       this.state.hexmap.terrains.forEach((terrain) => {
         terrain.locations.forEach((hv: HexVector) => {
           const pixel = this.hexToPixel(hv.sub(offset))
-          terrains.push(<Terrains.pillar center={pixel} radius={this.hexradius} terrain={terrain} />)
+          switch (terrain.type) {
+            
+          case "crater": {
+            terrains.push(<Terrains.crater center={pixel} radius={this.hexradius} terrain={terrain} />);
+            break;
+          }
+
+          case "entry": {
+            terrains.push(<Terrains.entry center={pixel} radius={this.hexradius} terrain={terrain} />);
+            break;
+          }
+
+          case "hill": {
+            terrains.push(<Terrains.hill center={pixel} radius={this.hexradius} terrain={terrain} />);
+            break;
+          }
+
+          case "mhcenter": {
+            terrains.push(<Terrains.mhcenter center={pixel} radius={this.hexradius} terrain={terrain} />);
+            break;
+          }
+
+          case "pillar": {
+            terrains.push(<Terrains.pillar center={pixel} radius={this.hexradius} terrain={terrain} />);
+            break;
+          }
+
+          }
         })
       })
     }
