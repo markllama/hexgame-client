@@ -25,11 +25,24 @@ class MegahexCenter extends React.Component<IMegahexCenter, any> {
     const hexrise = hexradius * Math.sqrt(2/3)
     
     return [
+      new HexVector(-hexradius*2, -hexrise*2),
+      new HexVector(-hexradius, -hexrise*2),
+
       new HexVector(-hexradius/2, -hexrise*3),
       new HexVector(hexradius/2, -hexrise*3),
 
+      new HexVector(hexradius, -hexrise*2),
+      new HexVector(hexradius*2, -hexrise*2),
+
+      new HexVector(hexradius*2, hexrise*2),      
+      new HexVector(hexradius, hexrise*2),
+
       new HexVector(hexradius/2, hexrise*3),
-      new HexVector(-hexradius/2, hexrise*3)
+      new HexVector(-hexradius/2, hexrise*3),
+
+      new HexVector(-hexradius, hexrise*2),
+      new HexVector(-hexradius*2, hexrise*2)
+
     ]
   }
   
@@ -42,7 +55,7 @@ class MegahexCenter extends React.Component<IMegahexCenter, any> {
       <Group>
         <Ring x={this.props.center.hx} y={this.props.center.hy} innerRadius={this.props.radius / 2} outerRadius={this.props.radius * .75} stroke='black' fill='gray' listening={false} />
 
-        <Line closed={true} points={mhpoints} stroke='black' listening={false} />
+        <Line closed={true} points={mhpoints} stroke='black' strokeWidth={3} listening={false} />
       </Group>
     );
   }
