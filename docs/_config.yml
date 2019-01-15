@@ -1,5 +1,5 @@
-title: Tactile theme
-description: Tactile is a theme for GitHub Pages.
-show_downloads: true
+title: Hexgame Client
+description: A web client for playing hex based tabletop board games online
+show_downloads: false
 google_analytics:
 theme: jekyll-theme-tactile
