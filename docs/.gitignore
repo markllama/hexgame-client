@@ -1,0 +1,7 @@
+#Emacs Backup Files
+*~
+
+# Rubygem Local
+vendor
+
+Gemfile.lock
