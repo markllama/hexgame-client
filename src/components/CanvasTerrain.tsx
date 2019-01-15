@@ -3,6 +3,8 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { Group } from 'react-konva';
 
+import { Orientation } from './HexmapCanvas';
+
 import HexVector from '../lib/hexmap/hexvector';
 import Terrain from '../lib/hexmap/terrain';
 
@@ -29,6 +31,7 @@ interface ICanvasTerrain {
 class CanvasTerrain extends React.Component<ICanvasTerrain, any> {
   public static propTypes = {
     center: PropTypes.object,
+    orientation: Orientation,
     radius: PropTypes.number,
     terrain: PropTypes.object
   }

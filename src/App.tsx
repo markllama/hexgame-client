@@ -5,7 +5,7 @@ import * as React from 'react';
 import { HashRouter as Router, NavLink, Route, RouteComponentProps } from "react-router-dom";
 
 import Dashboard from "./components/Dashboard";
-import { HexmapCanvas } from "./components/HexmapCanvas";
+import { HexmapCanvas, Orientation } from "./components/HexmapCanvas";
 import MapMenu from "./MapMenu";
 
 import './App.css';
@@ -29,7 +29,7 @@ class App extends React.Component {
       for (const s of maps) {
         if (s.name === mapname) { mapspec = s }
       }
-      return <HexmapCanvas hexmapurl={mapspec.url} />
+      return <HexmapCanvas hexmapurl={mapspec.url} orientation={Orientation.Portrait} />
     }
     
     // const hm = () => {

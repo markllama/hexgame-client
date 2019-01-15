@@ -3,6 +3,8 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { Group, Line, Ring } from 'react-konva';
 
+import { Orientation } from '../HexmapCanvas';
+
 import HexVector from '../../lib/hexmap/hexvector';
 import Terrain from '../../lib/hexmap/terrain';
 
@@ -16,6 +18,7 @@ interface IMegahexCenter {
 class MegahexCenter extends React.Component<IMegahexCenter, any> {
   public static propTypes = {
     center: PropTypes.object,
+    orientation: Orientation,
     radius: PropTypes.number,
     terrain: PropTypes.object
   }
@@ -25,7 +28,6 @@ class MegahexCenter extends React.Component<IMegahexCenter, any> {
     const hexrise = hexradius * Math.sqrt(2/3)
     
     return [
-
       
       new HexVector(-hexradius*2.5, -hexrise),
 
@@ -61,13 +63,13 @@ class MegahexCenter extends React.Component<IMegahexCenter, any> {
   
   public render() {
 
-    const mhborder = this.border().map(h => this.props.center.add(h) )
+    const mhborder = this.border()
     const mhpoints = [].concat.apply([],mhborder.map(h => h.toArray()))
     
     return (
-      <Group>
+        <Group x={this.props.center.hx} y={this.props.center.hy} >
 
-        <Ring x={this.props.center.hx} y={this.props.center.hy} innerRadius={2} outerRadius={4} stroke='black' fill='gray' listening={false} />
+        <Ring x={0} y={0} innerRadius={2} outerRadius={4} stroke='black' fill='gray' listening={false} />
 
         <Line closed={true} points={mhpoints} stroke='black' strokeWidth={5} listening={false} />
       </Group>
