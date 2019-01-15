@@ -1,8 +1,0 @@
-= Information on Hex Maps
-
-https://www.redblobgames.com/grids/hexagons/
-
-https://en.wikipedia.org/wiki/File:HexMapDistance.svg
-
-
-https://alexschroeder.ch/wiki/Old_School_Hex_Map_Tutorial
