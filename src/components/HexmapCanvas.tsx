@@ -1,6 +1,6 @@
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import { Layer, Stage, Text } from 'react-konva';
+import { Group, Layer, Stage, Text } from 'react-konva';
 
 import CanvasHex from './CanvasHex';
 
@@ -83,11 +83,14 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
 
     let width = this.width
     let height = this.height
+    let rotate = 0
 
     if (this.props.orientation === Orientation.Landscape) {
       width = this.height
       height = this.width
+      rotate = 90
     }
+
     
     return (
         <div className="HexmapCanvas">
@@ -96,12 +99,18 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
         <Stage width={width} height={height} >
         <Layer id="hex-layer">
         <Text text={this.state.hexmap.name} />
+        <Group rotation={rotate}>
         {this.draw_hexes()}
-         </Layer>
-        <Layer id="terrain-layer" >
-        {this.draw_terrains()}
+        </Group>
         </Layer>
-        <Layer id="token-layer" />
+        <Layer id="terrain-layer" >
+        <Group rotation={rotate}>
+        {this.draw_terrains()}
+        </Group>
+        </Layer>
+        <Layer id="token-layer">
+        <Group rotation={rotate} />
+        </Layer>
         </Stage>
         </div>
     )
