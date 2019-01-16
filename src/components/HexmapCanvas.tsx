@@ -81,16 +81,9 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
       )
     }
 
-    let width = this.width
-    let height = this.height
-    let rotate = 0
-
-    if (this.props.orientation === Orientation.Landscape) {
-      width = this.height
-      height = this.width
-      rotate = 90
-    }
-
+    const width = this.width
+    const height = this.height
+    const rotate = 0
     
     return (
         <div className="HexmapCanvas">
@@ -123,22 +116,10 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
     
     let point:HexVector = ORIGIN
     
-    switch(this.props.orientation) {
-      case Orientation.Portrait: {
-        point = new HexVector(
-          this.hexrun * 2,
-          this.hexrun * 4 * Math.sqrt(2/3)
-        )
-        break;
-      }
-      case Orientation.Landscape: {
-        point = new HexVector(
-          5 + this.hexrun * 4 * Math.sqrt(2/3),
-          this.width - this.hexrun * 2
-        )
-        break;      
-      }
-    }
+    point = new HexVector(
+      this.hexrun * 2,
+      this.hexrun * 4 * Math.sqrt(2/3)
+    )
 
     return point
   }
@@ -147,36 +128,16 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
 
     let point:HexVector = this.origin
     
-    switch(this.props.orientation) {
-      case Orientation.Portrait: {
-        const rowShift = new HexVector(0, (this.hexrise * 2))
-        const colShift = new HexVector(this.hexrun * 3, 0)
-        // const sawtooth = ORIGIN
-        const sawtooth = (hv.hx % 2) === 0 ?
-          ORIGIN :
-          new HexVector(0, - this.hexrise)
-        point = point
-          .add(colShift.mul(hv.hx))
-          .add(rowShift.mul(hv.hy - Math.floor(hv.hx / 2)))
-          .add(sawtooth)
-        break;
-      }
-
-      case Orientation.Landscape: {
-        const rowShift = new HexVector((this.hexrise * 2), 0)
-        const colShift = new HexVector(0, - this.hexrun * 3)
-        // const sawtooth = ORIGIN
-        const sawtooth = (hv.hx % 2) === 0 ?
-          ORIGIN :
-          new HexVector(- this.hexrise, 0)
-        point = point
-          .add(colShift.mul(hv.hx))
-          .add(rowShift.mul(hv.hy - Math.floor(hv.hx / 2)))
-          .add(sawtooth)
-        break;
-      }
-      
-    }
+    const rowShift = new HexVector(0, (this.hexrise * 2))
+    const colShift = new HexVector(this.hexrun * 3, 0)
+    // const sawtooth = ORIGIN
+    const sawtooth = (hv.hx % 2) === 0 ?
+      ORIGIN :
+      new HexVector(0, - this.hexrise)
+    point = point
+      .add(colShift.mul(hv.hx))
+      .add(rowShift.mul(hv.hy - Math.floor(hv.hx / 2)))
+      .add(sawtooth)
 
     return point
   }
@@ -193,7 +154,7 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
     if (this.state.hexmap) {
       this.state.hexmap.all().forEach( (location: HexVector) => {
           pixel = this.hexToPixel(location.sub(offset))
-        hexes.push(<CanvasHex orientation={this.props.orientation} hex={new Hex(location=location)} pixel={pixel} radius={this.hexradius}/>);
+        hexes.push(<CanvasHex hex={new Hex(location=location)} pixel={pixel} radius={this.hexradius}/>);
       })
     }
     return hexes

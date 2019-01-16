@@ -5,11 +5,9 @@ import { Group, RegularPolygon, Text } from 'react-konva';
 import Hex from '../lib/hexmap/hex';
 import HexVector from '../lib/hexmap/hexvector';
 
-enum Orientation { Portrait = 'portrait', Landscape = 'landscape' }
 
 interface ICanvasHexProps {
   hex: Hex,
-  orientation: Orientation,
   pixel: HexVector,
   radius: number
 }
@@ -18,13 +16,11 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
 
   public static propTypes = {
     hex: PropTypes.object,
-    orientation: PropTypes.string,
     pixel: PropTypes.object,
     radius: PropTypes.number
   }
 
   public static defaultProps = {
-    orientation: Orientation.Portrait,
     radius: 30
   }
   
@@ -55,8 +51,6 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
     const r = this.props.radius
     const label = this.location.toString()
 
-    const rotation = this.props.orientation === Orientation.Portrait ? 30 : 120
-    
     return (
       <Group>
         <RegularPolygon
@@ -64,7 +58,7 @@ class CanvasHex extends React.Component<ICanvasHexProps, any> {
       y={p.hy}
       sides={6}
       radius={r-3}
-      rotation={rotation}
+      rotation={30}
       stroke={'1px'}
       fill={this.state.color}
       listening={false}

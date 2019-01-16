@@ -3,8 +3,6 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { Group, Line, Ring } from 'react-konva';
 
-import { Orientation } from '../HexmapCanvas';
-
 import HexVector from '../../lib/hexmap/hexvector';
 import Terrain from '../../lib/hexmap/terrain';
 
@@ -18,7 +16,6 @@ interface IMegahexCenter {
 class MegahexCenter extends React.Component<IMegahexCenter, any> {
   public static propTypes = {
     center: PropTypes.object,
-    orientation: Orientation,
     radius: PropTypes.number,
     terrain: PropTypes.object
   }
