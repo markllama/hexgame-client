@@ -81,9 +81,17 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
       )
     }
 
-    const width = this.width
-    const height = this.height
-    const rotate = 0
+    let origin = {x:0, y:0}
+    let width = this.width
+    let height = this.height
+    let rotate = 0
+
+    if (this.props.orientation === Orientation.Landscape) {
+      width = this.height
+      height = this.width
+      rotate = -90
+      origin = {x:0, y:this.width}
+    }
     
     return (
         <div className="HexmapCanvas">
@@ -92,17 +100,17 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
         <Stage width={width} height={height} >
         <Layer id="hex-layer">
         <Text text={this.state.hexmap.name} />
-        <Group rotation={rotate}>
+        <Group x={origin.x} y={origin.y} rotation={rotate}>
         {this.draw_hexes()}
         </Group>
         </Layer>
         <Layer id="terrain-layer" >
-        <Group rotation={rotate}>
+        <Group x={origin.x} y={origin.y} rotation={rotate}>
         {this.draw_terrains()}
         </Group>
         </Layer>
         <Layer id="token-layer">
-        <Group rotation={rotate} />
+        <Group x={origin.x} y={origin.y} rotation={rotate} />
         </Layer>
         </Stage>
         </div>
@@ -153,7 +161,7 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
 
     if (this.state.hexmap) {
       this.state.hexmap.all().forEach( (location: HexVector) => {
-          pixel = this.hexToPixel(location.sub(offset))
+        pixel = this.hexToPixel(location.sub(offset))
         hexes.push(<CanvasHex hex={new Hex(location=location)} pixel={pixel} radius={this.hexradius}/>);
       })
     }
