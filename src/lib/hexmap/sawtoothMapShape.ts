@@ -18,6 +18,12 @@ export class SawtoothMapShape implements IMapShape {
     this.exclude = exclude
   }
 
+  get rotation(): number { return 0 }
+
+  public pixelOrigin(hexrun: number): HexVector {
+    return new HexVector(hexrun * 2, hexrun * 4 * Math.sqrt(2/3))
+  }
+  
   public contains(hv: HexVector):boolean {
     // In the first two columns, things are what you expect
     // from then on the first and last hex increases by one for every two
@@ -45,8 +51,6 @@ export class SawtoothMapShape implements IMapShape {
         }
       }
     }
-
-    
     
     return hexes;
   }

@@ -54,7 +54,10 @@ export class HexMap {
     // this.Tokens = []
   }
 
-
+  get rotation() {
+    return this.mapShape ? this.mapShape.rotation : 0
+  }
+  
   public terrainsAt(location?: HexVector): Set<Terrain> {
      if (location) {
       // add all the terrains that match the location
@@ -114,6 +117,11 @@ export class HexMap {
   public shapeName(): string {
     if (!this.mapShape) { this.initShape() }
     return this.mapShape.name
+  }
+
+  public pixelOrigin(hexrun: number) {
+    if (!this.mapShape) { this.initShape() }
+    return this.mapShape.pixelOrigin(hexrun)    
   }
 }
 

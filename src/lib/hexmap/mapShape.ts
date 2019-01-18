@@ -10,9 +10,11 @@ export interface IMapShape {
   name: string;
   size: HexVector;
   exclude: HexVector[];
+  rotation: number;
   contains(hv: HexVector): boolean;
   all(): HexVector[];
   borders(): {low: HexVector, high: HexVector};
+  pixelOrigin(hexrun: number): HexVector;
 }
 
 export default IMapShape;

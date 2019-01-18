@@ -47,6 +47,12 @@ export class MegahexMapShape implements IMapShape {
     this.exclude = exclude
   }
 
+  get rotation(): number { return -20 }
+
+  public pixelOrigin(hexrun: number): HexVector {
+    return new HexVector(hexrun * 6, hexrun * 4 * Math.sqrt(2/3))
+  }
+
   // I noticed several things about Megahexes:
   // 1) In an hx column, every 7th hex is a MH center.
   // 2) When hx increases by 1, the next center is at hy+5 (or -2)
@@ -152,35 +158,8 @@ export class MegahexMapShape implements IMapShape {
 
   public borders(): {low: HexVector, high: HexVector} {
 
-    // find the low and high hx
-    // this can clearly be optimized
+    return {low: new HexVector(), high: this.size.mul(3).add(new HexVector(0, 1))}
 
-    const allHexes = this.all()
-
-    const allhx = allHexes.map((hv) => hv.hx)
-    const xlow = Math.min.apply(null, allhx)
-    const xhigh = Math.max.apply(null, allhx) + 1
-
-    // find the extreme then normalize
-    const yhexlow = allHexes.reduce((current, test) => {
-      if (current.hy === test.hy) {
-        return current.hx < test.hx ? current : test
-      }
-      return current.hy < test.hy ? current : test
-    })
-    const ylow = yhexlow.hy + Math.floor(yhexlow.hx / 2) - 1
-    
-    // // find the extreme then normalize
-    const yhexhigh = allHexes.reduce((current, test) => {
-      if (current.hy === test.hy) {
-        return current.hx > test.hx ? current : test
-      }
-      return current.hy > test.hy ? current : test
-    })
-    const yhigh = yhexhigh.hy - Math.floor(yhexhigh.hx / 2) - 1
-
-    
-    return {low: new HexVector(xlow, ylow), high: new HexVector(xhigh, yhigh) }
   }
 }
 

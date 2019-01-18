@@ -29,7 +29,7 @@ class App extends React.Component {
       for (const s of maps) {
         if (s.name === mapname) { mapspec = s }
       }
-      return <HexmapCanvas hexmapurl={mapspec.url} orientation={Orientation.Landscape} />
+      return <HexmapCanvas hexmapurl={mapspec.url} orientation={Orientation.Portrait} />
     }
     
     // const hm = () => {
@@ -71,6 +71,5 @@ class App extends React.Component {
   }
 
 }
-
 
 export default App;

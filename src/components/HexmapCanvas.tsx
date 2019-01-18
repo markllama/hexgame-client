@@ -81,7 +81,7 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
       )
     }
 
-    let origin = {x:0, y:0}
+    let origin = this.state.hexmap.pixelOrigin(this.hexrun)
     let width = this.width
     let height = this.height
     let rotate = 0
@@ -90,8 +90,10 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
       width = this.height
       height = this.width
       rotate = -90
-      origin = {x:0, y:this.width}
+      origin = new HexVector(origin.hy, this.width - origin.hx)
     }
+
+    rotate += this.state.hexmap.rotation
     
     return (
         <div className="HexmapCanvas">
@@ -100,17 +102,17 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
         <Stage width={width} height={height} >
         <Layer id="hex-layer">
         <Text text={this.state.hexmap.name} />
-        <Group x={origin.x} y={origin.y} rotation={rotate}>
+        <Group x={origin.hx} y={origin.hy} rotation={rotate}>
         {this.draw_hexes()}
         </Group>
         </Layer>
         <Layer id="terrain-layer" >
-        <Group x={origin.x} y={origin.y} rotation={rotate}>
+        <Group x={origin.hx} y={origin.hy} rotation={rotate}>
         {this.draw_terrains()}
         </Group>
         </Layer>
         <Layer id="token-layer">
-        <Group x={origin.x} y={origin.y} rotation={rotate} />
+        <Group x={origin.hx} y={origin.hy} rotation={rotate} />
         </Layer>
         </Stage>
         </div>
@@ -120,34 +122,19 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
   //
   // Place the (0, 0) hex so the entire map fits
   //
-  public get origin() {
-    
-    let point:HexVector = ORIGIN
-    
-    point = new HexVector(
-      this.hexrun * 2,
-      this.hexrun * 4 * Math.sqrt(2/3)
-    )
-
-    return point
-  }
 
   public hexToPixel(hv: HexVector):HexVector {
-
-    let point:HexVector = this.origin
-    
     const rowShift = new HexVector(0, (this.hexrise * 2))
     const colShift = new HexVector(this.hexrun * 3, 0)
     // const sawtooth = ORIGIN
     const sawtooth = (hv.hx % 2) === 0 ?
       ORIGIN :
       new HexVector(0, - this.hexrise)
-    point = point
+
+    return ORIGIN
       .add(colShift.mul(hv.hx))
       .add(rowShift.mul(hv.hy - Math.floor(hv.hx / 2)))
       .add(sawtooth)
-
-    return point
   }
 
   // 
