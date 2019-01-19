@@ -182,6 +182,11 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
             break;
           }
 
+          case "hole": {
+            terrains.push(<Terrains.hole center={pixel} radius={this.hexradius} terrain={terrain} />);
+            break;
+          }
+
           case "mhcenter": {
             terrains.push(<Terrains.mhcenter center={pixel} radius={this.hexradius} terrain={terrain} />);
             break;

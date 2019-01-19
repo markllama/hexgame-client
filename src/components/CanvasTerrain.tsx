@@ -9,6 +9,7 @@ import Terrain from '../lib/hexmap/terrain';
 import Crater from './terrain/crater'
 import Entry from './terrain/entry'
 import Hill from './terrain/hill'
+import Hole from './terrain/hole'
 import MegahexCenter from './terrain/mhcenter'
 import Pillar from './terrain/pillar'
 
@@ -16,6 +17,7 @@ export const Terrains = {
   crater: Crater,
   entry: Entry,
   hill: Hill,
+  hole: Hole,
   mhcenter: MegahexCenter,
   pillar: Pillar
 }
