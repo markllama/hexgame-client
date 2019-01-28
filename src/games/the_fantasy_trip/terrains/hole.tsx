@@ -3,8 +3,8 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { Circle, Group } from 'react-konva';
 
-import HexVector from '../../lib/hexmap/hexvector';
-import Terrain from '../../lib/hexmap/terrain';
+import HexVector from '../../../lib/hexmap/hexvector';
+import Terrain from '../../../lib/hexmap/terrain';
 
 interface IHole {
   center: HexVector,
