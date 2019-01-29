@@ -2,15 +2,17 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { Group, Layer, Stage, Text } from 'react-konva';
 
-import CanvasHex from './CanvasHex';
+
+import Hex from '@hexmap/hex';
+import { HexVector, ORIGIN } from '@hexmap/hexvector';
+import HexMap from '@hexmap/map';
+// import Terrain from '../lib/hexmap/terrain';
 
 import { JsonConvert } from 'json2typescript'
-import Hex from '../lib/hexmap/hex';
-import { HexVector, ORIGIN } from '../lib/hexmap/hexvector';
-import HexMap from '../lib/hexmap/map';
-// import Terrain from '../lib/hexmap/terrain';
+
 import "./HexmapCanvas.css";
 
+import CanvasHex from './CanvasHex';
 import { Terrains } from './CanvasTerrain'
 
 export enum Orientation { Portrait = "portrait", Landscape = "landscape" }

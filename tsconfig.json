@@ -20,7 +20,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "paths": {
-      "@hexmap/*": ["/src/lib/hexmap/*"],
+      "@hexmap/*": ["./lib/hexmap/*"],
     }
   },
   "exclude": [

@@ -2,8 +2,8 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { Group, RegularPolygon, Text } from 'react-konva';
 
-import Hex from '../lib/hexmap/hex';
-import HexVector from '../lib/hexmap/hexvector';
+import Hex from '@hexmap/hex';
+import HexVector from '@hexmap/hexvector';
 
 
 interface ICanvasHexProps {
