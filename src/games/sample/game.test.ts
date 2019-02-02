@@ -2,6 +2,6 @@ import Game from './game'
 
 describe("Sample Game", () => {
   it("imports", () {
-    expect(Game.terrains).toBeTruthy()
+    expect(Object.keys(Game.terrains).length).toBe(2)
   }
 })
