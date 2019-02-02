@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "3.6.0",
     "@material-ui/icons": "^3.0.1",
+    "@patternfly/react-core": "^1.51.6",
     "json2typescript": "^1.0.6",
     "konva": "*",
     "react": "*",
