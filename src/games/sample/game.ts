@@ -1,12 +1,12 @@
 import Terrains from './terrains'
 
 export const Game = {
-  name: "sample",
-  description: "A sample game and maps",
   defaultMap: "sample",
+  description: "A sample game and maps",
   maps: {
     'sample': "./sampleMap.json"
   }
+  name: "sample",
   terrains: Terrains
 }
 

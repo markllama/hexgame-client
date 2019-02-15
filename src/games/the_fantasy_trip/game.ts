@@ -1,13 +1,13 @@
 import Terrains from './terrains'
 
 export const Game = {
-  name: "tft",
-  description: "The Fantasy Trip"
   defaultMap: "melee",
+  description: "The Fantasy Trip"
   maps: {
     'melee': "./meleeMap.json"
     'wizard': "./wizardMap.json"
   }
+  name: "tft",
   terrains: Terrains
 }
 

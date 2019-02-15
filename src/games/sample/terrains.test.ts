@@ -8,7 +8,7 @@ describe("sample terrains", () => {
       expect(Terrains[key]).toBeTruthy()
     })
 
-    expect(Terrains['hill']).toBeTruthy()
+    expect(Terrains.hill).toBeTruthy()
     
   })
 })
