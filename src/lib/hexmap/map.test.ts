@@ -140,7 +140,7 @@ describe('<HexMap>', () => {
     expect(M0.game).toEqual("sampleGame")
     expect(M0.size.eq(new HexVector(22, 15))).toBeTruthy()
     expect(M0.exclude.length).toEqual(1)
-    expect(M0.terrains.length).toEqual(1)
+    expect(M0.terrains.size).toEqual(1)
 
 
     expect(M0.all().length).toEqual(0)

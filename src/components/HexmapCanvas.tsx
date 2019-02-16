@@ -213,7 +213,7 @@ export class HexmapCanvas extends React.Component<IHexmapCanvasProps, IHexmapCan
       return resp.json()
     }).then( hmJson => {
       const jsonConvert: JsonConvert = new JsonConvert();
-      const hm = jsonConvert.deserialize(hmJson, HexMap)
+      const hm = jsonConvert.deserializeObject(hmJson, HexMap)
       hm.initShape()
       this.setState( {'hexmap': hm } )
     })
