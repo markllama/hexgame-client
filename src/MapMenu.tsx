@@ -85,17 +85,17 @@ export class MapMenu extends React.Component {
           }}
         >
             <MenuItem>
-              <Typography variant="h6" color="inherit">
+              <Typography variant="title" color="inherit">
                 <NavLink to="/map/samplemap">Sample Map</NavLink>
               </Typography>
             </MenuItem>
             <MenuItem>
-              <Typography variant="h6" color="inherit">
+              <Typography variant="title" color="inherit">
                 <NavLink to="/map/melee">Melee Map</NavLink>
               </Typography>
             </MenuItem>
             <MenuItem>
-              <Typography variant="h6" color="inherit">
+              <Typography variant="title" color="inherit">
                 <NavLink to="/map/wizard">Wizard Map</NavLink>
               </Typography>
             </MenuItem>

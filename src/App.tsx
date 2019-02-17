@@ -48,11 +48,11 @@ class App extends React.Component {
                 <IconButton className="menuButton" color="inherit" aria-label="Open drawer">
                   <MenuIcon />
                 </IconButton>
-                <Typography className="menu" variant="h6" color="inherit" noWrap={true}>
+                <Typography className="menu" variant="title" color="inherit" noWrap={true}>
                 Hexgame Server
                 </Typography>
                 &nbsp;
-                <Typography variant="h6" color="inherit">
+                <Typography variant="title" color="inherit">
                   <NavLink to="/dashboard">Home</NavLink>
                 </Typography>
                 &nbsp;
