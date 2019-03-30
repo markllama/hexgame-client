@@ -9,12 +9,13 @@ import {
 
 import {
   Route,
+  RouteComponentProps
 //   Switch,
 //   NavLink,
 //   BrowserRouter
 } from "react-router-dom";
 
-import { HexmapCanvas } from "./components/HexmapCanvas";
+import { HexmapCanvas, Orientation } from "./components/HexmapCanvas";
 
 import brandImage from './images/one_hex.png';
 
@@ -65,6 +66,21 @@ export class Dashboard extends React.Component<{}, IDashboardState> {
         <PageSidebar nav={PageNav}/>
     )
 
+    const maps = [
+      {name: "sample", url: "/samplemap.json" },
+      {name: "melee",  url: "/meleemap.json"  },
+      {name: "wizard", url: "/wizardmap.json" }
+    ]
+
+    const hm = ( props: RouteComponentProps<any> ) => {
+      const mapname = props.match.params.name
+      // find the map spec with the right name
+      let mapspec = maps[0]
+      for (const s of maps) {
+        if (s.name === mapname) { mapspec = s }
+      }
+      return <HexmapCanvas hexmapurl={mapspec.url} orientation={Orientation.Portrait} />
+    }
     // Define the actual page layout
     return (
         <Page header={Header} sidebar={Sidebar} >
@@ -78,11 +94,12 @@ export class Dashboard extends React.Component<{}, IDashboardState> {
           </TextContent>
         </PageSection>
         <PageSection>
-        <Route path="/maps/:name" component={HexmapCanvas} />
+        <Route path="/maps/:name" component={hm} />
         </PageSection>
         </Page>
     )
   }
+
 
   private onNavSelect = (groupId: number, itemId: number, event: React.FormEvent) => {
     this.setState({
