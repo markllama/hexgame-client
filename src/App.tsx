@@ -1,11 +1,11 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
-import MenuIcon from '@material-ui/icons/Menu';
+// import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
+// import MenuIcon from '@material-ui/icons/Menu';
 import * as React from 'react';
-import { HashRouter as Router, NavLink, Route, RouteComponentProps } from "react-router-dom";
+import { HashRouter as Router, Route, RouteComponentProps } from "react-router-dom";
 
 import Dashboard from "./components/Dashboard";
 import { HexmapCanvas, Orientation } from "./components/HexmapCanvas";
-import MapMenu from "./MapMenu";
+// import MapMenu from "./MapMenu";
 
 import './App.css';
 
@@ -42,23 +42,6 @@ class App extends React.Component {
               <img src={logo} className="App-logo" alt="logo"/>
               <h1 className="App-title">Welcome to the Hexgame Server</h1>
             </header>
-
-            <AppBar position="static" color="default">
-              <Toolbar>
-                <IconButton className="menuButton" color="inherit" aria-label="Open drawer">
-                  <MenuIcon />
-                </IconButton>
-                <Typography className="menu" variant="title" color="inherit" noWrap={true}>
-                Hexgame Server
-                </Typography>
-                &nbsp;
-                <Typography variant="title" color="inherit">
-                  <NavLink to="/dashboard">Home</NavLink>
-                </Typography>
-                &nbsp;
-                <MapMenu />
-              </Toolbar>
-            </AppBar>
 
             <div className="content">
               <Route path="/dashboard" component={Dashboard} />

@@ -1,6 +1,5 @@
-import { IconButton, Menu, MenuItem, Typography } from "@material-ui/core";
+// import { IconButton, Menu, MenuItem, Typography } from "@material-ui/core";
 import * as React from 'react';
-import { NavLink } from "react-router-dom";
 
 const timeoutLength = 300;
 
@@ -11,7 +10,6 @@ export class MapMenu extends React.Component {
     // Keep track of whether the mouse is over the button or menu
     mouseOverButton: false,
     mouseOverMenu: false,
-    open: false,
   };
 
   constructor(props: {}) {
@@ -21,7 +19,6 @@ export class MapMenu extends React.Component {
       // Keep track of whether the mouse is over the button or menu
       mouseOverButton: false,
       mouseOverMenu: false,
-      open: false,
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -64,42 +61,9 @@ export class MapMenu extends React.Component {
 
   public render() {
 
-    const open: boolean = (this.state.mouseOverButton || this.state.mouseOverMenu);
-
     return (
-      <div>
-        <IconButton
-          aria-owns={this.state.open ? 'map-menu' : undefined}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-          onMouseEnter={this.enterButton}
-          onMouseLeave={this.leaveButton}
-        >Maps</IconButton>
-        <Menu id="map-menu"
-          anchorEl={this.state.anchorEl}
-          open={open}
-          onClose={this.handleClose}
-          MenuListProps={{
-            onMouseEnter: this.enterMenu,
-            onMouseLeave: this.leaveMenu,
-          }}
-        >
-            <MenuItem>
-              <Typography variant="title" color="inherit">
-                <NavLink to="/map/samplemap">Sample Map</NavLink>
-              </Typography>
-            </MenuItem>
-            <MenuItem>
-              <Typography variant="title" color="inherit">
-                <NavLink to="/map/melee">Melee Map</NavLink>
-              </Typography>
-            </MenuItem>
-            <MenuItem>
-              <Typography variant="title" color="inherit">
-                <NavLink to="/map/wizard">Wizard Map</NavLink>
-              </Typography>
-            </MenuItem>
-        </Menu>
+        <div>
+        Inside Mapmenu
         </div>
     )
   }
