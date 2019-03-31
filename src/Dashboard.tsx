@@ -23,7 +23,7 @@ import brandImage from './images/one_hex.png';
 // };
 
 interface IDashboardState {
-  activeItem: number
+  activeItem: number,
 };
 
 export class Dashboard extends React.Component<{}, IDashboardState> {
@@ -31,10 +31,10 @@ export class Dashboard extends React.Component<{}, IDashboardState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      activeItem: 0
+      activeItem: 0,
     };
   }
-  
+
   public render() {
 
     const { activeItem } = this.state;
@@ -43,6 +43,7 @@ export class Dashboard extends React.Component<{}, IDashboardState> {
     const Header = (
       <PageHeader
         logo={<Brand src={brandImage} alt="Hexgame Logo" />}
+        showNavToggle={true}
       />
     )
 
@@ -83,7 +84,7 @@ export class Dashboard extends React.Component<{}, IDashboardState> {
     }
     // Define the actual page layout
     return (
-        <Page header={Header} sidebar={Sidebar} >
+        <Page header={Header} sidebar={Sidebar} isManagedSidebar={true} >
         <PageSection>
           <TextContent>
             <Text component="h1">Main Title</Text>
@@ -100,13 +101,13 @@ export class Dashboard extends React.Component<{}, IDashboardState> {
     )
   }
 
-
   private onNavSelect = (groupId: number, itemId: number, event: React.FormEvent) => {
     this.setState({
-      activeItem: itemId
+      activeItem: groupId
     });
   };
 
 };
+
 
 export default Dashboard;
