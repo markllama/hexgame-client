@@ -4,13 +4,15 @@
   "private": true,
   "dependencies": {
     "@patternfly/react-core": "^2.9.2",
+    "@types/redux": "^3.6.0",
     "json2typescript": "^1.0.6",
     "konva": "*",
     "react": "*",
     "react-bootstrap": "*",
     "react-dom": "*",
     "react-konva": "*",
-    "react-router-dom": "*"
+    "react-router-dom": "*",
+    "redux": "^4.0.1"
   },
   "scripts": {
     "start": "react-scripts-ts start",
