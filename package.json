@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@patternfly/react-core": "^2.9.2",
+    "@types/react-redux": "^7.0.6",
     "@types/redux": "^3.6.0",
     "json2typescript": "^1.0.6",
     "konva": "*",
@@ -11,6 +12,7 @@
     "react-bootstrap": "*",
     "react-dom": "*",
     "react-konva": "*",
+    "react-redux": "^6.0.1",
     "react-router-dom": "*",
     "redux": "^4.0.1"
   },
