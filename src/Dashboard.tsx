@@ -48,7 +48,8 @@ export class Dashboard extends React.Component<{}, IDashboardState> {
     )
 
     const PageNav = (
-      <Nav onSelect={this.onNavSelect} aria-label="Nav">
+        <Nav onSelect={this.onNavSelect} aria-label="Nav">
+        // get the list of maps
         <NavList>
           <NavItem to="/maps/sample" itemId={0} isActive={activeItem === 0}>
             Sample Map
@@ -68,9 +69,9 @@ export class Dashboard extends React.Component<{}, IDashboardState> {
     )
 
     const maps = [
-      {name: "sample", url: "/samplemap.json" },
-      {name: "melee",  url: "/meleemap.json"  },
-      {name: "wizard", url: "/wizardmap.json" }
+      {name: "sample", url: "/maps/samplemap.json" },
+      {name: "melee",  url: "/maps/meleemap.json"  },
+      {name: "wizard", url: "/maps/wizardmap.json" }
     ]
 
     const hm = ( props: RouteComponentProps<any> ) => {
